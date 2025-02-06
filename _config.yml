@@ -31,8 +31,9 @@ i18n_dir: :lang
 skip_render:
 
 # Writing
-new_post_name: :title.md # File name of new posts
+new_post_name: :year-:month-:day-:title.md  # 文件名格式
 default_layout: post
+post_asset_folder: true  # 开启资源文件夹
 titlecase: false # Transform title into titlecase
 external_link:
   enable: true # Open external links in new tab
@@ -40,7 +41,6 @@ external_link:
   exclude: ''
 filename_case: 0
 render_drafts: false
-post_asset_folder: false
 relative_link: false
 future: true
 syntax_highlighter: highlight.js
