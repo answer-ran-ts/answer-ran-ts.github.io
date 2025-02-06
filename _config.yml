@@ -3,17 +3,17 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle: ''
-description: ''
-keywords:
-author: John Doe
-language: en
-timezone: ''
+title: BlogMind
+subtitle: '思维的栖息地'
+description: '记录学习与思考'
+keywords: blog, tech, programming
+author: Answer Ran
+language: zh-CN  # 改为中文
+timezone: 'Asia/Shanghai'
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: https://answer-ran-ts.github.io
+url: https://blogmind.cloud
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:

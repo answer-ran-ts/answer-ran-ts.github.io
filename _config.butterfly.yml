@@ -1,0 +1,39 @@
+# Navigation bar settings
+menu:
+  首页: / || fas fa-home
+  归档: /archives/ || fas fa-archive
+  标签: /tags/ || fas fa-tags
+  分类: /categories/ || fas fa-folder-open
+  关于: /about/ || fas fa-heart
+
+# Social settings
+social:
+  Github: https://github.com/answer-ran-ts || fab fa-github
+  
+# Site Info
+avatar: /img/avatar.jpg  # 可以稍后添加头像
+favicon: /img/favicon.png  # 可以稍后添加网站图标
+
+# Article settings
+post_meta:
+  page:
+    date_type: both
+    categories: true
+    tags: true
+  post:
+    date_type: both
+    categories: true
+    tags: true
+
+# Code Blocks
+highlight_theme: mac light  # 代码块主题
+
+# Sidebar settings
+card_author:
+  enable: true
+  description: 
+  button:
+    enable: true
+    icon: fab fa-github
+    text: Follow Me
+    link: https://github.com/answer-ran-ts 
