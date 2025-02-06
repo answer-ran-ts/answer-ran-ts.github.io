@@ -87,14 +87,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const bubble = document.createElement('div');
     bubble.className = 'bubble';
     
-    const margin = 100;
+    // 增加边距使泡泡更分散
+    const margin = 150;
     const startX = margin + Math.random() * (window.innerWidth - 2 * margin);
     bubble.style.left = `${startX}px`;
     
-    const duration = 20 + Math.random() * 15;
+    // 增加动画时间让移动更慢
+    const duration = 25 + Math.random() * 20;
     bubble.style.animationDuration = `${duration}s`;
     
-    const delay = Math.random() * 8;
+    // 随机延迟使泡泡错开
+    const delay = Math.random() * 20;
     bubble.style.animationDelay = `${delay}s`;
     
     const rotation = Math.random() * 360;
@@ -146,23 +149,46 @@ document.addEventListener('DOMContentLoaded', function() {
       const y = rect.top + rect.height / 2;
       
       createExplosion(x, y, color);
+      
+      // 从数组中移除被点击的泡泡
+      const index = bubbles.indexOf(bubble);
+      if (index > -1) {
+        bubbles.splice(index, 1);
+      }
       this.remove();
+      
+      // 创建新的泡泡来替代被点击的
+      const newBubble = createBubble();
+      bubbles.push(newBubble);
     });
     
     container.appendChild(bubble);
     
+    // 动画结束时重新创建泡泡而不是移除
     bubble.addEventListener('animationend', () => {
       if (!isHovered) {
-        bubble.remove();
+        // 重置泡泡位置到底部
+        const newX = margin + Math.random() * (window.innerWidth - 2 * margin);
+        bubble.style.left = `${newX}px`;
+        
+        // 重置动画
+        bubble.style.animation = 'none';
+        bubble.offsetHeight; // 触发重排
+        bubble.style.animation = null;
+        
+        // 重新设置随机延迟
+        bubble.style.animationDelay = '0s';
       }
     });
+
+    return bubble;
   }
 
-  // 初始创建多个泡泡
-  for (let i = 0; i < 12; i++) {
-    createBubble();
+  // 初始创建泡泡
+  const bubbleCount = 15;
+  const bubbles = [];
+  
+  for (let i = 0; i < bubbleCount; i++) {
+    bubbles.push(createBubble());
   }
-
-  // 每隔一段时间创建新泡泡
-  setInterval(createBubble, 2000);
 }); 
