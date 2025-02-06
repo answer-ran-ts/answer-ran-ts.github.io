@@ -1,0 +1,276 @@
+/* 彩色光晕泡泡容器 */
+.bubble-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* 彩色光晕泡泡 */
+.bubble {
+  position: absolute;
+  border-radius: 50%;
+  backdrop-filter: blur(1px);
+  animation: float 20s linear infinite;
+  opacity: 0;
+  pointer-events: auto;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  will-change: transform;
+  transform-origin: center center;
+  z-index: 2;
+}
+
+/* 不同大小和颜色的泡泡 */
+.bubble:nth-child(8n+1) {
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle at 30% 30%,
+    rgba(255, 123, 172, 0.4),
+    rgba(255, 123, 172, 0.1) 30%,
+    rgba(255, 123, 172, 0) 70%
+  );
+}
+
+.bubble:nth-child(8n+2) {
+  width: 140px;
+  height: 140px;
+  background: radial-gradient(circle at 30% 30%,
+    rgba(64, 224, 208, 0.4),
+    rgba(64, 224, 208, 0.1) 30%,
+    rgba(64, 224, 208, 0) 70%
+  );
+}
+
+.bubble:nth-child(8n+3) {
+  width: 160px;
+  height: 160px;
+  background: radial-gradient(circle at 30% 30%,
+    rgba(255, 215, 0, 0.4),
+    rgba(255, 215, 0, 0.1) 30%,
+    rgba(255, 215, 0, 0) 70%
+  );
+}
+
+.bubble:nth-child(8n+4) {
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle at 30% 30%,
+    rgba(147, 112, 219, 0.4),
+    rgba(147, 112, 219, 0.1) 30%,
+    rgba(147, 112, 219, 0) 70%
+  );
+}
+
+.bubble:nth-child(8n+5) {
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle at 30% 30%,
+    rgba(72, 209, 204, 0.4),
+    rgba(72, 209, 204, 0.1) 30%,
+    rgba(72, 209, 204, 0) 70%
+  );
+}
+
+.bubble:nth-child(8n+6) {
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(circle at 30% 30%,
+    rgba(255, 182, 193, 0.4),
+    rgba(255, 182, 193, 0.1) 30%,
+    rgba(255, 182, 193, 0) 70%
+  );
+}
+
+.bubble:nth-child(8n+7) {
+  width: 170px;
+  height: 170px;
+  background: radial-gradient(circle at 30% 30%,
+    rgba(135, 206, 250, 0.4),
+    rgba(135, 206, 250, 0.1) 30%,
+    rgba(135, 206, 250, 0) 70%
+  );
+}
+
+.bubble:nth-child(8n) {
+  width: 130px;
+  height: 130px;
+  background: radial-gradient(circle at 30% 30%,
+    rgba(255, 165, 0, 0.4),
+    rgba(255, 165, 0, 0.1) 30%,
+    rgba(255, 165, 0, 0) 70%
+  );
+}
+
+/* 浮动动画 */
+@keyframes float {
+  0% {
+    transform: translate(0, 100vh) rotate(0deg) scale(0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.6;
+    transform: translate(0, 60vh) rotate(120deg) scale(1);
+  }
+  80% {
+    opacity: 0.6;
+    transform: translate(0, -60vh) rotate(240deg) scale(1);
+  }
+  100% {
+    transform: translate(0, -100vh) rotate(360deg) scale(1.2);
+    opacity: 0;
+  }
+}
+
+/* 添加模糊发光效果 */
+.bubble::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 50%;
+  filter: blur(20px);
+  background: inherit;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+/* 悬浮效果增强 */
+.bubble:hover::after {
+  opacity: 0.8;
+  filter: blur(15px);
+}
+
+/* 爆炸粒子样式 */
+.particle {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: explode 1s ease-out forwards;
+  z-index: 1000;
+}
+
+/* 祝福文字样式 */
+.blessing-text {
+  position: fixed;
+  font-size: 24px;
+  font-weight: bold;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  animation: float-text 2s ease-out forwards;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  z-index: 1000;
+}
+
+/* 爆炸动画 */
+@keyframes explode {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: 
+      translate(
+        calc(cos(var(--angle)) * var(--velocity) * 100px),
+        calc(sin(var(--angle)) * var(--velocity) * 100px)
+      )
+      scale(0);
+    opacity: 0;
+  }
+}
+
+/* 祝福文字动画 */
+@keyframes float-text {
+  0% {
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 0;
+  }
+  20% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 1;
+  }
+  80% {
+    transform: translate(-50%, -80%) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -100%) scale(0.8);
+    opacity: 0;
+  }
+}
+
+/* 优化泡泡点击效果 */
+.bubble:active {
+  transform: scale(0.9);
+  transition: transform 0.1s ease;
+}
+
+/* 当鼠标悬停在泡泡上时，提升其层级 */
+.bubble:hover {
+  filter: brightness(1.2);
+}
+
+/* 通用浮动元素样式 */
+.floating-element {
+  position: absolute;
+  pointer-events: auto;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  will-change: transform;
+  animation: float 20s linear infinite;
+  opacity: 0;
+}
+
+/* 星星样式 */
+.star {
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  background: radial-gradient(circle at 30% 30%,
+    rgba(255, 215, 0, 0.6),
+    rgba(255, 215, 0, 0.2) 30%,
+    rgba(255, 215, 0, 0) 70%
+  );
+}
+
+/* 心形样式 */
+.heart {
+  background: radial-gradient(circle at 30% 30%,
+    rgba(255, 105, 180, 0.6),
+    rgba(255, 105, 180, 0.2) 30%,
+    rgba(255, 105, 180, 0) 70%
+  );
+  clip-path: path('M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402m5.726-20.583c-2.203 0-4.446 1.042-5.726 3.238-1.285-2.206-3.522-3.248-5.719-3.248-3.183 0-6.281 2.187-6.281 6.191 0 4.661 5.571 9.429 12 15.809 6.43-6.38 12-11.148 12-15.809 0-4.011-3.095-6.181-6.274-6.181');
+}
+
+/* 咖啡杯样式 */
+.coffee {
+  background: radial-gradient(circle at 30% 30%,
+    rgba(139, 69, 19, 0.6),
+    rgba(139, 69, 19, 0.2) 30%,
+    rgba(139, 69, 19, 0) 70%
+  );
+  clip-path: path('M2 21h18v-2H2v2zm6-4h10v-2H8v2zm-6-4h16v-2H2v2zm8-4h8V7h-8v2zm-8-4h14V3H2v2z');
+}
+
+/* 祝福文字样式增强 */
+.blessing-text {
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+  -webkit-background-clip: text;
+  color: transparent;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  font-size: 28px;
+  letter-spacing: 2px;
+}
+
+/* 爆炸效果增强 */
+.particle {
+  box-shadow: 0 0 10px currentColor;
+}

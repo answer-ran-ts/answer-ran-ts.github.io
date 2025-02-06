@@ -1,0 +1,164 @@
+.recent-post-item {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  transition: all 0.4s ease;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  margin: 30px 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  isolation: isolate;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+/* 卡片容器样式 */
+#recent-posts {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+/* 确保每个卡片都是独立的容器 */
+#recent-posts > div {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.recent-post-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,0.2) 0%,
+    rgba(255,255,255,0) 50%,
+    rgba(255,255,255,0.2) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.recent-post-item:hover {
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+.recent-post-item:hover::before {
+  opacity: 1;
+}
+
+/* 卡片内容的3D效果 */
+.recent-post-item .post-content {
+  transform: translateZ(20px);
+  position: relative;
+  z-index: 2;
+  padding: 15px;
+}
+
+.recent-post-item img {
+  transform: translateZ(40px);
+  position: relative;
+  z-index: 1;
+  transition: all 0.4s ease;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.recent-post-item:hover img {
+  transform: translateZ(60px);
+}
+
+/* 确保文字可读性 */
+.recent-post-item .post-title,
+.recent-post-item .post-meta,
+.recent-post-item .post-content {
+  position: relative;
+  z-index: 3;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 10px;
+  border-radius: 8px;
+  margin: 5px 0;
+}
+
+/* 添加光晕效果 */
+.js-tilt-glare {
+  border-radius: 12px;
+  pointer-events: none;
+}
+
+/* 优化移动端显示 */
+@media screen and (max-width: 768px) {
+  #recent-posts {
+    grid-template-columns: 1fr;
+    padding: 10px;
+  }
+  
+  .recent-post-item {
+    margin: 15px 10px;
+  }
+}
+
+/* 页面顶部封面的效果样式 */
+#page-header {
+  position: relative;
+  transition: all 0.4s ease;
+  overflow: hidden;
+}
+
+#page-header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle at center,
+    rgba(255,255,255,0.15) 0%,
+    rgba(255,255,255,0) 70%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+#page-header:hover::before {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+#page-header::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    rgba(255,255,255,0.1) 0%,
+    rgba(255,255,255,0) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+#page-header:hover::after {
+  opacity: 1;
+}
+
+/* 确保封面内容正确显示 */
+#page-header .site-info,
+#page-header .scroll-down {
+  position: relative;
+  z-index: 3;
+}

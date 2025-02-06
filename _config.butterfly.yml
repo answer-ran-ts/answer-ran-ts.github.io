@@ -33,7 +33,23 @@ card_author:
   enable: true
   description: 
   button:
-    enable: true
+    enable: false
     icon: fab fa-github
     text: Follow Me
     link: https://github.com/answer-ran-ts 
+
+# Inject
+inject:
+  head:
+    - <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js"></script>
+    - <link rel="stylesheet" href="/css/bubble-effect.css">
+    - <script>
+        (function() {
+          const path = location.pathname;
+          const isHome = path === '/' || path === '/page/' || /^\/page\/\d+\/?$/.test(path);
+          document.documentElement.classList.add(isHome ? 'is-home-page' : 'not-home-page');
+        })();
+      </script>
+  bottom:
+    - <script src="/js/tilt-effect.js"></script>
+    - <script src="/js/bubble-effect.js"></script>
