@@ -5,7 +5,6 @@ tags:
   - JavaScript
   - 面试
 categories:
-  - 前端
   - JavaScript
 ---
 

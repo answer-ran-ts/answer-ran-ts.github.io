@@ -13,7 +13,8 @@
     "publish": "hexo clean && hexo generate --deploy",
     "new": "hexo new post",
     "new:draft": "hexo new draft",
-    "new:page": "hexo new page"
+    "new:page": "hexo new page",
+    "restart": "npm run clean && npm run server"
   },
   "hexo": {
     "version": "6.3.0"

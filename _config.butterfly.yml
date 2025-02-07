@@ -28,16 +28,6 @@ post_meta:
 # Code Blocks
 highlight_theme: mac light  # 代码块主题
 
-# Sidebar settings
-card_author:
-  enable: true
-  description: 
-  button:
-    enable: false
-    icon: fab fa-github
-    text: Follow Me
-    link: https://github.com/answer-ran-ts 
-
 # Inject
 inject:
   head:
@@ -46,3 +36,10 @@ inject:
   bottom:
     - <script src="/js/tilt-effect.js"></script>
     - <script src="/js/bubble-effect.js"></script>
+
+# Footer Settings
+footer:
+  owner:
+    enable: false
+  custom_text: ©2020 - 2025 By Answer Ran
+  copyright: false
