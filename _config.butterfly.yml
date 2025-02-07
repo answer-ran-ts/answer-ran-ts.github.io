@@ -42,7 +42,7 @@ card_author:
 inject:
   head:
     - <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js"></script>
-    - <link rel="stylesheet" href="/css/bubble-effect.css">
+    - <link rel="stylesheet" href="/css/custom.css">
     - |
       <script>
         (function() {

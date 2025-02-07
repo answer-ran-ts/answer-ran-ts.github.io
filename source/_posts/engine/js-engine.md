@@ -1,5 +1,5 @@
 ---
-title: 说说你对 JavaScript 引擎的理解？
+title: JavaScript 引擎的理解
 date: 2024-03-01 16:00:00
 tags:
   - JavaScript
@@ -9,7 +9,6 @@ categories:
   - JavaScript
 ---
 
-# 说说你对 JavaScript 引擎的理解？
 
 ## 一、什么是 JavaScript 引擎
 
