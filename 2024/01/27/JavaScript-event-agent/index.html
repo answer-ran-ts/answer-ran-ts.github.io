@@ -1,0 +1,200 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>什么是事件代理？应用场景？ | BlogMind</title><meta name="author" content="Answer Ran"><meta name="copyright" content="Answer Ran"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="一、是什么事件代理，俗地来讲，就是把一个元素响应事件（click、keydown……）的函数委托到另一个元素 前面讲到，事件流的都会经过三个阶段： 捕获阶段 -&gt; 目标阶段 -&gt; 冒泡阶段，而事件委托就是在冒泡阶段完成 事件委托，会把一个或者一组元素的事件委托到它的父层或者更外层元素上，真正绑定事件的是外层元素，而不是目标元素 当事件响应到目标元素上时，会通过事件冒泡机制从而触发它的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="什么是事件代理？应用场景？">
+<meta property="og:url" content="https://blogmind.cloud/2024/01/27/JavaScript-event-agent/index.html">
+<meta property="og:site_name" content="BlogMind">
+<meta property="og:description" content="一、是什么事件代理，俗地来讲，就是把一个元素响应事件（click、keydown……）的函数委托到另一个元素 前面讲到，事件流的都会经过三个阶段： 捕获阶段 -&gt; 目标阶段 -&gt; 冒泡阶段，而事件委托就是在冒泡阶段完成 事件委托，会把一个或者一组元素的事件委托到它的父层或者更外层元素上，真正绑定事件的是外层元素，而不是目标元素 当事件响应到目标元素上时，会通过事件冒泡机制从而触发它的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://static.vue-js.com/a33f0ab0-797e-11eb-ab90-d9ae814b240d.png">
+<meta property="article:published_time" content="2024-01-27T08:30:00.000Z">
+<meta property="article:modified_time" content="2025-02-07T07:22:15.418Z">
+<meta property="article:author" content="Answer Ran">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://static.vue-js.com/a33f0ab0-797e-11eb-ab90-d9ae814b240d.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://blogmind.cloud/2024/01/27/JavaScript-event-agent/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '什么是事件代理？应用场景？',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-02-07 15:22:15'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js"></script><link rel="stylesheet" href="/css/bubble-effect.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">61</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">27</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="BlogMind"><span class="site-name">BlogMind</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">什么是事件代理？应用场景？</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-01-27T08:30:00.000Z" title="发表于 2024-01-27 16:30:00">2024-01-27</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-02-07T07:22:15.418Z" title="更新于 2025-02-07 15:22:15">2025-02-07</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/JavaScript/">JavaScript</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="什么是事件代理？应用场景？"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><img src="https://static.vue-js.com/a33f0ab0-797e-11eb-ab90-d9ae814b240d.png"></p>
+<h2 id="一、是什么"><a href="#一、是什么" class="headerlink" title="一、是什么"></a>一、是什么</h2><p>事件代理，俗地来讲，就是把一个元素响应事件（<code>click</code>、<code>keydown</code>……）的函数委托到另一个元素</p>
+<p>前面讲到，事件流的都会经过三个阶段： 捕获阶段 -&gt; 目标阶段 -&gt; 冒泡阶段，而事件委托就是在冒泡阶段完成</p>
+<p>事件委托，会把一个或者一组元素的事件委托到它的父层或者更外层元素上，真正绑定事件的是外层元素，而不是目标元素</p>
+<p>当事件响应到目标元素上时，会通过事件冒泡机制从而触发它的外层元素的绑定事件上，然后在外层元素上去执行函数</p>
+<p>下面举个例子：</p>
+<p>比如一个宿舍的同学同时快递到了，一种笨方法就是他们一个个去领取</p>
+<p>较优方法就是把这件事情委托给宿舍长，让一个人出去拿好所有快递，然后再根据收件人一一分发给每个同学</p>
+<p>在这里，取快递就是一个事件，每个同学指的是需要响应事件的 <code>DOM </code>元素，而出去统一领取快递的宿舍长就是代理的元素</p>
+<p>所以真正绑定事件的是这个元素，按照收件人分发快递的过程就是在事件执行中，需要判断当前响应的事件应该匹配到被代理元素中的哪一个或者哪几个</p>
+<h2 id="二、应用场景"><a href="#二、应用场景" class="headerlink" title="二、应用场景"></a>二、应用场景</h2><p>如果我们有一个列表，列表之中有大量的列表项，我们需要在点击列表项的时候响应一个事件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul id=<span class="string">&quot;list&quot;</span>&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">li</span>&gt;</span>item 1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">li</span>&gt;</span>item 2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">li</span>&gt;</span>item 3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">  ......</span><br><span class="line">  &lt;li&gt;item n&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure>
+
+<p>如果给每个列表项一一都绑定一个函数，那对于内存消耗是非常大的</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取目标元素</span></span><br><span class="line"><span class="keyword">const</span> lis = <span class="variable language_">document</span>.<span class="title function_">getElementsByTagName</span>(<span class="string">&quot;li&quot;</span>)</span><br><span class="line"><span class="comment">// 循环遍历绑定事件</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; lis.<span class="property">length</span>; i++) &#123;</span><br><span class="line">    lis[i].<span class="property">onclick</span> = <span class="keyword">function</span>(<span class="params">e</span>)&#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(e.<span class="property">target</span>.<span class="property">innerHTML</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这时候就可以事件委托，把点击事件绑定在父级元素<code>ul</code>上面，然后执行事件的时候再去匹配目标元素</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 给父层元素绑定事件</span></span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;list&#x27;</span>).<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="keyword">function</span> (<span class="params">e</span>) &#123;</span><br><span class="line">    <span class="comment">// 兼容性处理</span></span><br><span class="line">    <span class="keyword">var</span> event = e || <span class="variable language_">window</span>.<span class="property">event</span>;</span><br><span class="line">    <span class="keyword">var</span> target = event.<span class="property">target</span> || event.<span class="property">srcElement</span>;</span><br><span class="line">    <span class="comment">// 判断是否匹配目标元素</span></span><br><span class="line">    <span class="keyword">if</span> (target.<span class="property">nodeName</span>.<span class="property">toLocaleLowerCase</span> === <span class="string">&#x27;li&#x27;</span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;the content is: &#x27;</span>, target.<span class="property">innerHTML</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>还有一种场景是上述列表项并不多，我们给每个列表项都绑定了事件</p>
+<p>但是如果用户能够随时动态的增加或者去除列表项元素，那么在每一次改变的时候都需要重新给新增的元素绑定事件，给即将删去的元素解绑事件</p>
+<p>如果用了事件委托就没有这种麻烦了，因为事件是绑定在父层的，和目标元素的增减是没有关系的，执行到目标元素是在真正响应执行事件函数的过程中去匹配的</p>
+<p>举个例子：</p>
+<p>下面<code>html</code>结构中，点击<code>input</code>可以动态添加元素</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">name</span>=<span class="string">&quot;&quot;</span> <span class="attr">id</span>=<span class="string">&quot;btn&quot;</span> <span class="attr">value</span>=<span class="string">&quot;添加&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">&quot;ul1&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>item 1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>item 2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>item 3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>item 4<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>使用事件委托</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> oBtn = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;btn&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> oUl = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;ul1&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> num = <span class="number">4</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//事件委托，添加的子元素也有事件</span></span><br><span class="line">oUl.<span class="property">onclick</span> = <span class="keyword">function</span> (<span class="params">ev</span>) &#123;</span><br><span class="line">    ev = ev || <span class="variable language_">window</span>.<span class="property">event</span>;</span><br><span class="line">    <span class="keyword">const</span> target = ev.<span class="property">target</span> || ev.<span class="property">srcElement</span>;</span><br><span class="line">    <span class="keyword">if</span> (target.<span class="property">nodeName</span>.<span class="title function_">toLowerCase</span>() == <span class="string">&#x27;li&#x27;</span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;the content is: &#x27;</span>, target.<span class="property">innerHTML</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//添加新节点</span></span><br><span class="line">oBtn.<span class="property">onclick</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    num++;</span><br><span class="line">    <span class="keyword">const</span> oLi = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;li&#x27;</span>);</span><br><span class="line">    oLi.<span class="property">innerHTML</span> = <span class="string">`item <span class="subst">$&#123;num&#125;</span>`</span>;</span><br><span class="line">    oUl.<span class="title function_">appendChild</span>(oLi);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，使用事件委托，在动态绑定事件的情况下是可以减少很多重复工作的</p>
+<h2 id="三、总结"><a href="#三、总结" class="headerlink" title="三、总结"></a>三、总结</h2><p>适合事件委托的事件有：<code>click</code>，<code>mousedown</code>，<code>mouseup</code>，<code>keydown</code>，<code>keyup</code>，<code>keypress</code></p>
+<p>从上面应用场景中，我们就可以看到使用事件委托存在两大优点：</p>
+<ul>
+<li>减少整个页面所需的内存，提升整体性能</li>
+<li>动态绑定，减少重复工作</li>
+</ul>
+<p>但是使用事件委托也是存在局限性：</p>
+<ul>
+<li><p><code>focus</code>、<code>blur </code>这些事件没有事件冒泡机制，所以无法进行委托绑定事件</p>
+</li>
+<li><p><code>mousemove</code>、<code>mouseout </code>这样的事件，虽然有事件冒泡，但是只能不断通过位置去计算定位，对性能消耗高，因此也是不适合于事件委托的</p>
+</li>
+</ul>
+<p>如果把所有事件都用事件代理，可能会出现事件误判，即本不该被触发的事件被绑定上了事件</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://blogmind.cloud">Answer Ran</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://blogmind.cloud/2024/01/27/JavaScript-event-agent/">https://blogmind.cloud/2024/01/27/JavaScript-event-agent/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blogmind.cloud" target="_blank">BlogMind</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/JavaScript/">JavaScript</a></div><div class="post_share"><div class="social-share" data-image="/" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/01/27/JavaScript-debounce-throttle/" title="什么是防抖和节流？有什么区别？如何实现？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">什么是防抖和节流？有什么区别？如何实现？</div></div></a></div><div class="next-post pull-right"><a href="/2024/01/26/JavaScript-data-type/" title="JavaScript中的数据类型？存储上的差别？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">JavaScript中的数据类型？存储上的差别？</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/01/20/JavaScript-BOM/" title="BOM的理解？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-20</div><div class="title">BOM的理解？</div></div></a></div><div><a href="/2024/01/16/JavaScript/" title="&#x3D;&#x3D; 和 &#x3D;&#x3D;&#x3D;区别，分别在什么情况使用"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-16</div><div class="title">&#x3D;&#x3D; 和 &#x3D;&#x3D;&#x3D;区别，分别在什么情况使用</div></div></a></div><div><a href="/2024/01/27/JavaScript-Dom/" title="DOM常见的操作有哪些？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-27</div><div class="title">DOM常见的操作有哪些？</div></div></a></div><div><a href="/2024/01/15/JavaScript-ajax/" title="ajax原理是什么？如何实现？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-15</div><div class="title">ajax原理是什么？如何实现？</div></div></a></div><div><a href="/2024/01/18/JavaScript-array-api/" title="数组的常用方法有哪些？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-18</div><div class="title">数组的常用方法有哪些？</div></div></a></div><div><a href="/2024/01/19/JavaScript-bind-call-apply/" title="bind、call、apply 区别？如何实现一个bind?"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-19</div><div class="title">bind、call、apply 区别？如何实现一个bind?</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Answer Ran</div><div class="author-info__description">记录学习与思考</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">61</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">27</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/answer-ran-ts" target="_blank" title="fab fa-github"><i class="Github"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">1.</span> <span class="toc-text">一、是什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">2.</span> <span class="toc-text">二、应用场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%80%BB%E7%BB%93"><span class="toc-number">3.</span> <span class="toc-text">三、总结</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/02/01/scene-bubble-effect/" title="小心爆炸💥">小心爆炸💥</a><time datetime="2025-01-31T16:00:00.000Z" title="发表于 2025-02-01 00:00:00">2025-02-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/19/vue-vue-components-communication/" title="Vue 组件之间的通信方式有哪些？">Vue 组件之间的通信方式有哪些？</a><time datetime="2024-03-19T08:30:00.000Z" title="发表于 2024-03-19 16:30:00">2024-03-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/19/engine-frontend-monitor/" title="前端监控体系的搭建经验">前端监控体系的搭建经验</a><time datetime="2024-03-19T08:00:00.000Z" title="发表于 2024-03-19 16:00:00">2024-03-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/19/micro-micro-frontend/" title="前端微服务架构的实践经验">前端微服务架构的实践经验</a><time datetime="2024-03-19T08:00:00.000Z" title="发表于 2024-03-19 16:00:00">2024-03-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/19/scene-list-detail-page/" title="列表页跳转详情页的一些最佳实践？">列表页跳转详情页的一些最佳实践？</a><time datetime="2024-03-19T08:00:00.000Z" title="发表于 2024-03-19 16:00:00">2024-03-19</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="footer_custom_text">©2020 - 2025 By Answer Ran</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script src="/js/tilt-effect.js"></script><script src="/js/bubble-effect.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

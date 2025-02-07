@@ -1,0 +1,266 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>BOM的理解？ | BlogMind</title><meta name="author" content="Answer Ran"><meta name="copyright" content="Answer Ran"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="一、是什么BOM (Browser Object Model)，浏览器对象模型，提供了独立于内容与浏览器窗口进行交互的对象 其作用就是跟浏览器做一些交互效果,比如如何进行页面的后退，前进，刷新，浏览器的窗口发生变化，滚动条的滚动，以及获取客户的一些信息如：浏览器品牌版本，屏幕分辨率 浏览器的全部内容可以看成DOM，整个浏览器可以看成BOM。区别如下：  二、windowBom的核心对象是win">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BOM的理解？">
+<meta property="og:url" content="https://blogmind.cloud/2024/01/20/JavaScript-BOM/index.html">
+<meta property="og:site_name" content="BlogMind">
+<meta property="og:description" content="一、是什么BOM (Browser Object Model)，浏览器对象模型，提供了独立于内容与浏览器窗口进行交互的对象 其作用就是跟浏览器做一些交互效果,比如如何进行页面的后退，前进，刷新，浏览器的窗口发生变化，滚动条的滚动，以及获取客户的一些信息如：浏览器品牌版本，屏幕分辨率 浏览器的全部内容可以看成DOM，整个浏览器可以看成BOM。区别如下：  二、windowBom的核心对象是win">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://static.vue-js.com/3e191c40-8089-11eb-85f6-6fac77c0c9b3.png">
+<meta property="og:image" content="https://static.vue-js.com/482f33e0-8089-11eb-85f6-6fac77c0c9b3.png">
+<meta property="og:image" content="https://static.vue-js.com/6797ab40-8089-11eb-ab90-d9ae814b240d.png">
+<meta property="og:image" content="https://static.vue-js.com/74096620-8089-11eb-ab90-d9ae814b240d.png">
+<meta property="og:image" content="https://static.vue-js.com/7d6b21e0-8089-11eb-85f6-6fac77c0c9b3.png">
+<meta property="article:published_time" content="2024-01-20T03:20:00.000Z">
+<meta property="article:modified_time" content="2025-02-07T07:25:24.037Z">
+<meta property="article:author" content="Answer Ran">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://static.vue-js.com/3e191c40-8089-11eb-85f6-6fac77c0c9b3.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://blogmind.cloud/2024/01/20/JavaScript-BOM/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'BOM的理解？',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-02-07 15:25:24'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js"></script><link rel="stylesheet" href="/css/bubble-effect.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">61</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">27</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="BlogMind"><span class="site-name">BlogMind</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">BOM的理解？</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-01-20T03:20:00.000Z" title="发表于 2024-01-20 11:20:00">2024-01-20</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-02-07T07:25:24.037Z" title="更新于 2025-02-07 15:25:24">2025-02-07</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/JavaScript/">JavaScript</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="BOM的理解？"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p> <img src="https://static.vue-js.com/3e191c40-8089-11eb-85f6-6fac77c0c9b3.png"></p>
+<h2 id="一、是什么"><a href="#一、是什么" class="headerlink" title="一、是什么"></a>一、是什么</h2><p><code>BOM</code> (Browser Object Model)，浏览器对象模型，提供了独立于内容与浏览器窗口进行交互的对象</p>
+<p>其作用就是跟浏览器做一些交互效果,比如如何进行页面的后退，前进，刷新，浏览器的窗口发生变化，滚动条的滚动，以及获取客户的一些信息如：浏览器品牌版本，屏幕分辨率</p>
+<p>浏览器的全部内容可以看成<code>DOM</code>，整个浏览器可以看成<code>BOM</code>。区别如下：</p>
+<p><img src="https://static.vue-js.com/482f33e0-8089-11eb-85f6-6fac77c0c9b3.png"></p>
+<h2 id="二、window"><a href="#二、window" class="headerlink" title="二、window"></a>二、window</h2><p><code>Bom</code>的核心对象是<code>window</code>，它表示浏览器的一个实例</p>
+<p>在浏览器中，<code>window</code>对象有双重角色，即是浏览器窗口的一个接口，又是全局对象</p>
+<p>因此所有在全局作用域中声明的变量、函数都会变成<code>window</code>对象的属性和方法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">&#x27;js每日一题&#x27;</span>;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">lookName</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="title function_">alert</span>(<span class="variable language_">this</span>.<span class="property">name</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">window</span>.<span class="property">name</span>);  <span class="comment">//js每日一题</span></span><br><span class="line"><span class="title function_">lookName</span>();                <span class="comment">//js每日一题</span></span><br><span class="line"><span class="variable language_">window</span>.<span class="title function_">lookName</span>();         <span class="comment">//js每日一题</span></span><br></pre></td></tr></table></figure>
+
+<p>关于窗口控制方法如下：</p>
+<ul>
+<li><code>moveBy(x,y)</code>：从当前位置水平移动窗体x个像素，垂直移动窗体y个像素，x为负数，将向左移动窗体，y为负数，将向上移动窗体</li>
+<li><code>moveTo(x,y)</code>：移动窗体左上角到相对于屏幕左上角的(x,y)点</li>
+<li><code>resizeBy(w,h)</code>：相对窗体当前的大小，宽度调整w个像素，高度调整h个像素。如果参数为负值，将缩小窗体，反之扩大窗体</li>
+<li><code>resizeTo(w,h)</code>：把窗体宽度调整为w个像素，高度调整为h个像素</li>
+<li><code>scrollTo(x,y)</code>：如果有滚动条，将横向滚动条移动到相对于窗体宽度为x个像素的位置，将纵向滚动条移动到相对于窗体高度为y个像素的位置</li>
+<li><code>scrollBy(x,y)</code>： 如果有滚动条，将横向滚动条向左移动x个像素，将纵向滚动条向下移动y个像素</li>
+</ul>
+<p> <code>window.open()</code> 既可以导航到一个特定的<code>url</code>，也可以打开一个新的浏览器窗口</p>
+<p>如果 <code>window.open()</code> 传递了第二个参数，且该参数是已有窗口或者框架的名称，那么就会在目标窗口加载第一个参数指定的URL</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="title function_">open</span>(<span class="string">&#x27;htttp://www.vue3js.cn&#x27;</span>,<span class="string">&#x27;topFrame&#x27;</span>)</span><br><span class="line">==&gt; &lt; a href=<span class="string">&quot; &quot;</span> target=<span class="string">&quot;topFrame&quot;</span>&gt;&lt;/ a&gt;</span><br></pre></td></tr></table></figure>
+
+<p><code>window.open()</code> 会返回新窗口的引用，也就是新窗口的 <code>window</code> 对象</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myWin = <span class="variable language_">window</span>.<span class="title function_">open</span>(<span class="string">&#x27;http://www.vue3js.cn&#x27;</span>,<span class="string">&#x27;myWin&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><code>window.close()</code> 仅用于通过 <code>window.open()</code> 打开的窗口</p>
+<p>新创建的 <code>window</code> 对象有一个 <code>opener</code> 属性，该属性指向打开他的原始窗口对象</p>
+<h2 id="三、location"><a href="#三、location" class="headerlink" title="三、location"></a>三、location</h2><p><code>url</code>地址如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">http</span>:<span class="comment">//foouser:barpassword@www.wrox.com:80/WileyCDA/?q=javascript#contents</span></span><br></pre></td></tr></table></figure>
+
+<p><code>location</code>属性描述如下：</p>
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>例子</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>hash</td>
+<td>“#contents”</td>
+<td>utl中#后面的字符，没有则返回空串</td>
+</tr>
+<tr>
+<td>host</td>
+<td><a target="_blank" rel="noopener" href="http://www.wrox.com/">www.wrox.com:80</a></td>
+<td>服务器名称和端口号</td>
+</tr>
+<tr>
+<td>hostname</td>
+<td><a target="_blank" rel="noopener" href="http://www.wrox.com/">www.wrox.com</a></td>
+<td>域名，不带端口号</td>
+</tr>
+<tr>
+<td>href</td>
+<td><a target="_blank" rel="noopener" href="http://www.wrox.com/WileyCDA/?q=javascript#contents">http://www.wrox.com:80/WileyCDA/?q=javascript#contents</a></td>
+<td>完整url</td>
+</tr>
+<tr>
+<td>pathname</td>
+<td>“&#x2F;WileyCDA&#x2F;“</td>
+<td>服务器下面的文件路径</td>
+</tr>
+<tr>
+<td>port</td>
+<td>80</td>
+<td>url的端口号，没有则为空</td>
+</tr>
+<tr>
+<td>protocol</td>
+<td>http:</td>
+<td>使用的协议</td>
+</tr>
+<tr>
+<td>search</td>
+<td>?q&#x3D;javascript</td>
+<td>url的查询字符串，通常为？后面的内容</td>
+</tr>
+</tbody></table>
+<p>除了 <code>hash </code>之外，只要修改<code>location</code>的一个属性，就会导致页面重新加载新<code> URL</code></p>
+<p><code>location.reload()</code>，此方法可以重新刷新当前页面。这个方法会根据最有效的方式刷新页面，如果页面自上一次请求以来没有改变过，页面就会从浏览器缓存中重新加载</p>
+<p>如果要强制从服务器中重新加载，传递一个参数<code>true</code>即可</p>
+<h2 id="四、navigator"><a href="#四、navigator" class="headerlink" title="四、navigator"></a>四、navigator</h2><p><code>navigator</code> 对象主要用来获取浏览器的属性，区分浏览器类型。属性较多，且兼容性比较复杂</p>
+<p>下表列出了<code>navigator</code>对象接口定义的属性和方法：</p>
+<p> <img src="https://static.vue-js.com/6797ab40-8089-11eb-ab90-d9ae814b240d.png"></p>
+<p> <img src="https://static.vue-js.com/74096620-8089-11eb-ab90-d9ae814b240d.png"></p>
+<h2 id="五、screen"><a href="#五、screen" class="headerlink" title="五、screen"></a>五、screen</h2><p>保存的纯粹是客户端能力信息，也就是浏览器窗口外面的客户端显示器的信息，比如像素宽度和像素高度</p>
+<p> <img src="https://static.vue-js.com/7d6b21e0-8089-11eb-85f6-6fac77c0c9b3.png"></p>
+<h2 id="六、history"><a href="#六、history" class="headerlink" title="六、history"></a>六、history</h2><p><code>history</code>对象主要用来操作浏览器<code>URL</code>的历史记录，可以通过参数向前，向后，或者向指定<code>URL</code>跳转</p>
+<p>常用的属性如下：</p>
+<ul>
+<li><code>history.go()</code></li>
+</ul>
+<p>接收一个整数数字或者字符串参数：向最近的一个记录中包含指定字符串的页面跳转，</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">history.<span class="title function_">go</span>(<span class="string">&#x27;maixaofei.com&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>当参数为整数数字的时候，正数表示向前跳转指定的页面，负数为向后跳转指定的页面</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">history.<span class="title function_">go</span>(<span class="number">3</span>) <span class="comment">//向前跳转三个记录</span></span><br><span class="line">history.<span class="title function_">go</span>(-<span class="number">1</span>) <span class="comment">//向后跳转一个记录</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>history.forward()</code>：向前跳转一个页面</li>
+<li><code>history.back()</code>：向后跳转一个页面</li>
+<li><code>history.length</code>：获取历史记录数</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://blogmind.cloud">Answer Ran</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://blogmind.cloud/2024/01/20/JavaScript-BOM/">https://blogmind.cloud/2024/01/20/JavaScript-BOM/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blogmind.cloud" target="_blank">BlogMind</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/JavaScript/">JavaScript</a></div><div class="post_share"><div class="social-share" data-image="/" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/01/20/webpack-improve-build/" title="如何提高webpack的构建速度？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">如何提高webpack的构建速度？</div></div></a></div><div class="next-post pull-right"><a href="/2024/01/19/webpack-build-process/" title="webpack的构建流程"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">webpack的构建流程</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/01/16/JavaScript/" title="&#x3D;&#x3D; 和 &#x3D;&#x3D;&#x3D;区别，分别在什么情况使用"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-16</div><div class="title">&#x3D;&#x3D; 和 &#x3D;&#x3D;&#x3D;区别，分别在什么情况使用</div></div></a></div><div><a href="/2024/01/27/JavaScript-Dom/" title="DOM常见的操作有哪些？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-27</div><div class="title">DOM常见的操作有哪些？</div></div></a></div><div><a href="/2024/01/15/JavaScript-ajax/" title="ajax原理是什么？如何实现？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-15</div><div class="title">ajax原理是什么？如何实现？</div></div></a></div><div><a href="/2024/01/18/JavaScript-array-api/" title="数组的常用方法有哪些？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-18</div><div class="title">数组的常用方法有哪些？</div></div></a></div><div><a href="/2024/01/19/JavaScript-bind-call-apply/" title="bind、call、apply 区别？如何实现一个bind?"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-19</div><div class="title">bind、call、apply 区别？如何实现一个bind?</div></div></a></div><div><a href="/2024/01/21/JavaScript-cache/" title="Javascript本地存储的方式有哪些？区别及应用场景？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-21</div><div class="title">Javascript本地存储的方式有哪些？区别及应用场景？</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Answer Ran</div><div class="author-info__description">记录学习与思考</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">61</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">27</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/answer-ran-ts" target="_blank" title="fab fa-github"><i class="Github"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">1.</span> <span class="toc-text">一、是什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81window"><span class="toc-number">2.</span> <span class="toc-text">二、window</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81location"><span class="toc-number">3.</span> <span class="toc-text">三、location</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81navigator"><span class="toc-number">4.</span> <span class="toc-text">四、navigator</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81screen"><span class="toc-number">5.</span> <span class="toc-text">五、screen</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81history"><span class="toc-number">6.</span> <span class="toc-text">六、history</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/02/01/scene-bubble-effect/" title="小心爆炸💥">小心爆炸💥</a><time datetime="2025-01-31T16:00:00.000Z" title="发表于 2025-02-01 00:00:00">2025-02-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/19/vue-vue-components-communication/" title="Vue 组件之间的通信方式有哪些？">Vue 组件之间的通信方式有哪些？</a><time datetime="2024-03-19T08:30:00.000Z" title="发表于 2024-03-19 16:30:00">2024-03-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/19/engine-frontend-monitor/" title="前端监控体系的搭建经验">前端监控体系的搭建经验</a><time datetime="2024-03-19T08:00:00.000Z" title="发表于 2024-03-19 16:00:00">2024-03-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/19/micro-micro-frontend/" title="前端微服务架构的实践经验">前端微服务架构的实践经验</a><time datetime="2024-03-19T08:00:00.000Z" title="发表于 2024-03-19 16:00:00">2024-03-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/19/scene-list-detail-page/" title="列表页跳转详情页的一些最佳实践？">列表页跳转详情页的一些最佳实践？</a><time datetime="2024-03-19T08:00:00.000Z" title="发表于 2024-03-19 16:00:00">2024-03-19</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="footer_custom_text">©2020 - 2025 By Answer Ran</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script src="/js/tilt-effect.js"></script><script src="/js/bubble-effect.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

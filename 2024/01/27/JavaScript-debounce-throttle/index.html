@@ -1,0 +1,210 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>什么是防抖和节流？有什么区别？如何实现？ | BlogMind</title><meta name="author" content="Answer Ran"><meta name="copyright" content="Answer Ran"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="一、是什么本质上是优化高频率执行代码的一种手段 如：浏览器的 resize、scroll、keypress、mousemove 等事件在触发时，会不断地调用绑定在事件上的回调函数，极大地浪费资源，降低前端性能 为了优化体验，需要对这类事件进行调用次数的限制，对此我们就可以采用 防抖（debounce） 和 节流（throttle） 的方式来减少调用频率 定义 节流: n 秒内只运行一次，若在">
+<meta property="og:type" content="article">
+<meta property="og:title" content="什么是防抖和节流？有什么区别？如何实现？">
+<meta property="og:url" content="https://blogmind.cloud/2024/01/27/JavaScript-debounce-throttle/index.html">
+<meta property="og:site_name" content="BlogMind">
+<meta property="og:description" content="一、是什么本质上是优化高频率执行代码的一种手段 如：浏览器的 resize、scroll、keypress、mousemove 等事件在触发时，会不断地调用绑定在事件上的回调函数，极大地浪费资源，降低前端性能 为了优化体验，需要对这类事件进行调用次数的限制，对此我们就可以采用 防抖（debounce） 和 节流（throttle） 的方式来减少调用频率 定义 节流: n 秒内只运行一次，若在">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://static.vue-js.com/912f1a10-8787-11eb-85f6-6fac77c0c9b3.png">
+<meta property="og:image" content="https://static.vue-js.com/a2c81b50-8787-11eb-ab90-d9ae814b240d.png">
+<meta property="article:published_time" content="2024-01-27T08:30:00.000Z">
+<meta property="article:modified_time" content="2025-02-07T07:26:34.212Z">
+<meta property="article:author" content="Answer Ran">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://static.vue-js.com/912f1a10-8787-11eb-85f6-6fac77c0c9b3.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://blogmind.cloud/2024/01/27/JavaScript-debounce-throttle/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '什么是防抖和节流？有什么区别？如何实现？',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-02-07 15:26:34'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js"></script><link rel="stylesheet" href="/css/bubble-effect.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">61</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">27</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="BlogMind"><span class="site-name">BlogMind</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">什么是防抖和节流？有什么区别？如何实现？</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-01-27T08:30:00.000Z" title="发表于 2024-01-27 16:30:00">2024-01-27</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-02-07T07:26:34.212Z" title="更新于 2025-02-07 15:26:34">2025-02-07</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/JavaScript/">JavaScript</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="什么是防抖和节流？有什么区别？如何实现？"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p> <img src="https://static.vue-js.com/912f1a10-8787-11eb-85f6-6fac77c0c9b3.png"></p>
+<h2 id="一、是什么"><a href="#一、是什么" class="headerlink" title="一、是什么"></a>一、是什么</h2><p>本质上是优化高频率执行代码的一种手段</p>
+<p>如：浏览器的 <code>resize</code>、<code>scroll</code>、<code>keypress</code>、<code>mousemove</code> 等事件在触发时，会不断地调用绑定在事件上的回调函数，极大地浪费资源，降低前端性能</p>
+<p>为了优化体验，需要对这类事件进行调用次数的限制，对此我们就可以采用 <strong>防抖（debounce）</strong> 和 <strong>节流（throttle）</strong> 的方式来减少调用频率</p>
+<h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><ul>
+<li>节流: n 秒内只运行一次，若在 n 秒内重复触发，只有一次生效</li>
+<li>防抖: n 秒后在执行该事件，若在 n 秒内被重复触发，则重新计时</li>
+</ul>
+<p>一个经典的比喻:</p>
+<p>想象每天上班大厦底下的电梯。把电梯完成一次运送，类比为一次函数的执行和响应</p>
+<p>假设电梯有两种运行策略 <code>debounce</code> 和 <code>throttle</code>，超时设定为15秒，不考虑容量限制</p>
+<p>电梯第一个人进来后，15秒后准时运送一次，这是节流</p>
+<p>电梯第一个人进来后，等待15秒。如果过程中又有人进来，15秒等待重新计时，直到15秒后开始运送，这是防抖</p>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><h3 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h3><p>完成节流可以使用时间戳与定时器的写法</p>
+<p>使用时间戳写法，事件会立即执行，停止触发后没有办法再次执行</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">throttled1</span>(<span class="params">fn, delay = <span class="number">500</span></span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> oldtime = <span class="title class_">Date</span>.<span class="title function_">now</span>()</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params">...args</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> newtime = <span class="title class_">Date</span>.<span class="title function_">now</span>()</span><br><span class="line">        <span class="keyword">if</span> (newtime - oldtime &gt;= delay) &#123;</span><br><span class="line">            fn.<span class="title function_">apply</span>(<span class="literal">null</span>, args)</span><br><span class="line">            oldtime = <span class="title class_">Date</span>.<span class="title function_">now</span>()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>使用定时器写法，<code>delay</code>毫秒后第一次执行，第二次事件停止触发后依然会再一次执行</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">throttled2</span>(<span class="params">fn, delay = <span class="number">500</span></span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> timer = <span class="literal">null</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params">...args</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!timer) &#123;</span><br><span class="line">            timer = <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">                fn.<span class="title function_">apply</span>(<span class="variable language_">this</span>, args)</span><br><span class="line">                timer = <span class="literal">null</span></span><br><span class="line">            &#125;, delay);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以将时间戳写法的特性与定时器写法的特性相结合，实现一个更加精确的节流。实现如下</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">throttled</span>(<span class="params">fn, delay</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> timer = <span class="literal">null</span></span><br><span class="line">    <span class="keyword">let</span> starttime = <span class="title class_">Date</span>.<span class="title function_">now</span>()</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> curTime = <span class="title class_">Date</span>.<span class="title function_">now</span>() <span class="comment">// 当前时间</span></span><br><span class="line">        <span class="keyword">let</span> remaining = delay - (curTime - starttime)  <span class="comment">// 从上一次到现在，还剩下多少多余时间</span></span><br><span class="line">        <span class="keyword">let</span> context = <span class="variable language_">this</span></span><br><span class="line">        <span class="keyword">let</span> args = <span class="variable language_">arguments</span></span><br><span class="line">        <span class="built_in">clearTimeout</span>(timer)</span><br><span class="line">        <span class="keyword">if</span> (remaining &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">            fn.<span class="title function_">apply</span>(context, args)</span><br><span class="line">            starttime = <span class="title class_">Date</span>.<span class="title function_">now</span>()</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            timer = <span class="built_in">setTimeout</span>(fn, remaining);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="防抖"><a href="#防抖" class="headerlink" title="防抖"></a>防抖</h3><p>简单版本的实现</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">debounce</span>(<span class="params">func, wait</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> timeout;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> context = <span class="variable language_">this</span>; <span class="comment">// 保存this指向</span></span><br><span class="line">        <span class="keyword">let</span> args = <span class="variable language_">arguments</span>; <span class="comment">// 拿到event对象</span></span><br><span class="line"></span><br><span class="line">        <span class="built_in">clearTimeout</span>(timeout)</span><br><span class="line">        timeout = <span class="built_in">setTimeout</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">            func.<span class="title function_">apply</span>(context, args)</span><br><span class="line">        &#125;, wait);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>防抖如果需要立即执行，可加入第三个参数用于判断，实现如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">debounce</span>(<span class="params">func, wait, immediate</span>) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> timeout;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> context = <span class="variable language_">this</span>;</span><br><span class="line">        <span class="keyword">let</span> args = <span class="variable language_">arguments</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (timeout) <span class="built_in">clearTimeout</span>(timeout); <span class="comment">// timeout 不为null</span></span><br><span class="line">        <span class="keyword">if</span> (immediate) &#123;</span><br><span class="line">            <span class="keyword">let</span> callNow = !timeout; <span class="comment">// 第一次会立即执行，以后只有事件执行后才会再次触发</span></span><br><span class="line">            timeout = <span class="built_in">setTimeout</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">                timeout = <span class="literal">null</span>;</span><br><span class="line">            &#125;, wait)</span><br><span class="line">            <span class="keyword">if</span> (callNow) &#123;</span><br><span class="line">                func.<span class="title function_">apply</span>(context, args)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            timeout = <span class="built_in">setTimeout</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">                func.<span class="title function_">apply</span>(context, args)</span><br><span class="line">            &#125;, wait);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="二、区别"><a href="#二、区别" class="headerlink" title="二、区别"></a>二、区别</h2><p>相同点：</p>
+<ul>
+<li>都可以通过使用 <code>setTimeout</code> 实现</li>
+<li>目的都是，降低回调执行频率。节省计算资源</li>
+</ul>
+<p>不同点：</p>
+<ul>
+<li>函数防抖，在一段连续操作结束后，处理回调，利用<code>clearTimeout </code>和 <code>setTimeout</code>实现。函数节流，在一段连续操作中，每一段时间只执行一次，频率较高的事件中使用来提高性能</li>
+<li>函数防抖关注一定时间连续触发的事件，只在最后执行一次，而函数节流一段时间内只执行一次</li>
+</ul>
+<p>例如，都设置时间频率为500ms，在2秒时间内，频繁触发函数，节流，每隔 500ms 就执行一次。防抖，则不管调动多少次方法，在2s后，只会执行一次</p>
+<p>如下图所示：</p>
+<p> <img src="https://static.vue-js.com/a2c81b50-8787-11eb-ab90-d9ae814b240d.png"></p>
+<h2 id="三、应用场景"><a href="#三、应用场景" class="headerlink" title="三、应用场景"></a>三、应用场景</h2><p>防抖在连续的事件，只需触发一次回调的场景有：</p>
+<ul>
+<li>搜索框搜索输入。只需用户最后一次输入完，再发送请求</li>
+<li>手机号、邮箱验证输入检测</li>
+<li>窗口大小<code>resize</code>。只需窗口调整完成后，计算窗口大小。防止重复渲染。</li>
+</ul>
+<p>节流在间隔一段时间执行一次回调的场景有：</p>
+<ul>
+<li>滚动加载，加载更多或滚到底部监听</li>
+<li>搜索框，搜索联想功能</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://blogmind.cloud">Answer Ran</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://blogmind.cloud/2024/01/27/JavaScript-debounce-throttle/">https://blogmind.cloud/2024/01/27/JavaScript-debounce-throttle/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blogmind.cloud" target="_blank">BlogMind</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/JavaScript/">JavaScript</a></div><div class="post_share"><div class="social-share" data-image="/" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/01/27/JavaScript-Dom/" title="DOM常见的操作有哪些？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">DOM常见的操作有哪些？</div></div></a></div><div class="next-post pull-right"><a href="/2024/01/27/JavaScript-event-agent/" title="什么是事件代理？应用场景？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">什么是事件代理？应用场景？</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/01/20/JavaScript-BOM/" title="BOM的理解？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-20</div><div class="title">BOM的理解？</div></div></a></div><div><a href="/2024/01/16/JavaScript/" title="&#x3D;&#x3D; 和 &#x3D;&#x3D;&#x3D;区别，分别在什么情况使用"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-16</div><div class="title">&#x3D;&#x3D; 和 &#x3D;&#x3D;&#x3D;区别，分别在什么情况使用</div></div></a></div><div><a href="/2024/01/27/JavaScript-Dom/" title="DOM常见的操作有哪些？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-27</div><div class="title">DOM常见的操作有哪些？</div></div></a></div><div><a href="/2024/01/15/JavaScript-ajax/" title="ajax原理是什么？如何实现？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-15</div><div class="title">ajax原理是什么？如何实现？</div></div></a></div><div><a href="/2024/01/18/JavaScript-array-api/" title="数组的常用方法有哪些？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-18</div><div class="title">数组的常用方法有哪些？</div></div></a></div><div><a href="/2024/01/19/JavaScript-bind-call-apply/" title="bind、call、apply 区别？如何实现一个bind?"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-19</div><div class="title">bind、call、apply 区别？如何实现一个bind?</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Answer Ran</div><div class="author-info__description">记录学习与思考</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">61</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">27</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/answer-ran-ts" target="_blank" title="fab fa-github"><i class="Github"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">1.</span> <span class="toc-text">一、是什么</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-number">1.0.1.</span> <span class="toc-text">定义</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.</span> <span class="toc-text">代码实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8A%82%E6%B5%81"><span class="toc-number">2.1.</span> <span class="toc-text">节流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%B2%E6%8A%96"><span class="toc-number">2.2.</span> <span class="toc-text">防抖</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%8C%BA%E5%88%AB"><span class="toc-number">3.</span> <span class="toc-text">二、区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">4.</span> <span class="toc-text">三、应用场景</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/02/01/scene-bubble-effect/" title="小心爆炸💥">小心爆炸💥</a><time datetime="2025-01-31T16:00:00.000Z" title="发表于 2025-02-01 00:00:00">2025-02-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/19/vue-vue-components-communication/" title="Vue 组件之间的通信方式有哪些？">Vue 组件之间的通信方式有哪些？</a><time datetime="2024-03-19T08:30:00.000Z" title="发表于 2024-03-19 16:30:00">2024-03-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/19/engine-frontend-monitor/" title="前端监控体系的搭建经验">前端监控体系的搭建经验</a><time datetime="2024-03-19T08:00:00.000Z" title="发表于 2024-03-19 16:00:00">2024-03-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/19/micro-micro-frontend/" title="前端微服务架构的实践经验">前端微服务架构的实践经验</a><time datetime="2024-03-19T08:00:00.000Z" title="发表于 2024-03-19 16:00:00">2024-03-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/19/scene-list-detail-page/" title="列表页跳转详情页的一些最佳实践？">列表页跳转详情页的一些最佳实践？</a><time datetime="2024-03-19T08:00:00.000Z" title="发表于 2024-03-19 16:00:00">2024-03-19</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="footer_custom_text">©2020 - 2025 By Answer Ran</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script src="/js/tilt-effect.js"></script><script src="/js/bubble-effect.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
