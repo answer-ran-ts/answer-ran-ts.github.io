@@ -1,0 +1,235 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>如何实现上拉加载，下拉刷新？ | BlogMind</title><meta name="author" content="Answer Ran"><meta name="copyright" content="Answer Ran"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="一、前言下拉刷新和上拉加载这两种交互方式通常出现在移动端中 本质上等同于PC网页中的分页，只是交互形式不同 开源社区也有很多优秀的解决方案，如iscroll、better-scroll、pulltorefresh.js库等等 这些第三方库使用起来非常便捷 我们通过原生的方式实现一次上拉加载，下拉刷新，有助于对第三方库有更好的理解与使用 二、实现原理上拉加载及下拉刷新都依赖于用户交互 最重要的是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何实现上拉加载，下拉刷新？">
+<meta property="og:url" content="https://blogmind.cloud/2023/06/19/JavaScript-pull-up-loading-pull-down-refresh/index.html">
+<meta property="og:site_name" content="BlogMind">
+<meta property="og:description" content="一、前言下拉刷新和上拉加载这两种交互方式通常出现在移动端中 本质上等同于PC网页中的分页，只是交互形式不同 开源社区也有很多优秀的解决方案，如iscroll、better-scroll、pulltorefresh.js库等等 这些第三方库使用起来非常便捷 我们通过原生的方式实现一次上拉加载，下拉刷新，有助于对第三方库有更好的理解与使用 二、实现原理上拉加载及下拉刷新都依赖于用户交互 最重要的是">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://static.vue-js.com/89cd1850-8adc-11eb-ab90-d9ae814b240d.png">
+<meta property="og:image" content="https://static.vue-js.com/df498a00-8ae3-11eb-ab90-d9ae814b240d.png">
+<meta property="article:published_time" content="2023-06-18T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-02-07T07:53:28.779Z">
+<meta property="article:author" content="Answer Ran">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://static.vue-js.com/89cd1850-8adc-11eb-ab90-d9ae814b240d.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://blogmind.cloud/2023/06/19/JavaScript-pull-up-loading-pull-down-refresh/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '如何实现上拉加载，下拉刷新？',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-02-07 15:53:28'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js"></script><link rel="stylesheet" href="/css/bubble-effect.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">62</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">31</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="BlogMind"><span class="site-name">BlogMind</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">如何实现上拉加载，下拉刷新？</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-06-18T16:00:00.000Z" title="发表于 2023-06-19 00:00:00">2023-06-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-02-07T07:53:28.779Z" title="更新于 2025-02-07 15:53:28">2025-02-07</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/JavaScript/">JavaScript</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="如何实现上拉加载，下拉刷新？"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p> <img src="https://static.vue-js.com/89cd1850-8adc-11eb-ab90-d9ae814b240d.png"></p>
+<h2 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h2><p>下拉刷新和上拉加载这两种交互方式通常出现在移动端中</p>
+<p>本质上等同于PC网页中的分页，只是交互形式不同</p>
+<p>开源社区也有很多优秀的解决方案，如<code>iscroll</code>、<code>better-scroll</code>、<code>pulltorefresh.js</code>库等等</p>
+<p>这些第三方库使用起来非常便捷</p>
+<p>我们通过原生的方式实现一次上拉加载，下拉刷新，有助于对第三方库有更好的理解与使用</p>
+<h2 id="二、实现原理"><a href="#二、实现原理" class="headerlink" title="二、实现原理"></a>二、实现原理</h2><p>上拉加载及下拉刷新都依赖于用户交互</p>
+<p>最重要的是要理解在什么场景，什么时机下触发交互动作</p>
+<h3 id="上拉加载"><a href="#上拉加载" class="headerlink" title="上拉加载"></a>上拉加载</h3><p>首先可以看一张图</p>
+<p> <img src="https://static.vue-js.com/df498a00-8ae3-11eb-ab90-d9ae814b240d.png"></p>
+<p>上拉加载的本质是页面触底，或者快要触底时的动作</p>
+<p>判断页面触底我们需要先了解一下下面几个属性</p>
+<ul>
+<li><p><code>scrollTop</code>：滚动视窗的高度距离<code>window</code>顶部的距离，它会随着往上滚动而不断增加，初始值是0，它是一个变化的值</p>
+</li>
+<li><p><code>clientHeight</code>:它是一个定值，表示屏幕可视区域的高度；</p>
+</li>
+<li><p><code>scrollHeight</code>：页面不能滚动时也是存在的,此时scrollHeight等于clientHeight。scrollHeight表示<code>body</code>所有元素的总长度(包括body元素自身的padding)</p>
+</li>
+</ul>
+<p>综上我们得出一个触底公式：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrollTop + clientHeight &gt;= scrollHeight</span><br></pre></td></tr></table></figure>
+
+<p>简单实现</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> clientHeight  = <span class="variable language_">document</span>.<span class="property">documentElement</span>.<span class="property">clientHeight</span>; <span class="comment">//浏览器高度</span></span><br><span class="line"><span class="keyword">let</span> scrollHeight = <span class="variable language_">document</span>.<span class="property">body</span>.<span class="property">scrollHeight</span>;</span><br><span class="line"><span class="keyword">let</span> scrollTop = <span class="variable language_">document</span>.<span class="property">documentElement</span>.<span class="property">scrollTop</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">let</span> distance = <span class="number">50</span>;  <span class="comment">//距离视窗还用50的时候，开始触发；</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> ((scrollTop + clientHeight) &gt;= (scrollHeight - distance)) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;开始加载数据&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="下拉刷新"><a href="#下拉刷新" class="headerlink" title="下拉刷新"></a>下拉刷新</h3><p>下拉刷新的本质是页面本身置于顶部时，用户下拉时需要触发的动作</p>
+<p>关于下拉刷新的原生实现，主要分成三步：</p>
+<ul>
+<li>监听原生<code>touchstart</code>事件，记录其初始位置的值，<code>e.touches[0].pageY</code>；</li>
+<li>监听原生<code>touchmove</code>事件，记录并计算当前滑动的位置值与初始位置值的差值，大于<code>0</code>表示向下拉动，并借助CSS3的<code>translateY</code>属性使元素跟随手势向下滑动对应的差值，同时也应设置一个允许滑动的最大值；</li>
+<li>监听原生<code>touchend</code>事件，若此时元素滑动达到最大值，则触发<code>callback</code>，同时将<code>translateY</code>重设为<code>0</code>，元素回到初始位置</li>
+</ul>
+<p>举个例子：</p>
+<p><code>Html</code>结构如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;main&gt;</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;refreshText&quot;</span>&gt;</span>&lt;/p &gt;</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">&quot;refreshContainer&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>111<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>222<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>333<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>444<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>555<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        ...</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">main</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>监听<code>touchstart</code>事件，记录初始的值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> _element = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;refreshContainer&#x27;</span>),</span><br><span class="line">    _refreshText = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.refreshText&#x27;</span>),</span><br><span class="line">    _startPos = <span class="number">0</span>,  <span class="comment">// 初始的值</span></span><br><span class="line">    _transitionHeight = <span class="number">0</span>; <span class="comment">// 移动的距离</span></span><br><span class="line"></span><br><span class="line">_element.<span class="title function_">addEventListener</span>(<span class="string">&#x27;touchstart&#x27;</span>, <span class="keyword">function</span>(<span class="params">e</span>) &#123;</span><br><span class="line">    _startPos = e.<span class="property">touches</span>[<span class="number">0</span>].<span class="property">pageY</span>; <span class="comment">// 记录初始位置</span></span><br><span class="line">    _element.<span class="property">style</span>.<span class="property">position</span> = <span class="string">&#x27;relative&#x27;</span>;</span><br><span class="line">    _element.<span class="property">style</span>.<span class="property">transition</span> = <span class="string">&#x27;transform 0s&#x27;</span>;</span><br><span class="line">&#125;, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+
+<p>监听<code>touchmove</code>移动事件，记录滑动差值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">_element.<span class="title function_">addEventListener</span>(<span class="string">&#x27;touchmove&#x27;</span>, <span class="keyword">function</span>(<span class="params">e</span>) &#123;</span><br><span class="line">    <span class="comment">// e.touches[0].pageY 当前位置</span></span><br><span class="line">    _transitionHeight = e.<span class="property">touches</span>[<span class="number">0</span>].<span class="property">pageY</span> - _startPos; <span class="comment">// 记录差值</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (_transitionHeight &gt; <span class="number">0</span> &amp;&amp; _transitionHeight &lt; <span class="number">60</span>) &#123; </span><br><span class="line">        _refreshText.<span class="property">innerText</span> = <span class="string">&#x27;下拉刷新&#x27;</span>; </span><br><span class="line">        _element.<span class="property">style</span>.<span class="property">transform</span> = <span class="string">&#x27;translateY(&#x27;</span>+_transitionHeight+<span class="string">&#x27;px)&#x27;</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (_transitionHeight &gt; <span class="number">55</span>) &#123;</span><br><span class="line">            _refreshText.<span class="property">innerText</span> = <span class="string">&#x27;释放更新&#x27;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;                </span><br><span class="line">&#125;, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+
+<p>最后，就是监听<code>touchend</code>离开的事件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">_element.<span class="title function_">addEventListener</span>(<span class="string">&#x27;touchend&#x27;</span>, <span class="keyword">function</span>(<span class="params">e</span>) &#123;</span><br><span class="line">    _element.<span class="property">style</span>.<span class="property">transition</span> = <span class="string">&#x27;transform 0.5s ease 1s&#x27;</span>;</span><br><span class="line">    _element.<span class="property">style</span>.<span class="property">transform</span> = <span class="string">&#x27;translateY(0px)&#x27;</span>;</span><br><span class="line">    _refreshText.<span class="property">innerText</span> = <span class="string">&#x27;更新中...&#x27;</span>;</span><br><span class="line">    <span class="comment">// todo...</span></span><br><span class="line"></span><br><span class="line">&#125;, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+
+<p>从上面可以看到，在下拉到松手的过程中，经历了三个阶段：</p>
+<ul>
+<li>当前手势滑动位置与初始位置差值大于零时，提示正在进行下拉刷新操作</li>
+<li>下拉到一定值时，显示松手释放后的操作提示</li>
+<li>下拉到达设定最大值松手时，执行回调，提示正在进行更新操作</li>
+</ul>
+<h2 id="三、案例"><a href="#三、案例" class="headerlink" title="三、案例"></a>三、案例</h2><p>在实际开发中，我们更多的是使用第三方库，下面以<code>better-scroll</code>进行举例：</p>
+<p>HTML结构</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">&quot;position-wrapper&quot;</span>&gt;</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;refresh&quot;</span>&gt;</span>下拉刷新&lt;/p &gt;</span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;position-list&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">   <span class="comment">&lt;!--列表内容--&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;more&quot;</span>&gt;</span>查看更多&lt;/p &gt;</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>实例化上拉下拉插件，通过<code>use</code>来注册插件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">BScroll</span> <span class="keyword">from</span> <span class="string">&quot;@better-scroll/core&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">PullDown</span> <span class="keyword">from</span> <span class="string">&quot;@better-scroll/pull-down&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">PullUp</span> <span class="keyword">from</span> <span class="string">&#x27;@better-scroll/pull-up&#x27;</span>;</span><br><span class="line"><span class="title class_">BScroll</span>.<span class="title function_">use</span>(<span class="title class_">PullDown</span>);</span><br><span class="line"><span class="title class_">BScroll</span>.<span class="title function_">use</span>(<span class="title class_">PullUp</span>);</span><br></pre></td></tr></table></figure>
+
+<p>实例化<code>BetterScroll</code>，并传入相关的参数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> pageNo = <span class="number">1</span>,pageSize = <span class="number">10</span>,dataList = [],isMore = <span class="literal">true</span>;  </span><br><span class="line"><span class="keyword">var</span> scroll= <span class="keyword">new</span> <span class="title class_">BScroll</span>(<span class="string">&quot;#position-wrapper&quot;</span>,&#123;</span><br><span class="line">    <span class="attr">scrollY</span>:<span class="literal">true</span>,<span class="comment">//垂直方向滚动</span></span><br><span class="line">    <span class="attr">click</span>:<span class="literal">true</span>,<span class="comment">//默认会阻止浏览器的原生click事件，如果需要点击，这里要设为true</span></span><br><span class="line">    <span class="attr">pullUpLoad</span>:<span class="literal">true</span>,<span class="comment">//上拉加载更多</span></span><br><span class="line">    <span class="attr">pullDownRefresh</span>:&#123;</span><br><span class="line">        <span class="attr">threshold</span>:<span class="number">50</span>,<span class="comment">//触发pullingDown事件的位置</span></span><br><span class="line">        <span class="attr">stop</span>:<span class="number">0</span><span class="comment">//下拉回弹后停留的位置</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//监听下拉刷新</span></span><br><span class="line">scroll.<span class="title function_">on</span>(<span class="string">&quot;pullingDown&quot;</span>,pullingDownHandler);</span><br><span class="line"><span class="comment">//监测实时滚动</span></span><br><span class="line">scroll.<span class="title function_">on</span>(<span class="string">&quot;scroll&quot;</span>,scrollHandler);</span><br><span class="line"><span class="comment">//上拉加载更多</span></span><br><span class="line">scroll.<span class="title function_">on</span>(<span class="string">&quot;pullingUp&quot;</span>,pullingUpHandler);</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">pullingDownHandler</span>(<span class="params"></span>)&#123;</span><br><span class="line">    dataList=[];</span><br><span class="line">    pageNo=<span class="number">1</span>;</span><br><span class="line">    isMore=<span class="literal">true</span>;</span><br><span class="line">    $(<span class="string">&quot;.more&quot;</span>).<span class="title function_">text</span>(<span class="string">&quot;查看更多&quot;</span>);</span><br><span class="line">    <span class="keyword">await</span> <span class="title function_">getlist</span>();<span class="comment">//请求数据</span></span><br><span class="line">    scroll.<span class="title function_">finishPullDown</span>();<span class="comment">//每次下拉结束后，需要执行这个操作</span></span><br><span class="line">    scroll.<span class="title function_">refresh</span>();<span class="comment">//当滚动区域的dom结构有变化时，需要执行这个操作</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">pullingUpHandler</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">if</span>(!isMore)&#123;</span><br><span class="line">        $(<span class="string">&quot;.more&quot;</span>).<span class="title function_">text</span>(<span class="string">&quot;没有更多数据了&quot;</span>);</span><br><span class="line">        scroll.<span class="title function_">finishPullUp</span>();<span class="comment">//每次上拉结束后，需要执行这个操作</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    pageNo++;</span><br><span class="line">    <span class="keyword">await</span> <span class="variable language_">this</span>.<span class="title function_">getlist</span>();<span class="comment">//请求数据</span></span><br><span class="line">    scroll.<span class="title function_">finishPullUp</span>();<span class="comment">//每次上拉结束后，需要执行这个操作</span></span><br><span class="line">    scroll.<span class="title function_">refresh</span>();<span class="comment">//当滚动区域的dom结构有变化时，需要执行这个操作    </span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">scrollHandler</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="variable language_">this</span>.<span class="property">y</span>&gt;<span class="number">50</span>) $(<span class="string">&#x27;.refresh&#x27;</span>).<span class="title function_">text</span>(<span class="string">&quot;松手开始加载&quot;</span>);</span><br><span class="line">    <span class="keyword">else</span> $(<span class="string">&#x27;.refresh&#x27;</span>).<span class="title function_">text</span>(<span class="string">&quot;下拉刷新&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getlist</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="comment">//返回的数据</span></span><br><span class="line">    <span class="keyword">let</span> result=....;</span><br><span class="line">    dataList=dataList.<span class="title function_">concat</span>(result);</span><br><span class="line">    <span class="comment">//判断是否已加载完</span></span><br><span class="line">    <span class="keyword">if</span>(result.<span class="property">length</span>&lt;pageSize) isMore=<span class="literal">false</span>;</span><br><span class="line">    <span class="comment">//将dataList渲染到html内容中</span></span><br><span class="line">&#125;    </span><br></pre></td></tr></table></figure>
+
+<p>注意点：</p>
+<p>使用<code>better-scroll </code>实现下拉刷新、上拉加载时要注意以下几点：</p>
+<ul>
+<li><code>wrapper</code>里必须只有一个子元素</li>
+<li>子元素的高度要比<code>wrapper</code>要高</li>
+<li>使用的时候，要确定<code>DOM</code>元素是否已经生成，必须要等到<code>DOM</code>渲染完成后，再<code>new BScroll()</code></li>
+<li>滚动区域的<code>DOM</code>元素结构有变化后，需要执行刷新 <code>refresh() </code></li>
+<li>上拉或者下拉，结束后，需要执行<code>finishPullUp()</code>或者<code>finishPullDown()</code>，否则将不会执行下次操作</li>
+<li><code>better-scroll</code>，默认会阻止浏览器的原生<code>click</code>事件，如果滚动内容区要添加点击事件，需要在实例化属性里设置<code>click:true</code></li>
+</ul>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>下拉刷新、上拉加载原理本身都很简单，真正复杂的是封装过程中，要考虑的兼容性、易用性、性能等诸多细节</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000014423308">https://segmentfault.com/a/1190000014423308</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/ustbhuangyi/better-scroll">https://github.com/ustbhuangyi/better-scroll</a></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://blogmind.cloud">Answer Ran</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://blogmind.cloud/2023/06/19/JavaScript-pull-up-loading-pull-down-refresh/">https://blogmind.cloud/2023/06/19/JavaScript-pull-up-loading-pull-down-refresh/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blogmind.cloud" target="_blank">BlogMind</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/JavaScript/">JavaScript</a></div><div class="post_share"><div class="social-share" data-image="/" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/06/22/JavaScript-string-api/" title="JavaScript字符串的常用方法有哪些？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">JavaScript字符串的常用方法有哪些？</div></div></a></div><div class="next-post pull-right"><a href="/2023/06/13/JavaScript-single-sign/" title="什么是单点登录？如何实现？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">什么是单点登录？如何实现？</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/04/16/JavaScript/" title="&#x3D;&#x3D; 和 &#x3D;&#x3D;&#x3D;区别，分别在什么情况使用"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-04-16</div><div class="title">&#x3D;&#x3D; 和 &#x3D;&#x3D;&#x3D;区别，分别在什么情况使用</div></div></a></div><div><a href="/2024/04/28/JavaScript-BOM/" title="BOM的理解？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-04-28</div><div class="title">BOM的理解？</div></div></a></div><div><a href="/2024/04/18/JavaScript-ajax/" title="ajax原理是什么？如何实现？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-04-18</div><div class="title">ajax原理是什么？如何实现？</div></div></a></div><div><a href="/2024/07/04/JavaScript-Dom/" title="DOM常见的操作有哪些？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-07-04</div><div class="title">DOM常见的操作有哪些？</div></div></a></div><div><a href="/2024/04/20/JavaScript-array-api/" title="数组的常用方法有哪些？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-04-20</div><div class="title">数组的常用方法有哪些？</div></div></a></div><div><a href="/2024/04/22/JavaScript-bind-call-apply/" title="bind、call、apply 区别？如何实现一个bind?"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-04-22</div><div class="title">bind、call、apply 区别？如何实现一个bind?</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Answer Ran</div><div class="author-info__description">记录学习与思考</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">62</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">31</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/answer-ran-ts" target="_blank" title="fab fa-github"><i class="Github"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">一、前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">二、实现原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8A%E6%8B%89%E5%8A%A0%E8%BD%BD"><span class="toc-number">2.1.</span> <span class="toc-text">上拉加载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E6%8B%89%E5%88%B7%E6%96%B0"><span class="toc-number">2.2.</span> <span class="toc-text">下拉刷新</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%A1%88%E4%BE%8B"><span class="toc-number">3.</span> <span class="toc-text">三、案例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-number">3.1.</span> <span class="toc-text">小结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">4.</span> <span class="toc-text">参考文献</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/02/06/ai-ai-development-perspective/" title="如何理性看待AI发展：一把双刃剑">如何理性看待AI发展：一把双刃剑</a><time datetime="2025-02-05T16:00:00.000Z" title="发表于 2025-02-06 00:00:00">2025-02-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/02/05/ai-deepseek-thoughts/" title="对 DeepSeek 开源大模型的一些思考">对 DeepSeek 开源大模型的一些思考</a><time datetime="2025-02-04T16:00:00.000Z" title="发表于 2025-02-05 00:00:00">2025-02-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/09/19/micro-micro-frontend/" title="前端微服务架构的实践经验">前端微服务架构的实践经验</a><time datetime="2024-09-19T08:00:00.000Z" title="发表于 2024-09-19 16:00:00">2024-09-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/09/12/performance-performance-metrics/" title="前端性能指标有哪些，如何获取和分析？">前端性能指标有哪些，如何获取和分析？</a><time datetime="2024-09-12T11:00:00.000Z" title="发表于 2024-09-12 19:00:00">2024-09-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/09/10/performance-excel-export/" title="大数据量的 Excel 导出解决方案有哪些？">大数据量的 Excel 导出解决方案有哪些？</a><time datetime="2024-09-10T11:00:00.000Z" title="发表于 2024-09-10 19:00:00">2024-09-10</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="footer_custom_text">©2020 - 2025 By Answer Ran</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script src="/js/tilt-effect.js"></script><script src="/js/bubble-effect.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
