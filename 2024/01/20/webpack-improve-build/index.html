@@ -1,0 +1,241 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>如何提高webpack的构建速度？ | BlogMind</title><meta name="author" content="Answer Ran"><meta name="copyright" content="Answer Ran"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="一、背景随着我们的项目涉及到页面越来越多，功能和业务代码也会随着越多，相应的 webpack 的构建时间也会越来越久 构建时间与我们日常开发效率密切相关，当我们本地开发启动 devServer 或者 build 的时候，如果时间过长，会大大降低我们的工作效率 所以，优化webpack 构建速度是十分重要的环节 二、如何优化常见的提升构建速度的手段有如下：  优化 loader 配置 合理使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何提高webpack的构建速度？">
+<meta property="og:url" content="https://blogmind.cloud/2024/01/20/webpack-improve-build/index.html">
+<meta property="og:site_name" content="BlogMind">
+<meta property="og:description" content="一、背景随着我们的项目涉及到页面越来越多，功能和业务代码也会随着越多，相应的 webpack 的构建时间也会越来越久 构建时间与我们日常开发效率密切相关，当我们本地开发启动 devServer 或者 build 的时候，如果时间过长，会大大降低我们的工作效率 所以，优化webpack 构建速度是十分重要的环节 二、如何优化常见的提升构建速度的手段有如下：  优化 loader 配置 合理使用">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://static.vue-js.com/3a1b8620-b01b-11eb-85f6-6fac77c0c9b3.png">
+<meta property="og:image" content="https://static.vue-js.com/11647af0-b01d-11eb-85f6-6fac77c0c9b3.png">
+<meta property="article:published_time" content="2024-01-20T12:00:00.000Z">
+<meta property="article:modified_time" content="2025-02-06T16:13:22.843Z">
+<meta property="article:author" content="Answer Ran">
+<meta property="article:tag" content="webpack">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://static.vue-js.com/3a1b8620-b01b-11eb-85f6-6fac77c0c9b3.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://blogmind.cloud/2024/01/20/webpack-improve-build/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '如何提高webpack的构建速度？',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-02-07 00:13:22'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js"></script><link rel="stylesheet" href="/css/bubble-effect.css"><script>
+  (function() {
+    const path = location.pathname;
+    const isHome = path === '/' || path === '/page/' || /^\/page\/\d+\/?$/.test(path);
+    document.documentElement.classList.add(isHome ? 'is-home-page' : 'not-home-page');
+  })();
+</script>
+<meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">25</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">25</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">15</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="BlogMind"><span class="site-name">BlogMind</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">如何提高webpack的构建速度？</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-01-20T12:00:00.000Z" title="发表于 2024-01-20 20:00:00">2024-01-20</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-02-06T16:13:22.843Z" title="更新于 2025-02-07 00:13:22">2025-02-07</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/webpack/">webpack</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="如何提高webpack的构建速度？"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p> <img src="https://static.vue-js.com/3a1b8620-b01b-11eb-85f6-6fac77c0c9b3.png"></p>
+<h2 id="一、背景"><a href="#一、背景" class="headerlink" title="一、背景"></a>一、背景</h2><p>随着我们的项目涉及到页面越来越多，功能和业务代码也会随着越多，相应的 <code>webpack</code> 的构建时间也会越来越久</p>
+<p>构建时间与我们日常开发效率密切相关，当我们本地开发启动 <code>devServer</code> 或者 <code>build</code> 的时候，如果时间过长，会大大降低我们的工作效率</p>
+<p>所以，优化<code>webpack</code> 构建速度是十分重要的环节</p>
+<h2 id="二、如何优化"><a href="#二、如何优化" class="headerlink" title="二、如何优化"></a>二、如何优化</h2><p>常见的提升构建速度的手段有如下：</p>
+<ul>
+<li>优化 loader 配置</li>
+<li>合理使用 resolve.extensions</li>
+<li>优化 resolve.modules</li>
+<li>优化 resolve.alias</li>
+<li>使用 DLLPlugin 插件</li>
+<li>使用 cache-loader</li>
+<li>terser 启动多线程</li>
+<li>合理使用 sourceMap</li>
+</ul>
+<h3 id="优化loader配置"><a href="#优化loader配置" class="headerlink" title="优化loader配置"></a>优化loader配置</h3><p>在使用<code>loader</code>时，可以通过配置<code>include</code>、<code>exclude</code>、<code>test</code>属性来匹配文件，接触<code>include</code>、<code>exclude</code>规定哪些匹配应用<code>loader</code></p>
+<p>如采用 ES6 的项目为例，在配置 <code>babel-loader </code>时，可以这样：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">module</span>: &#123;</span><br><span class="line">    <span class="attr">rules</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="comment">// 如果项目源码中只有 js 文件就不要写成 /\.jsx?$/，提升正则表达式性能</span></span><br><span class="line">        <span class="attr">test</span>: <span class="regexp">/\.js$/</span>,</span><br><span class="line">        <span class="comment">// babel-loader 支持缓存转换出的结果，通过 cacheDirectory 选项开启</span></span><br><span class="line">        <span class="attr">use</span>: [<span class="string">&#x27;babel-loader?cacheDirectory&#x27;</span>],</span><br><span class="line">        <span class="comment">// 只对项目根目录下的 src 目录中的文件采用 babel-loader</span></span><br><span class="line">        <span class="attr">include</span>: path.<span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;src&#x27;</span>),</span><br><span class="line">      &#125;,</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="合理使用-resolve-extensions"><a href="#合理使用-resolve-extensions" class="headerlink" title="合理使用 resolve.extensions"></a>合理使用 resolve.extensions</h3><p>在开发中我们会有各种各样的模块依赖，这些模块可能来自于自己编写的代码，也可能来自第三方库， <code>resolve</code>可以帮助<code>webpack</code>从每个 <code>require/import</code> 语句中，找到需要引入到合适的模块代码</p>
+<p>通过<code>resolve.extensions</code>是解析到文件时自动添加拓展名，默认情况如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="attr">extensions</span>:[<span class="string">&quot;.warm&quot;</span>,<span class="string">&quot;.mjs&quot;</span>,<span class="string">&quot;.js&quot;</span>,<span class="string">&quot;.json&quot;</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当我们引入文件的时候，若没有文件后缀名，则会根据数组内的值依次查找</p>
+<p>当我们配置的时候，则不要随便把所有后缀都写在里面，这会调用多次文件的查找，这样就会减慢打包速度</p>
+<h3 id="优化-resolve-modules"><a href="#优化-resolve-modules" class="headerlink" title="优化 resolve.modules"></a>优化 resolve.modules</h3><p><code>resolve.modules</code> 用于配置 <code>webpack</code> 去哪些目录下寻找第三方模块。默认值为<code>[&#39;node_modules&#39;]</code>，所以默认会从<code>node_modules</code>中查找文件<br>当安装的第三方模块都放在项目根目录下的 <code>./node_modules </code>目录下时，所以可以指明存放第三方模块的绝对路径，以减少寻找，配置如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">  resolve: &#123;</span><br><span class="line">    // 使用绝对路径指明第三方模块存放的位置，以减少搜索步骤</span><br><span class="line">    // 其中 __dirname 表示当前工作目录，也就是项目根目录</span><br><span class="line">    modules: [path.resolve(__dirname, &#x27;node_modules&#x27;)]</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="优化-resolve-alias"><a href="#优化-resolve-alias" class="headerlink" title="优化 resolve.alias"></a>优化 resolve.alias</h3><p><code>alias</code>给一些常用的路径起一个别名，特别当我们的项目目录结构比较深的时候，一个文件的路径可能是<code>./../../</code>的形式</p>
+<p>通过配置<code>alias</code>以减少查找过程</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="attr">resolve</span>:&#123;</span><br><span class="line">        <span class="attr">alias</span>:&#123;</span><br><span class="line">            <span class="string">&quot;@&quot;</span>:path.<span class="title function_">resolve</span>(__dirname,<span class="string">&#x27;./src&#x27;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="使用-DLLPlugin-插件"><a href="#使用-DLLPlugin-插件" class="headerlink" title="使用 DLLPlugin 插件"></a>使用 DLLPlugin 插件</h3><p><code>DLL</code>全称是 动态链接库，是为软件在winodw种实现共享函数库的一种实现方式，而Webpack也内置了DLL的功能，为的就是可以共享，不经常改变的代码，抽成一个共享的库。这个库在之后的编译过程中，会被引入到其他项目的代码中</p>
+<p>使用步骤分成两部分：</p>
+<ul>
+<li>打包一个 DLL 库</li>
+<li>引入 DLL 库</li>
+</ul>
+<h4 id="打包一个-DLL-库"><a href="#打包一个-DLL-库" class="headerlink" title="打包一个 DLL 库"></a>打包一个 DLL 库</h4><p><code>webpack</code>内置了一个<code>DllPlugin</code>可以帮助我们打包一个DLL的库文件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="attr">plugins</span>:[</span><br><span class="line">        <span class="keyword">new</span> webpack.<span class="title class_">DllPlugin</span>(&#123;</span><br><span class="line">            <span class="attr">name</span>:<span class="string">&#x27;dll_[name]&#x27;</span>,</span><br><span class="line">            <span class="attr">path</span>:path.<span class="title function_">resolve</span>(__dirname,<span class="string">&quot;./dll/[name].mainfest.json&quot;</span>)</span><br><span class="line">        &#125;)</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="引入-DLL-库"><a href="#引入-DLL-库" class="headerlink" title="引入 DLL 库"></a>引入 DLL 库</h4><p>使用 <code>webpack</code> 自带的 <code>DllReferencePlugin</code> 插件对 <code>mainfest.json</code> 映射文件进行分析，获取要使用的<code>DLL</code>库</p>
+<p>然后再通过<code>AddAssetHtmlPlugin</code>插件，将我们打包的<code>DLL</code>库引入到<code>Html</code>模块中</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">new</span> webpack.<span class="title class_">DllReferencePlugin</span>(&#123;</span><br><span class="line">        <span class="attr">context</span>:path.<span class="title function_">resolve</span>(__dirname,<span class="string">&quot;./dll/dll_react.js&quot;</span>),</span><br><span class="line">        <span class="attr">mainfest</span>:path.<span class="title function_">resolve</span>(__dirname,<span class="string">&quot;./dll/react.mainfest.json&quot;</span>)</span><br><span class="line">    &#125;),</span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">AddAssetHtmlPlugin</span>(&#123;</span><br><span class="line">        <span class="attr">outputPath</span>:<span class="string">&quot;./auto&quot;</span>,</span><br><span class="line">        <span class="attr">filepath</span>:path.<span class="title function_">resolve</span>(__dirname,<span class="string">&quot;./dll/dll_react.js&quot;</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="使用-cache-loader"><a href="#使用-cache-loader" class="headerlink" title="使用 cache-loader"></a>使用 cache-loader</h3><p>在一些性能开销较大的 <code>loader </code>之前添加 <code>cache-loader</code>，以将结果缓存到磁盘里，显著提升二次构建速度</p>
+<p>保存和读取这些缓存文件会有一些时间开销，所以请只对性能开销较大的 <code>loader</code> 使用此<code> loader</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">    <span class="attr">module</span>: &#123;</span><br><span class="line">        <span class="attr">rules</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">test</span>: <span class="regexp">/\.ext$/</span>,</span><br><span class="line">                <span class="attr">use</span>: [<span class="string">&#x27;cache-loader&#x27;</span>, ...loaders],</span><br><span class="line">                <span class="attr">include</span>: path.<span class="title function_">resolve</span>(<span class="string">&#x27;src&#x27;</span>),</span><br><span class="line">            &#125;,</span><br><span class="line">        ],</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="terser-启动多线程"><a href="#terser-启动多线程" class="headerlink" title="terser 启动多线程"></a>terser 启动多线程</h3><p>使用多进程并行运行来提高构建速度</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">optimization</span>: &#123;</span><br><span class="line">    <span class="attr">minimizer</span>: [</span><br><span class="line">      <span class="keyword">new</span> <span class="title class_">TerserPlugin</span>(&#123;</span><br><span class="line">        <span class="attr">parallel</span>: <span class="literal">true</span>,</span><br><span class="line">      &#125;),</span><br><span class="line">    ],</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="合理使用-sourceMap"><a href="#合理使用-sourceMap" class="headerlink" title="合理使用 sourceMap"></a>合理使用 sourceMap</h3><p>打包生成  <code>sourceMap</code> 的时候，如果信息越详细，打包速度就会越慢。对应属性取值如下所示：</p>
+<p><img src="https://static.vue-js.com/11647af0-b01d-11eb-85f6-6fac77c0c9b3.png"></p>
+<h3 id="三、总结"><a href="#三、总结" class="headerlink" title="三、总结"></a>三、总结</h3><p>可以看到，优化<code>webpack</code>构建的方式有很多，主要可以从优化搜索时间、缩小文件搜索范围、减少不必要的编译等方面入手</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/ly2011/blog/issues/44">https://github.com/ly2011/blog/issues/44</a></li>
+<li><a target="_blank" rel="noopener" href="https://xie.infoq.cn/article/541418eb82a674741a0ad8865">https://xie.infoq.cn/article/541418eb82a674741a0ad8865</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/139498741">https://zhuanlan.zhihu.com/p/139498741</a></li>
+<li><a target="_blank" rel="noopener" href="https://vue3js.cn/interview">https://vue3js.cn/interview</a></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://blogmind.cloud">Answer Ran</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://blogmind.cloud/2024/01/20/webpack-improve-build/">https://blogmind.cloud/2024/01/20/webpack-improve-build/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blogmind.cloud" target="_blank">BlogMind</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/webpack/">webpack</a></div><div class="post_share"><div class="social-share" data-image="/" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/03/01/js-engine/" title="说说你对 JavaScript 引擎的理解？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">说说你对 JavaScript 引擎的理解？</div></div></a></div><div class="next-post pull-right"><a href="/2024/01/19/webpack-build-process/" title="webpack的构建流程"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">webpack的构建流程</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/01/17/webpack-HMR/" title="webpack的热更新是如何做到的？原理是什么？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-17</div><div class="title">webpack的热更新是如何做到的？原理是什么？</div></div></a></div><div><a href="/2024/01/19/webpack-build-process/" title="webpack的构建流程"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-19</div><div class="title">webpack的构建流程</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Answer Ran</div><div class="author-info__description">记录学习与思考</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">25</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">25</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">15</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/answer-ran-ts" target="_blank" title="fab fa-github"><i class="Github"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E8%83%8C%E6%99%AF"><span class="toc-number">1.</span> <span class="toc-text">一、背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%A6%82%E4%BD%95%E4%BC%98%E5%8C%96"><span class="toc-number">2.</span> <span class="toc-text">二、如何优化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E5%8C%96loader%E9%85%8D%E7%BD%AE"><span class="toc-number">2.1.</span> <span class="toc-text">优化loader配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%88%E7%90%86%E4%BD%BF%E7%94%A8-resolve-extensions"><span class="toc-number">2.2.</span> <span class="toc-text">合理使用 resolve.extensions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E5%8C%96-resolve-modules"><span class="toc-number">2.3.</span> <span class="toc-text">优化 resolve.modules</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E5%8C%96-resolve-alias"><span class="toc-number">2.4.</span> <span class="toc-text">优化 resolve.alias</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-DLLPlugin-%E6%8F%92%E4%BB%B6"><span class="toc-number">2.5.</span> <span class="toc-text">使用 DLLPlugin 插件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%93%E5%8C%85%E4%B8%80%E4%B8%AA-DLL-%E5%BA%93"><span class="toc-number">2.5.1.</span> <span class="toc-text">打包一个 DLL 库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%95%E5%85%A5-DLL-%E5%BA%93"><span class="toc-number">2.5.2.</span> <span class="toc-text">引入 DLL 库</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-cache-loader"><span class="toc-number">2.6.</span> <span class="toc-text">使用 cache-loader</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#terser-%E5%90%AF%E5%8A%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B"><span class="toc-number">2.7.</span> <span class="toc-text">terser 启动多线程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%88%E7%90%86%E4%BD%BF%E7%94%A8-sourceMap"><span class="toc-number">2.8.</span> <span class="toc-text">合理使用 sourceMap</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%80%BB%E7%BB%93"><span class="toc-number">2.9.</span> <span class="toc-text">三、总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">3.</span> <span class="toc-text">参考文献</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/19/vue-components-communication/" title="Vue 组件之间的通信方式有哪些？">Vue 组件之间的通信方式有哪些？</a><time datetime="2024-03-19T08:30:00.000Z" title="发表于 2024-03-19 16:30:00">2024-03-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/19/404/" title="vue项目本地开发完成后部署到服务器后报404是什么原因呢？">vue项目本地开发完成后部署到服务器后报404是什么原因呢？</a><time datetime="2024-03-19T08:00:00.000Z" title="发表于 2024-03-19 16:00:00">2024-03-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/19/excel-export/" title="说说大数据量的 Excel 导出解决方案有哪些？">说说大数据量的 Excel 导出解决方案有哪些？</a><time datetime="2024-03-19T08:00:00.000Z" title="发表于 2024-03-19 16:00:00">2024-03-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/19/frontend-monitor/" title="说说前端监控体系的搭建经验？">说说前端监控体系的搭建经验？</a><time datetime="2024-03-19T08:00:00.000Z" title="发表于 2024-03-19 16:00:00">2024-03-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/19/frontend-engineering/" title="说说基于 Vue3 的前端工程化实践？">说说基于 Vue3 的前端工程化实践？</a><time datetime="2024-03-19T08:00:00.000Z" title="发表于 2024-03-19 16:00:00">2024-03-19</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By Answer Ran</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script src="/js/tilt-effect.js"></script><script src="/js/bubble-effect.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
