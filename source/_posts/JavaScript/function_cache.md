@@ -1,6 +1,6 @@
 ---
 title: Javascript中如何实现函数缓存？函数缓存有哪些应用场景？
-date: 2024-02-01 09:30:00
+date: 2024-07-22
 tags:
   - JavaScript
 categories:

@@ -1,6 +1,6 @@
 ---
 title: 说说 Javascript 数字精度丢失的问题，如何解决？
-date: 2024-02-05 15:45:00
+date: 2023-08-10
 tags:
   - JavaScript
 categories:

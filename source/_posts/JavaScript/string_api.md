@@ -1,6 +1,6 @@
 ---
 title: JavaScript字符串的常用方法有哪些？
-date: 2024-02-14 14:30:00
+date: 2023-06-22
 tags:
   - JavaScript
 categories:

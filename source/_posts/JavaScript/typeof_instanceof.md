@@ -1,6 +1,6 @@
 ---
 title: typeof 与 instanceof 区别
-date: 2024-02-18 11:20:00
+date: 2023-09-10
 tags:
   - JavaScript
 categories:

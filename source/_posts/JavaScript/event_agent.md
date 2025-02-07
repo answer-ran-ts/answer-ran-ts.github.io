@@ -1,6 +1,6 @@
 ---
 title: 什么是事件代理？应用场景？
-date: 2024-01-27 16:30:00
+date: 2024-07-11
 tags:
   - JavaScript
 categories:

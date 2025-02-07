@@ -1,6 +1,6 @@
 ---
 title: JavaScript原型，原型链？有什么特点？
-date: 2024-02-08 11:45:00
+date: 2023-04-09
 tags:
   - JavaScript
 categories:

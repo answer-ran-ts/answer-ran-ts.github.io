@@ -1,6 +1,6 @@
 ---
 title: 小心爆炸💥
-date: 2025-02-01
+date: 2024-05-15 21:03:00
 updated: 2025-02-07
 tags: [JavaScript, CSS, 前端特效]
 categories: 交互

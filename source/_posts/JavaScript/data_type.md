@@ -1,6 +1,6 @@
 ---
 title: JavaScript中的数据类型？存储上的差别？
-date: 2024-01-26 15:40:00
+date: 2024-06-28
 tags:
   - JavaScript
 categories:

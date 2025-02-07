@@ -1,6 +1,6 @@
 ---
 title: bind、call、apply 区别？如何实现一个bind?
-date: 2024-01-19 09:15:00
+date: 2024-04-22
 tags:
   - JavaScript
 categories:

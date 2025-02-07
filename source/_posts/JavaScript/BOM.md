@@ -1,6 +1,6 @@
 ---
 title: BOM的理解？
-date: 2024-01-20 11:20:00
+date: 2024-04-28
 tags:
   - JavaScript
 categories:

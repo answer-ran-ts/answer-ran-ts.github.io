@@ -1,6 +1,6 @@
 ---
 title: 说说 JavaScript 中内存泄漏的几种情况？
-date: 2024-02-06 09:15:00
+date: 2023-06-10
 tags:
   - JavaScript
 categories:

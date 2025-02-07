@@ -1,6 +1,6 @@
 ---
 title: Javascript如何实现继承？
-date: 2024-02-03 11:20:00
+date: 2024-08-12
 tags:
   - JavaScript
 categories:

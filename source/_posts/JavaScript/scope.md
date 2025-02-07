@@ -1,6 +1,6 @@
 ---
 title: 对作用域链的理解
-date: 2024-02-11 09:30:00
+date: 2023-12-19
 tags:
   - JavaScript
 categories:

@@ -1,6 +1,6 @@
 ---
 title: ajax原理是什么？如何实现？
-date: 2024-01-15 14:30:00
+date: 2024-04-18 20:02:00
 tags:
   - JavaScript
 categories:

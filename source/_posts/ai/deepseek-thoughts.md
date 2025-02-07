@@ -1,6 +1,6 @@
 ---
 title: 对 DeepSeek 开源大模型的一些思考
-date: 2024-03-19 16:00:00
+date: 2025-02-05
 tags:
   - AI
   - LLM
