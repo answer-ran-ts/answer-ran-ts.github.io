@@ -8,4 +8,17 @@ input[type="search"] {
     max-width: 100vw !important;
     width: 100vw !important;
   }
+  
+  /* 隐藏移动端搜索按钮和对话框 */
+  #search-button {
+    display: none !important;
+  }
+  
+  #local-search {
+    display: none !important;
+  }
+  
+  .search-mask {
+    display: none !important;
+  }
 } 
