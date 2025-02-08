@@ -1,0 +1,42 @@
+input[type="text"],
+input[type="search"] {
+  font-size: 16px !important;
+}
+
+@media screen and (max-width: 768px) {
+  /* 搜索相关 */
+  .search-dialog {
+    max-width: 100vw !important;
+    width: 100vw !important;
+  }
+  
+  #search-button {
+    display: none !important;
+  }
+  
+  #local-search {
+    display: none !important;
+  }
+  
+  .search-mask {
+    display: none !important;
+  }
+
+  /* 卡片相关 */
+  .card-widget,
+  .card-info,
+  #recent-posts > .recent-post-item,
+  .card-announcement {
+    transition: none !important;
+    transform: none !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  .card-widget:hover,
+  .card-info:hover,
+  #recent-posts > .recent-post-item:hover,
+  .card-announcement:hover {
+    transform: none !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+  }
+}
