@@ -141,8 +141,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const rotation = random() * 360;
 
     // 根据动画延迟设置大小（延迟越大，位置越靠下，大小越小）
-    const maxSize = 160;
-    const minSize = 30;
+    const maxSize = 180;
+    const minSize = 40;
     const sizeRange = maxSize - minSize;
     const size = minSize + (sizeRange * (1 - delay / 20)) + 'px';
 
