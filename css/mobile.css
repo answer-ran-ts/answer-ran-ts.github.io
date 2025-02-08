@@ -22,21 +22,28 @@ input[type="search"] {
     display: none !important;
   }
 
-  /* 卡片相关 */
-  .card-widget,
-  .card-info,
-  #recent-posts > .recent-post-item,
-  .card-announcement {
-    transition: none !important;
-    transform: none !important;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
-  }
-
+  /* 卡片相关 - 只禁用 hover 时的变换 */
   .card-widget:hover,
   .card-info:hover,
   #recent-posts > .recent-post-item:hover,
   .card-announcement:hover {
     transform: none !important;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  /* 移动端边距 */
+  #recent-posts > .recent-post-item,
+  .card-widget {
+    margin: -20px 12px 40px !important;
+  }
+
+  /* 分页器和底部特殊处理 */
+  #pagination {
+    margin: 0 12px 56px !important;
+    padding: 0px 0 !important;
+  }
+
+  #footer {
+    margin: -20px 12px 40px !important;
+    padding: 16px 0 !important;
   }
 }
