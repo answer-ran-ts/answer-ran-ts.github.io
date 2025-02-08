@@ -234,7 +234,11 @@
       envId: 'blog-comment-3gx7e9uh8ec033eb',
       el: '#post-comment',
       region: 'ap-shanghai',
-      path: window.location.pathname
+      path: window.location.pathname,
+      anonymous: true,
+      onError: function (err) {
+        console.error(err);
+      }
     });
   });
 </script>
