@@ -43,3 +43,9 @@ footer:
     enable: false
   custom_text: ©2020 - 2025 By Answer Ran
   copyright: false
+
+# Local search
+local_search:
+  enable: true
+  preload: false
+  CDN:
