@@ -1,0 +1,228 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>动态给vue的data添加一个新的属性时会发生什么？怎样解决？ | BlogMind</title><meta name="author" content="Answer Ran"><meta name="copyright" content="Answer Ran"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="一、直接添加属性的问题我们从一个例子开始 定义一个p标签，通过v-for指令进行遍历 然后给botton标签绑定点击事件，我们预期点击按钮时，数据新增一个属性，界面也 新增一行 1234&lt;p v-for&#x3D;&quot;(value,key) in item&quot; :key&#x3D;&quot;key&quot;&gt;    &amp;#123;&amp;#123; value &amp;#125;&amp;#125;&amp;lt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="动态给vue的data添加一个新的属性时会发生什么？怎样解决？">
+<meta property="og:url" content="https://blogmind.cloud/2025/01/01/vue-data-object-add-attrs/index.html">
+<meta property="og:site_name" content="BlogMind">
+<meta property="og:description" content="一、直接添加属性的问题我们从一个例子开始 定义一个p标签，通过v-for指令进行遍历 然后给botton标签绑定点击事件，我们预期点击按钮时，数据新增一个属性，界面也 新增一行 1234&lt;p v-for&#x3D;&quot;(value,key) in item&quot; :key&#x3D;&quot;key&quot;&gt;    &amp;#123;&amp;#123; value &amp;#125;&amp;#125;&amp;lt">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://static.vue-js.com/a502dde0-3acc-11eb-ab90-d9ae814b240d.png">
+<meta property="article:published_time" content="2025-01-01T08:00:00.000Z">
+<meta property="article:modified_time" content="2025-02-08T05:16:38.463Z">
+<meta property="article:author" content="Answer Ran">
+<meta property="article:tag" content="面试">
+<meta property="article:tag" content="Vue">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://static.vue-js.com/a502dde0-3acc-11eb-ab90-d9ae814b240d.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://blogmind.cloud/2025/01/01/vue-data-object-add-attrs/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '动态给vue的data添加一个新的属性时会发生什么？怎样解决？',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-02-08 13:16:38'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js"></script><link rel="stylesheet" href="/css/bubble-effect.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">99</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">31</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="BlogMind"><span class="site-name">BlogMind</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">动态给vue的data添加一个新的属性时会发生什么？怎样解决？</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-01-01T08:00:00.000Z" title="发表于 2025-01-01 16:00:00">2025-01-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-02-08T05:16:38.463Z" title="更新于 2025-02-08 13:16:38">2025-02-08</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%89%8D%E7%AB%AF/Vue/">Vue</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="动态给vue的data添加一个新的属性时会发生什么？怎样解决？"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><img src="https://static.vue-js.com/a502dde0-3acc-11eb-ab90-d9ae814b240d.png" alt="image.png"></p>
+<h2 id="一、直接添加属性的问题"><a href="#一、直接添加属性的问题" class="headerlink" title="一、直接添加属性的问题"></a>一、直接添加属性的问题</h2><p>我们从一个例子开始</p>
+<p>定义一个<code>p</code>标签，通过<code>v-for</code>指令进行遍历</p>
+<p>然后给<code>botton</code>标签绑定点击事件，我们预期点击按钮时，数据新增一个属性，界面也 新增一行</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">v-for</span>=<span class="string">&quot;(value,key) in item&quot;</span> <span class="attr">:key</span>=<span class="string">&quot;key&quot;</span>&gt;</span></span><br><span class="line">    &#123;&#123; value &#125;&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;addProperty&quot;</span>&gt;</span>动态添加新属性<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>实例化一个<code>vue</code>实例，定义<code>data</code>属性和<code>methods</code>方法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> <span class="title class_">Vue</span>(&#123;</span><br><span class="line">    <span class="attr">el</span>:<span class="string">&quot;#app&quot;</span>,</span><br><span class="line">   	<span class="attr">data</span>:<span class="function">()=&gt;</span>&#123;</span><br><span class="line">       	<span class="attr">item</span>:&#123;</span><br><span class="line">            <span class="attr">oldProperty</span>:<span class="string">&quot;旧属性&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">methods</span>:&#123;</span><br><span class="line">        <span class="title function_">addProperty</span>(<span class="params"></span>)&#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">items</span>.<span class="property">newProperty</span> = <span class="string">&quot;新属性&quot;</span>  <span class="comment">// 为items添加新属性</span></span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">items</span>)  <span class="comment">// 输出带有newProperty的items</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>点击按钮，发现结果不及预期，数据虽然更新了（<code>console</code>打印出了新属性），但页面并没有更新</p>
+<h2 id="二、原理分析"><a href="#二、原理分析" class="headerlink" title="二、原理分析"></a>二、原理分析</h2><p>为什么产生上面的情况呢？</p>
+<p>下面来分析一下</p>
+<p><code>vue2</code>是用过<code>Object.defineProperty</code>实现数据响应式</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;&#125;</span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(obj, <span class="string">&#x27;foo&#x27;</span>, &#123;</span><br><span class="line">        <span class="title function_">get</span>(<span class="params"></span>) &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`get foo:<span class="subst">$&#123;val&#125;</span>`</span>);</span><br><span class="line">            <span class="keyword">return</span> val</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="title function_">set</span>(<span class="params">newVal</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (newVal !== val) &#123;</span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`set foo:<span class="subst">$&#123;newVal&#125;</span>`</span>);</span><br><span class="line">                val = newVal</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当我们访问<code>foo</code>属性或者设置<code>foo</code>值的时候都能够触发<code>setter</code>与<code>getter</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">obj.<span class="property">foo</span>   </span><br><span class="line">obj.<span class="property">foo</span> = <span class="string">&#x27;new&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>但是我们为<code>obj</code>添加新属性的时候，却无法触发事件属性的拦截</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">obj.<span class="property">bar</span>  = <span class="string">&#x27;新属性&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>原因是一开始<code>obj</code>的<code>foo</code>属性被设成了响应式数据，而<code>bar</code>是后面新增的属性，并没有通过<code>Object.defineProperty</code>设置成响应式数据</p>
+<h2 id="三、解决方案"><a href="#三、解决方案" class="headerlink" title="三、解决方案"></a>三、解决方案</h2><p><code>Vue</code> 不允许在已经创建的实例上动态添加新的响应式属性</p>
+<p>若想实现数据与视图同步更新，可采取下面三种解决方案：</p>
+<ul>
+<li>Vue.set()</li>
+<li>Object.assign()</li>
+<li>$forcecUpdated()</li>
+</ul>
+<h3 id="Vue-set"><a href="#Vue-set" class="headerlink" title="Vue.set()"></a>Vue.set()</h3><p>Vue.set( target, propertyName&#x2F;index, value )</p>
+<p>参数</p>
+<ul>
+<li><code>&#123;Object | Array&#125; target</code></li>
+<li><code>&#123;string | number&#125; propertyName/index</code></li>
+<li><code>&#123;any&#125; value</code></li>
+</ul>
+<p>返回值：设置的值</p>
+<p>通过<code>Vue.set</code>向响应式对象中添加一个<code>property</code>，并确保这个新 <code>property </code>同样是响应式的，且触发视图更新</p>
+<p>关于<code>Vue.set</code>源码（省略了很多与本节不相关的代码）</p>
+<p>源码位置：<code>src\core\observer\index.js</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">set</span> (<span class="params">target: <span class="built_in">Array</span>&lt;any&gt; | <span class="built_in">Object</span>, key: any, val: any</span>): any &#123;</span><br><span class="line">  ...</span><br><span class="line">  <span class="title function_">defineReactive</span>(ob.<span class="property">value</span>, key, val)</span><br><span class="line">  ob.<span class="property">dep</span>.<span class="title function_">notify</span>()</span><br><span class="line">  <span class="keyword">return</span> val</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里无非再次调用<code>defineReactive</code>方法，实现新增属性的响应式</p>
+<p>关于<code>defineReactive</code>方法，内部还是通过<code>Object.defineProperty</code>实现属性拦截</p>
+<p>大致代码如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">defineReactive</span>(<span class="params">obj, key, val</span>) &#123;</span><br><span class="line">    <span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(obj, key, &#123;</span><br><span class="line">        <span class="title function_">get</span>(<span class="params"></span>) &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`get <span class="subst">$&#123;key&#125;</span>:<span class="subst">$&#123;val&#125;</span>`</span>);</span><br><span class="line">            <span class="keyword">return</span> val</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="title function_">set</span>(<span class="params">newVal</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (newVal !== val) &#123;</span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`set <span class="subst">$&#123;key&#125;</span>:<span class="subst">$&#123;newVal&#125;</span>`</span>);</span><br><span class="line">                val = newVal</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Object-assign"><a href="#Object-assign" class="headerlink" title="Object.assign()"></a>Object.assign()</h3><p>直接使用<code>Object.assign()</code>添加到对象的新属性不会触发更新</p>
+<p>应创建一个新的对象，合并原对象和混入对象的属性</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">this</span>.<span class="property">someObject</span> = <span class="title class_">Object</span>.<span class="title function_">assign</span>(&#123;&#125;,<span class="variable language_">this</span>.<span class="property">someObject</span>,&#123;<span class="attr">newProperty1</span>:<span class="number">1</span>,<span class="attr">newProperty2</span>:<span class="number">2</span> ...&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="forceUpdate"><a href="#forceUpdate" class="headerlink" title="$forceUpdate"></a>$forceUpdate</h3><p>如果你发现你自己需要在 <code>Vue </code>中做一次强制更新，99.9% 的情况，是你在某个地方做错了事</p>
+<p><code>$forceUpdate</code>迫使<code> Vue</code> 实例重新渲染</p>
+<p>PS：仅仅影响实例本身和插入插槽内容的子组件，而不是所有子组件。</p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><ul>
+<li><p>如果为对象添加少量的新属性，可以直接采用<code>Vue.set()</code></p>
+</li>
+<li><p>如果需要为新对象添加大量的新属性，则通过<code>Object.assign()</code>创建新对象</p>
+</li>
+<li><p>如果你实在不知道怎么操作时，可采取<code>$forceUpdate()</code>进行强制刷新 (不建议)</p>
+</li>
+</ul>
+<p>PS：<code>vue3</code>是用过<code>proxy</code>实现数据响应式的，直接动态添加新属性仍可以实现数据响应式</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://cn.vuejs.org/v2/api/#Vue-set">https://cn.vuejs.org/v2/api/#Vue-set</a></li>
+<li><a target="_blank" rel="noopener" href="https://vue3js.cn/docs/zh">https://vue3js.cn/docs/zh</a></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://blogmind.cloud">Answer Ran</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://blogmind.cloud/2025/01/01/vue-data-object-add-attrs/">https://blogmind.cloud/2025/01/01/vue-data-object-add-attrs/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blogmind.cloud" target="_blank">BlogMind</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E9%9D%A2%E8%AF%95/">面试</a><a class="post-meta__tags" href="/tags/Vue/">Vue</a></div><div class="post_share"><div class="social-share" data-image="/" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2025/01/11/vue-cors/" title="Vue项目中你是如何解决跨域的呢？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Vue项目中你是如何解决跨域的呢？</div></div></a></div><div class="next-post pull-right"><a href="/2024/11/21/vue-data/" title="为什么data属性是一个函数而不是一个对象？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">为什么data属性是一个函数而不是一个对象？</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/03/19/vue-404/" title="vue项目本地开发完成后部署到服务器后报404是什么原因呢？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-19</div><div class="title">vue项目本地开发完成后部署到服务器后报404是什么原因呢？</div></div></a></div><div><a href="/2025/01/16/vue-axios/" title="Vue项目中有封装过axios吗？主要是封装哪方面的？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-16</div><div class="title">Vue项目中有封装过axios吗？主要是封装哪方面的？</div></div></a></div><div><a href="/2025/01/18/vue-communication/" title="Vue组件之间的通信方式都有哪些？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-18</div><div class="title">Vue组件之间的通信方式都有哪些？</div></div></a></div><div><a href="/2025/01/11/vue-cors/" title="Vue项目中你是如何解决跨域的呢？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-11</div><div class="title">Vue项目中你是如何解决跨域的呢？</div></div></a></div><div><a href="/2025/01/21/vue-components-plugin/" title="Vue中组件和插件有什么区别？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-21</div><div class="title">Vue中组件和插件有什么区别？</div></div></a></div><div><a href="/2024/11/15/vue-directive/" title="你有写过自定义指令吗？自定义指令的应用场景有哪些？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-11-15</div><div class="title">你有写过自定义指令吗？自定义指令的应用场景有哪些？</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Answer Ran</div><div class="author-info__description">记录学习与思考</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">99</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">31</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/answer-ran-ts" target="_blank" title="fab fa-github"><i class="Github"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E7%9B%B4%E6%8E%A5%E6%B7%BB%E5%8A%A0%E5%B1%9E%E6%80%A7%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text">一、直接添加属性的问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90"><span class="toc-number">2.</span> <span class="toc-text">二、原理分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">3.</span> <span class="toc-text">三、解决方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Vue-set"><span class="toc-number">3.1.</span> <span class="toc-text">Vue.set()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Object-assign"><span class="toc-number">3.2.</span> <span class="toc-text">Object.assign()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#forceUpdate"><span class="toc-number">3.3.</span> <span class="toc-text">$forceUpdate</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-number">3.4.</span> <span class="toc-text">小结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">4.</span> <span class="toc-text">参考文献</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/02/08/vue-vue3-vue2/" title="无题">无题</a><time datetime="2025-02-08T05:07:02.748Z" title="发表于 2025-02-08 13:07:02">2025-02-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/02/08/vue-vue/" title="无题">无题</a><time datetime="2025-02-08T05:07:02.747Z" title="发表于 2025-02-08 13:07:02">2025-02-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/02/06/ai-ai-development-perspective/" title="如何理性看待AI发展：一把双刃剑">如何理性看待AI发展：一把双刃剑</a><time datetime="2025-02-05T16:00:00.000Z" title="发表于 2025-02-06 00:00:00">2025-02-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/02/05/ai-deepseek-thoughts/" title="对 DeepSeek 开源大模型的一些思考">对 DeepSeek 开源大模型的一些思考</a><time datetime="2025-02-04T16:00:00.000Z" title="发表于 2025-02-05 00:00:00">2025-02-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/02/03/vue-axiosCode/" title="你了解axios的原理吗？有看过它的源码吗？">你了解axios的原理吗？有看过它的源码吗？</a><time datetime="2025-02-03T08:00:00.000Z" title="发表于 2025-02-03 16:00:00">2025-02-03</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="footer_custom_text">©2020 - 2025 By Answer Ran</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script src="/js/tilt-effect.js"></script><script src="/js/bubble-effect.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // 为每个卡片设置不同的初始角度
     const startRotation = (index % 2 === 0) ? 2 : -2;
     article.style.transform = `rotate(${startRotation}deg)`;
-
+    
     VanillaTilt.init(article, {
       max: 15,
       speed: 400,
