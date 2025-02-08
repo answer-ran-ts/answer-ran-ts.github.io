@@ -260,7 +260,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // 初始化泡泡
-  const bubbleCount = 20;
+  const bubbleCount = 16;
   for (let i = 0; i < bubbleCount; i++) {
     const bubble = createBubble();
     activeBubbles.add(bubble);
