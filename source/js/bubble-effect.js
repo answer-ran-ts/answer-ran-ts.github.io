@@ -127,19 +127,32 @@ document.addEventListener("DOMContentLoaded", function () {
     const bubble = document.createElement("div");
     bubble.className = "bubble";
 
-    // 预计算并缓存样式值
-    const margin = 150;
-    const startX = margin + random() * (window.innerWidth - 2 * margin);
+    // 修改边距和位置计算逻辑
+    const margin = 20;
+    const viewportWidth = window.innerWidth;
+    
+    // 将视口宽度分成几个区域，确保泡泡分散
+    const section = Math.floor(Math.random() * 4);
+    const sectionWidth = (viewportWidth - 2 * margin) / 4;
+    const startX = margin + (section * sectionWidth) + (random() * sectionWidth);
+    
     const duration = 25 + random() * 20;
     const delay = random() * 20;
     const rotation = random() * 360;
 
-    // 使用 cssText 批量设置样式
+    // 根据动画延迟设置大小（延迟越大，位置越靠下，大小越小）
+    const maxSize = 160;
+    const minSize = 30;
+    const sizeRange = maxSize - minSize;
+    const size = minSize + (sizeRange * (1 - delay / 20)) + 'px';
+
     bubble.style.cssText = `
       left:${startX}px;
       animation-duration:${duration}s;
       animation-delay:${delay}s;
-      transform:rotate(${rotation}deg)
+      transform:rotate(${rotation}deg);
+      width:${size};
+      height:${size}
     `;
 
     // 使用闭包存储状态，避免重复查找
@@ -199,7 +212,9 @@ document.addEventListener("DOMContentLoaded", function () {
           animation-delay:${delay}s;
           transform:rotate(${rotation}deg);
           animation-play-state:running;
-          transition:transform 0.5s ease
+          transition:transform 0.5s ease;
+          width:${size};
+          height:${size}
         `;
         document.removeEventListener("mousemove", handlers.mousemove);
         cancelAnimationFrame(rafId);
@@ -214,6 +229,8 @@ document.addEventListener("DOMContentLoaded", function () {
         createExplosion(rect.left + rect.width/2, rect.top + rect.height/2, color[0]);
         activeBubbles.delete(bubble);
         bubble.remove();
+        
+        // 创建新泡泡时保持相同大小
         const newBubble = createBubble();
         activeBubbles.add(newBubble);
         container.appendChild(newBubble);
@@ -227,6 +244,9 @@ document.addEventListener("DOMContentLoaded", function () {
           bubble.offsetHeight;
           bubble.style.animation = null;
           bubble.style.animationDelay = "0s";
+          // 保持原有大小
+          bubble.style.width = size;
+          bubble.style.height = size;
         }
       }
     };
@@ -240,7 +260,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // 初始化泡泡
-  const bubbleCount = 15;
+  const bubbleCount = 20;
   for (let i = 0; i < bubbleCount; i++) {
     const bubble = createBubble();
     activeBubbles.add(bubble);

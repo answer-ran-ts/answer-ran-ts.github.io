@@ -51,7 +51,7 @@ Path=/docs   # /docs/Web/ 下的资源会带 Cookie 首部
 
 - 标记为 `Secure `的 `Cookie `只应通过被`HTTPS`协议加密过的请求发送给服务端
 
-通过上述，我们可以看到`cookie`又开始的作用并不是为了缓存而设计出来，只是借用了`cookie`的特性实现缓存
+通过上述，我们可以看到`cookie`一开始的作用并不是为了缓存而设计出来，只是借用了`cookie`的特性实现缓存
 
 关于`cookie`的使用如下：
 
@@ -66,7 +66,7 @@ Set-Cookie:name=aa; domain=aa.net; path=/  # 服务端设置
 document.cookie =name=bb; domain=aa.net; path=/  # 客户端设置
 ```
 
-最后`cookie`的删除，最常用的方法就是给`cookie`设置一个过期的事件，这样`cookie`过期后会被浏览器删除
+最后`cookie`的删除，最常用的方法就是给`cookie`设置一个过期的时间，这样`cookie`过期后会被浏览器删除
 
 
 
