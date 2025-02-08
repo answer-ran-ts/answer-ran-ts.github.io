@@ -47,5 +47,13 @@ footer:
 # Local search
 local_search:
   enable: true
-  preload: false
+  preload: true
   CDN:
+  top_n_per_article: 1
+  raw: false
+  shrink_ending: true
+  cache: true
+  cache_expires: 86400
+  labels:
+    input_placeholder: "搜索文章..."
+    hits_empty: "未找到任何结果: ${query}"

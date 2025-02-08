@@ -113,3 +113,10 @@ search:
   field: post
   content: true
   format: html
+  limit: 10000
+  # 添加权重配置
+  weight:
+    title: 100
+    content: 1
+    tags: 10
+    categories: 10
