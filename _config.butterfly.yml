@@ -33,6 +33,7 @@ inject:
   head:
     - <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js"></script>
     - <link rel="stylesheet" href="/css/bubble-effect.css">
+    - <link rel="stylesheet" href="/css/mobile.css">
   bottom:
     - <script src="/js/tilt-effect.js"></script>
     - <script src="/js/bubble-effect.js"></script>
@@ -50,10 +51,15 @@ local_search:
   preload: true
   CDN:
   top_n_per_article: 1
+  unescape: false
+  trigger: auto
+  animation: false
   raw: false
   shrink_ending: true
   cache: true
   cache_expires: 86400
+  min_length: 2
   labels:
     input_placeholder: "搜索文章..."
-    hits_empty: "未找到任何结果: ${query}"
+    hits_empty: "未找到相关内容"
+    hits_stats: "找到 ${hits} 条结果"

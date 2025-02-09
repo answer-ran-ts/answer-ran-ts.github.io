@@ -114,9 +114,9 @@ search:
   content: true
   format: html
   limit: 10000
-  # 添加权重配置
+  preload: true
   weight:
     title: 100
-    content: 1
-    tags: 10
-    categories: 10
+    content: 10
+    tags: 50
+    categories: 50

@@ -1,0 +1,49 @@
+input[type="text"],
+input[type="search"] {
+  font-size: 16px !important;
+}
+
+@media screen and (max-width: 768px) {
+  /* 搜索相关 */
+  .search-dialog {
+    max-width: 100vw !important;
+    width: 100vw !important;
+  }
+  
+  #search-button {
+    display: none !important;
+  }
+  
+  #local-search {
+    display: none !important;
+  }
+  
+  .search-mask {
+    display: none !important;
+  }
+
+  /* 卡片相关 - 只禁用 hover 时的变换 */
+  .card-widget:hover,
+  .card-info:hover,
+  #recent-posts > .recent-post-item:hover,
+  .card-announcement:hover {
+    transform: none !important;
+  }
+
+  /* 移动端边距 */
+  #recent-posts > .recent-post-item,
+  .card-widget {
+    margin: -20px 12px 40px !important;
+  }
+
+  /* 分页器和底部特殊处理 */
+  #pagination {
+    margin: 0 12px 56px !important;
+    padding: 0px 0 !important;
+  }
+
+  #footer {
+    margin: -20px 12px 40px !important;
+    padding: 16px 0 !important;
+  }
+}
