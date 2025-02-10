@@ -9,10 +9,11 @@ menu:
 # Social settings
 social:
   Github: https://github.com/answer-ran-ts || fab fa-github
-  
+  Coplit: https://www.coplit.com/answer-ran || fas fa-code
+
 # Site Info
-avatar: /img/avatar.jpg  # 可以稍后添加头像
-favicon: /img/favicon.png  # 可以稍后添加网站图标
+avatar: /img/avatar.jpg # 可以稍后添加头像
+favicon: /img/favicon.png # 可以稍后添加网站图标
 
 # Article settings
 post_meta:
@@ -26,7 +27,7 @@ post_meta:
     tags: true
 
 # Code Blocks
-highlight_theme: mac light  # 代码块主题
+highlight_theme: mac light # 代码块主题
 
 # Inject
 inject:
@@ -42,7 +43,7 @@ inject:
 footer:
   owner:
     enable: false
-  custom_text: ©2020 - 2025 By Answer Ran
+  custom_text: ©2025 Answer Ran
   copyright: false
 
 # Local search
@@ -63,3 +64,51 @@ local_search:
     input_placeholder: "搜索文章..."
     hits_empty: "未找到相关内容"
     hits_stats: "找到 ${hits} 条结果"
+
+# Aside (侧边栏) 配置
+aside:
+  enable: true
+  hide: false
+  button: true
+  mobile: true # 在移动设备上显示
+  position: right # left or right
+  card_author:
+    enable: true
+    description: "欢迎来到我的博客，这里是一个分享技术与生活的空间，希望能带给大家有价值的内容😉"
+    button:
+      enable: true
+      icon: fab fa-github
+      text: Follow Me
+      link: https://github.com/answer-ran-ts
+    button2:
+      enable: true
+      icon: fas fa-code
+      text: Coplit
+      link: https://www.coplit.com/answer-ran
+  card_announcement:
+    enable: true
+    content: |
+      <div class="announcement">
+        努力更新中......面试ing......
+      </div>
+  card_recent_post:
+    enable: true
+    limit: 5
+    sort: date
+    sort_order: -1
+  card_categories:
+    enable: true
+    limit: 8
+    expand: none
+    sort_order: -1
+  card_tags:
+    enable: true
+    limit: 40
+    color: false
+    sort_order: -1
+  card_archives:
+    enable: true
+    type: monthly
+    format: MMMM YYYY
+    order: -1
+    limit: 8
