@@ -52,7 +52,7 @@
   isHome: true,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2025-02-09 00:38:30'
+  postUpdate: '2025-02-10 23:36:31'
 }</script><script>(win=>{
       win.saveToLocal = {
         set: (key, value, ttl) => {
@@ -149,147 +149,178 @@
         }
       }
       detectApple()
-    })(window)</script><script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js"></script><link rel="stylesheet" href="/css/bubble-effect.css"><link rel="stylesheet" href="/css/mobile.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">100</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">31</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">15</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="BlogMind"><span class="site-name">BlogMind</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">BlogMind</h1><div id="site_social_icons"><a class="social-icon" href="https://github.com/answer-ran-ts" target="_blank" title="fab fa-github"><i class="Github"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/07/13/JavaScript-event-loop/" title="对事件循环的理解">对事件循环的理解</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-07-12T16:00:00.000Z" title="发表于 2024-07-13 00:00:00">2024-07-13</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-02-07T07:51:44.385Z" title="更新于 2025-02-07 15:51:44">2025-02-07</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/JavaScript/">JavaScript</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/JavaScript/">JavaScript</a></span></div><div class="content"> 
-一、是什么首先，JavaScript 是一门单线程的语言，意味着同一时间内只能做一件事，但是这并不意味着单线程就是阻塞，而实现单线程非阻塞的方法就是事件循环
-在JavaScript中，所有的任务都可以分为
+    })(window)</script><script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js"></script><link rel="stylesheet" href="/css/bubble-effect.css"><link rel="stylesheet" href="/css/mobile.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">115</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">32</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">17</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="BlogMind"><span class="site-name">BlogMind</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">BlogMind</h1><div id="site_social_icons"><a class="social-icon" href="https://github.com/answer-ran-ts" target="_blank" title="fab fa-github"><i class="Github"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/09/01/vue-keepalive/" title="说说你对keep-alive的理解是什么？">说说你对keep-alive的理解是什么？</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-09-01T08:00:00.000Z" title="发表于 2024-09-01 16:00:00">2024-09-01</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-02-08T06:49:30.105Z" title="更新于 2025-02-08 14:49:30">2025-02-08</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Vue/">Vue</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E9%9D%A2%E8%AF%95/">面试</a><span class="article-meta-link">•</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/Vue/">Vue</a></span></div><div class="content">
+一、Keep-alive 是什么keep-alive是vue中的内置组件，能在组件切换过程中将状态保留在内存中，防止重复渲染DOM
+keep-alive 包裹动态组件时，会缓存不活动的组件实例，而不是销毁它们
+keep-alive可以设置以下props属性：
 
-同步任务：立即执行的任务，同步任务一般会直接进入到主线程中执行
+include - 字符串或正则表达式。只有名称匹配的组件会被缓存
 
-异步任务：异步执行的任务，比如ajax网络请求，setTimeout 定时函数等
+exclude - 字符串或正则表达式。任何名称匹配的组件都不会被缓存
+
+max - 数字。最多可以缓存多少组件实例
 
 
-同步任务与异步任务的运行流程图如下：
+关于keep-alive的基本用法：
+123&lt;keep-alive&gt;  &lt;component :is=&quot;view&quot;&gt;&lt;/component&gt;&lt;/keep-alive&gt;
+
+使用includes和exclude：
+12345678910111213&lt;keep-alive include=&quot;a,b&quot;&gt;  &lt;component :is=&quot;view&quot;&gt;&lt;/component&gt;&lt;/keep-alive& ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/08/26/vue-key/" title="你知道vue中key的原理吗？说说你对它的理解">你知道vue中key的原理吗？说说你对它的理解</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-08-26T08:00:00.000Z" title="发表于 2024-08-26 16:00:00">2024-08-26</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-02-08T06:49:30.106Z" title="更新于 2025-02-08 14:49:30">2025-02-08</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Vue/">Vue</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E9%9D%A2%E8%AF%95/">面试</a><span class="article-meta-link">•</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/Vue/">Vue</a></span></div><div class="content">
+一、Key是什么开始之前，我们先还原两个实际工作场景
+
+当我们在使用v-for时，需要给单元加上key
+
+123&lt;ul&gt;    &lt;li v-for=&quot;item in items&quot; :key=&quot;item.id&quot;&gt;...&lt;/li&gt;&lt;/ul&gt;
+
+用+new Date()生成的时间戳作为key，手动强制触发重新渲染1&lt;Comp :key=&quot;+new Date()&quot; /&gt;
+
+那么这背后的逻辑是什么，key的作用又是什么？
+一句话来讲
+
+key是给每一个vnode的唯一id，也是diff的一种优化策略，可以根据key，更准确， 更快的找到对应的vnode节点
+
+场景背后的逻辑当我们在使用v-for时，需要给单元加上key
+
+如果不用key，Vue会采用就地复地原则：最小化element的移动，并且会尝试尽最大程度在同适当的地方对相同类型的element，做patch或者reuse。
+
+如果使用了key，Vue会根据keys的顺序记录element，曾经拥有了key的elemen ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/08/24/vue-lifecycle/" title="请描述下你对vue生命周期的理解？在created和mounted这两个生命周期中请求数据有什么区别呢？">请描述下你对vue生命周期的理解？在created和mounted这两个生命周期中请求数据有什么区别呢？</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-08-24T08:00:00.000Z" title="发表于 2024-08-24 16:00:00">2024-08-24</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-02-08T06:49:30.105Z" title="更新于 2025-02-08 14:49:30">2025-02-08</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Vue/">Vue</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E9%9D%A2%E8%AF%95/">面试</a><span class="article-meta-link">•</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/Vue/">Vue</a></span></div><div class="content">
+一、生命周期是什么生命周期（Life Cycle）的概念应用很广泛，特别是在政治、经济、环境、技术、社会等诸多领域经常出现，其基本涵义可以通俗地理解为“从摇篮到坟墓”（Cradle-to-Grave）的整个过程在Vue中实例从创建到销毁的过程就是生命周期，即指从创建、初始化数据、编译模板、挂载Dom→渲染、更新→渲染、卸载等一系列过程我们可以把组件比喻成工厂里面的一条流水线，每个工人（生命周期）站在各自的岗位，当任务流转到工人身边的时候，工人就开始工作PS：在Vue生命周期钩子会自动绑定 this 上下文到实例中，因此你可以访问数据，对 property 和方法进行运算这意味着你不能使用箭头函数来定义一个生命周期方法 (例如 created: () =&gt; this.fetchTodos())
+二、生命周期有哪些Vue生命周期总共可以分为8个阶段：创建前后, 载入前后,更新前后,销毁前销毁后，以及一些特殊场景的生命周期
+
+
+
+生命周期
+描述
+
+
+
+beforeCreate
+组件实例被创建之初
+
+
+created
+组件实例已经完全创建
+
+
+beforeMount
+组件挂载之前
+
+
+ ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/08/20/JavaScript-js-engine/" title="JavaScript 引擎的理解">JavaScript 引擎的理解</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-08-19T16:00:00.000Z" title="发表于 2024-08-20 00:00:00">2024-08-20</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-02-07T07:52:38.353Z" title="更新于 2025-02-07 15:52:38">2025-02-07</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/JavaScript/">JavaScript</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/JavaScript/">JavaScript</a><span class="article-meta-link">•</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E9%9D%A2%E8%AF%95/">面试</a></span></div><div class="content">一、什么是 JavaScript 引擎JavaScript 引擎是一个专门处理 JavaScript 代码的程序。它负责解析和执行 JavaScript 代码，将我们编写的 JavaScript 代码转换为机器能够理解和执行的机器码。
+目前主流的 JavaScript 引擎有：
+
+V8（Google）：用于 Chrome 浏览器和 Node.js
+SpiderMonkey（Mozilla）：用于 Firefox 浏览器
+JavaScriptCore（Apple）：用于 Safari 浏览器
+Chakra（Microsoft）：用于 IE 和 Edge 浏览器（旧版）
+
+二、主要组成部分1. Memory Heap（内存堆）
+用于存储对象、数组等引用类型数据
+进行动态内存分配
+包含垃圾回收机制（分代回收、标记清除、引用计数等）
+处理内存碎片化问题
+
+2. Call Stack（调用栈）
+记录代码执行的上下文
+基于 LIFO（后进先出）原则
+包含以下信息：
+局部变量
+参数
+返回地址
+临时变量
+
+
+
+3. Parser（解析器）解析过程分为两个阶段：
+
+词法分析（Tokenization）
+ ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/08/16/JavaScript-js-data-structure/" title="了解的js数据结构？">了解的js数据结构？</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-08-15T16:00:00.000Z" title="发表于 2024-08-16 00:00:00">2024-08-16</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-02-07T07:52:33.290Z" title="更新于 2025-02-07 15:52:33">2025-02-07</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/JavaScript/">JavaScript</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/JavaScript/">JavaScript</a></span></div><div class="content">什么是数据结构？数据结构是计算机存储、组织数据的方式。数据结构意味着接口或封装：一个数据结构可被视为两个函数之间的接口，或者是由数据类型联合组成的存储内容的访问方法封装。
+我们每天的编码中都会用到数据结构数组是最简单的内存数据结构下面是常见的数据结构：
+
+数组（Array）
+栈（Stack）
+队列（Queue）
+链表（Linked List）
+字典
+散列表（Hash table）
+树（Tree）
+图（Graph）
+堆（Heap）
+
+数组（Array）数组是最最基本的数据结构，很多语言都内置支持数组。数组是使用一块连续的内存空间保存数据，保存的数据的个数在分配内存的时候就是确定的。
+在日常生活中，人们经常使用列表：待办事项列表、购物清单等。
+而计算机程序也在使用列表，在下面的条件下，选择列表作为数据结构就显得尤为有用：数据结构较为简单不需要在一个长序列中查找元素，或者对其进行排序反之，如果数据结构非常复杂，列表的作用就没有那么大了。
+栈（Stack）栈是一种遵循后进先出（LIFO）原则的有序集合在栈里，新元素都接近栈顶，旧元素都接近栈底。每次加入新的元素和拿走元素都在顶部操作
+队列（Qu ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/08/12/JavaScript-inherit/" title="Javascript如何实现继承？">Javascript如何实现继承？</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-08-11T16:00:00.000Z" title="发表于 2024-08-12 00:00:00">2024-08-12</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-02-07T07:52:28.116Z" title="更新于 2025-02-07 15:52:28">2025-02-07</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/JavaScript/">JavaScript</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/JavaScript/">JavaScript</a></span></div><div class="content">
+一、是什么继承（inheritance）是面向对象软件技术当中的一个概念。
+如果一个类别B”继承自”另一个类别A，就把这个B称为”A的子类”，而把A称为”B的父类别”也可以称”A是B的超类”
+
+继承的优点
+
+继承可以使得子类具有父类别的各种属性和方法，而不需要再次编写相同的代码
+在子类别继承父类别的同时，可以重新定义某些属性，并重写某些方法，即覆盖父类别的原有属性和方法，使其获得与父类别不同的功能
+虽然JavaScript并不是真正的面向对象语言，但它天生的灵活性，使应用场景更加丰富
+关于继承，我们举个形象的例子：
+定义一个类（Class）叫汽车，汽车的属性包括颜色、轮胎、品牌、速度、排气量等
+1234567class Car&#123;    constructor(color,speed)&#123;        this.color = color        this.speed = speed        // ...    &#125;&#125;
+
+由汽车这个类可以派生出”轿车”和”货车”两个类，在汽车的基础属性上，为轿车添加一个后备厢、给货车添加一个大货箱
+12 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/08/10/scene-map-big-data/" title="地图海量点渲染的解决方案有哪些？">地图海量点渲染的解决方案有哪些？</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-08-10T13:00:00.000Z" title="发表于 2024-08-10 21:00:00">2024-08-10</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-02-07T07:48:18.120Z" title="更新于 2025-02-07 15:48:18">2025-02-07</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%89%8D%E7%AB%AF/%E5%9C%B0%E5%9B%BE%E5%BC%80%E5%8F%91/">地图开发</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/">性能优化</a><span class="article-meta-link">•</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E5%9C%B0%E5%9B%BE/">地图</a><span class="article-meta-link">•</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据</a></span></div><div class="content">一、问题背景在地图应用中，经常需要展示海量的点位数据（如出租车、共享单车、监控点位等）。当数据量达到几万甚至几十万个点时，会带来以下问题：
+
+渲染性能下降
+交互响应迟缓
+内存占用过大
+视觉上的点位重叠
+
+二、解决方案1. 数据分层与分块1.1 按层级分组12345678910111213141516class LayerManager &#123;  constructor() &#123;    this.layers = new Map(); // 存储不同层级的数据  &#125;    addPoint(point, zoom) &#123;    if (!this.layers.has(zoom)) &#123;      this.layers.set(zoom, new Set());    &#125;    this.layers.get(zoom).add(point);  &#125;    getVisiblePoints(zoom) &#123;    return this.layers.get(Math.floor(zoom)) || new Set() ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/08/10/JavaScript-functional-programming/" title="对函数式编程的理解？优缺点？">对函数式编程的理解？优缺点？</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-08-09T16:00:00.000Z" title="发表于 2024-08-10 00:00:00">2024-08-10</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-02-07T07:52:21.414Z" title="更新于 2025-02-07 15:52:21">2025-02-07</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/JavaScript/">JavaScript</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/JavaScript/">JavaScript</a></span></div><div class="content"> 
+一、是什么函数式编程是一种”编程范式”（programming paradigm），一种编写程序的方法论
+主要的编程范式有三种：命令式编程，声明式编程和函数式编程
+相比命令式编程，函数式编程更加强调程序执行的结果而非执行的过程，倡导利用若干简单的执行单元让计算结果不断渐进，逐层推导复杂的运算，而非设计一个复杂的执行过程
+举个例子，将数组每个元素进行平方操作，命令式编程与函数式编程如下
+12345678// 命令式编程var array = [0, 1, 2, 3]for(let i = 0; i &lt; array.length; i++) &#123;    array[i] = Math.pow(array[i], 2)&#125;// 函数式方式[0, 1, 2, 3].map(num =&gt; Math.pow(num, 2))
+
+简单来讲，就是要把过程逻辑写成函数，定义好输入参数，只关心它的输出结果
+即是一种描述集合和集合之间的转换关系，输入通过函数都会返回有且只有一个输出值
  
-从上面我们可以看到，同步任务进入主线程，即主执行栈，异步任务进入任务队列，主线程内的任务执行完毕为空，会去任务队列读取对应的任务，推入主线程执行。上述过程的不断重复就事件循环
-二、宏任务与微任务如果将任务划分为同步任务和异步任务并不是那么的准确，举个例子：
-1234567891011121314console.log(1)setTimeout(()=&gt;&#123;    console.log(2)&#125;, 0)new Promise((resolve, reject)=&gt;&#123;    console.log(&#x27;new Promise&#x27;)    ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/07/11/JavaScript-event-agent/" title="什么是事件代理？应用场景？">什么是事件代理？应用场景？</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-07-10T16:00:00.000Z" title="发表于 2024-07-11 00:00:00">2024-07-11</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-02-07T07:51:37.722Z" title="更新于 2025-02-07 15:51:37">2025-02-07</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/JavaScript/">JavaScript</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/JavaScript/">JavaScript</a></span></div><div class="content">
-一、是什么事件代理，俗地来讲，就是把一个元素响应事件（click、keydown……）的函数委托到另一个元素
-前面讲到，事件流的都会经过三个阶段： 捕获阶段 -&gt; 目标阶段 -&gt; 冒泡阶段，而事件委托就是在冒泡阶段完成
-事件委托，会把一个或者一组元素的事件委托到它的父层或者更外层元素上，真正绑定事件的是外层元素，而不是目标元素
-当事件响应到目标元素上时，会通过事件冒泡机制从而触发它的外层元素的绑定事件上，然后在外层元素上去执行函数
-下面举个例子：
-比如一个宿舍的同学同时快递到了，一种笨方法就是他们一个个去领取
-较优方法就是把这件事情委托给宿舍长，让一个人出去拿好所有快递，然后再根据收件人一一分发给每个同学
-在这里，取快递就是一个事件，每个同学指的是需要响应事件的 DOM 元素，而出去统一领取快递的宿舍长就是代理的元素
-所以真正绑定事件的是这个元素，按照收件人分发快递的过程就是在事件执行中，需要判断当前响应的事件应该匹配到被代理元素中的哪一个或者哪几个
-二、应用场景如果我们有一个列表，列表之中有大量的列表项，我们需要在点击列表项的时候响应一个事件
-1234567&lt;ul ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/07/09/vue-nexttick/" title="Vue中的$nextTick有什么作用？">Vue中的$nextTick有什么作用？</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-07-09T08:00:00.000Z" title="发表于 2024-07-09 16:00:00">2024-07-09</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-02-08T06:49:30.105Z" title="更新于 2025-02-08 14:49:30">2025-02-08</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Vue/">Vue</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E9%9D%A2%E8%AF%95/">面试</a><span class="article-meta-link">•</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/Vue/">Vue</a></span></div><div class="content">
-一、NextTick是什么官方对其的定义
+可以看到，函数实际上是一个关系，或者说是一种映射，而这种映射关系是可以组合的，一旦我们知 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/08/04/vue-mixin/" title="说说你对vue的mixin的理解，有什么应用场景？">说说你对vue的mixin的理解，有什么应用场景？</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-08-04T08:00:00.000Z" title="发表于 2024-08-04 16:00:00">2024-08-04</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-02-08T06:49:30.105Z" title="更新于 2025-02-08 14:49:30">2025-02-08</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Vue/">Vue</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E9%9D%A2%E8%AF%95/">面试</a><span class="article-meta-link">•</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/Vue/">Vue</a></span></div><div class="content">
+一、mixin是什么Mixin是面向对象程序设计语言中的类，提供了方法的实现。其他类可以访问mixin类的方法而不必成为其子类
+Mixin类通常作为功能模块使用，在需要该功能时“混入”，有利于代码复用又避免了多继承的复杂
+Vue中的mixin先来看一下官方定义
 
-在下次 DOM 更新循环结束之后执行延迟回调。在修改数据之后立即使用这个方法，获取更新后的 DOM
+mixin（混入），提供了一种非常灵活的方式，来分发 Vue 组件中的可复用功能。
 
-什么意思呢？
-我们可以理解成，Vue 在更新 DOM 时是异步执行的。当数据发生变化，Vue将开启一个异步更新队列，视图需要等队列中所有数据变化完成之后，再统一进行更新
-举例一下
-Html结构
-1&lt;div id=&quot;app&quot;&gt; &#123;&#123; message &#125;&#125; &lt;/div&gt;
+本质其实就是一个js对象，它可以包含我们组件中任意功能选项，如data、components、methods 、created、computed等等
+我们只要将共用的功能以对象的方式传入 mixins选项中，当组件使用 mixins对象时所有mixins对象的选项都将被混入该组件本身的选项中来
+在Vue中我们可以局部混入跟全局混入
+局部混入定义一个mixin对象，有组件options的data、methods属性
+12345678910var myMixin = &#123;  created: function () &#123;    this.hello()  &#125;,  methods: &#123;    hello: fu ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/07/29/vue-modifier/" title="Vue常用的修饰符有哪些有什么应用场景">Vue常用的修饰符有哪些有什么应用场景</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-07-29T08:00:00.000Z" title="发表于 2024-07-29 16:00:00">2024-07-29</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-02-08T06:49:30.105Z" title="更新于 2025-02-08 14:49:30">2025-02-08</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Vue/">Vue</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E9%9D%A2%E8%AF%95/">面试</a><span class="article-meta-link">•</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/Vue/">Vue</a></span></div><div class="content">
+一、修饰符是什么在程序世界里，修饰符是用于限定类型以及类型成员的声明的一种符号
+在Vue中，修饰符处理了许多DOM事件的细节，让我们不再需要花大量的时间去处理这些烦恼的事情，而能有更多的精力专注于程序的逻辑处理
+vue中修饰符分为以下五种：
 
-构建一个vue实例
-123456const vm = new Vue(&#123;  el: &#x27;#app&#x27;,  data: &#123;    message: &#x27;原始值&#x27;  &#125;&#125;)
+表单修饰符
+事件修饰符
+鼠标按键修饰符
+键值修饰符
+v-bind修饰符
 
-修改message
-123this.message = &#x27;修改后的值1&#x27;this.message = &#x27;修改后的值2&#x27;this.message = &#x27;修改后的值3&#x27;
+二、修饰符的作用表单修饰符在我们填写表单的时候用得最多的是input标签，指令用得最多的是v-model
+关于表单的修饰符有如下：
 
-这时候想获取页面最新的D ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/07/07/vue-observable/" title="Vue.observable你有了解过吗？说说看">Vue.observable你有了解过吗？说说看</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-07-07T08:00:00.000Z" title="发表于 2024-07-07 16:00:00">2024-07-07</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-02-08T06:49:30.105Z" title="更新于 2025-02-08 14:49:30">2025-02-08</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Vue/">Vue</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E9%9D%A2%E8%AF%95/">面试</a><span class="article-meta-link">•</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/Vue/">Vue</a></span></div><div class="content">  
-一、Observable 是什么Observable 翻译过来我们可以理解成可观察的
-我们先来看一下其在Vue中的定义
+lazy
+trim
+number
 
-Vue.observable，让一个对象变成响应式数据。Vue 内部会用它来处理 data 函数返回的对象
+lazy在我们填完信息，光标离开标签的时候，才会将值赋予给value，也就是在change事件之后再进行信息同步
+12&lt;input type=&quot;text&quot; v-model.lazy=&quot;value&quot;&gt;&lt;p&gt;&#123;&#123;value&#125;&#125;&lt;/p&gt;
 
-返回的对象可以直接用于渲染函数和计算属性内，并且会在发生变更时触发相应的更新。也可以作为最小化的跨组件状态存储器
-1Vue.observable(&#123; count : 1&#125;)
-
-其作用等同于
-1new vue(&#123; count : 1&#125;)
-
-在 Vue 2.x 中，被传入的对象会直接被 Vue.observable 变更，它和被返回的对象是同一个对象
-在 Vue 3.x 中，则会返回一个可响应的代理，而对源对象直接进行变更仍然是不可响应的
-二、使用场景在非父子组件通信时，可以使用通常的bus或者使用vuex，但是实现的功能不是太复杂，而使用上面两个又有点繁琐。这时，observable就是一个很好的选择
-创建一个js文件
-12345678910111213141516// 引入vueimport Vue from & ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/07/05/vue-permission/" title="vue要做权限管理该怎么做？如果控制到按钮级别的权限怎么做？">vue要做权限管理该怎么做？如果控制到按钮级别的权限怎么做？</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-07-05T08:00:00.000Z" title="发表于 2024-07-05 16:00:00">2024-07-05</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-02-08T06:49:30.106Z" title="更新于 2025-02-08 14:49:30">2025-02-08</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Vue/">Vue</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E9%9D%A2%E8%AF%95/">面试</a><span class="article-meta-link">•</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/Vue/">Vue</a></span></div><div class="content">
-一、是什么权限是对特定资源的访问许可，所谓权限控制，也就是确保用户只能访问到被分配的资源
-而前端权限归根结底是请求的发起权，请求的发起可能有下面两种形式触发
-
-页面加载触发
-页面上的按钮点击触发
-
-总的来说，所有的请求发起都触发自前端路由或视图
-所以我们可以从这两方面入手，对触发权限的源头进行控制，最终要实现的目标是：
-
-路由方面，用户登录后只能看到自己有权访问的导航菜单，也只能访问自己有权访问的路由地址，否则将跳转 4xx 提示页
-
-视图方面，用户只能看到自己有权浏览的内容和有权操作的控件
-
-最后再加上请求控制作为最后一道防线，路由可能配置失误，按钮可能忘了加权限，这种时候请求控制可以用来兜底，越权请求将在前端被拦截
-
-
-二、如何做前端权限控制可以分为四个方面：
-
-接口权限
-按钮权限
-菜单权限
-路由权限
-
-接口权限接口权限目前一般采用jwt的形式来验证，没有通过的话一般返回401，跳转到登录页面重新进行登录
-登录完拿到token，将token存起来，通过axios请求拦截器进行拦截，每次请求的时候头部携带token
-123456789axios.interceptors.reque ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/07/04/JavaScript-Dom/" title="DOM常见的操作有哪些？">DOM常见的操作有哪些？</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-07-03T16:00:00.000Z" title="发表于 2024-07-04 00:00:00">2024-07-04</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-02-07T07:51:18.187Z" title="更新于 2025-02-07 15:51:18">2025-02-07</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/JavaScript/">JavaScript</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/JavaScript/">JavaScript</a></span></div><div class="content"> 
-一、DOM文档对象模型 (DOM) 是 HTML 和 XML 文档的编程接口
-它提供了对文档的结构化的表述，并定义了一种方式可以使从程序中对该结构进行访问，从而改变文档的结构，样式和内容
-任何 HTML 或XML文档都可以用 DOM 表示为一个由节点构成的层级结构
-节点分很多类型，每种类型对应着文档中不同的信息和（或）标记，也都有自己不同的特性、数据和方法，而且与其他类型有某种关系，如下所示：
-12345678&lt;html&gt;    &lt;head&gt;        &lt;title&gt;Page&lt;/title&gt;    &lt;/head&gt;    &lt;body&gt;        &lt;p&gt;Hello World!&lt;/p &gt;    &lt;/body&gt;&lt;/html&gt;
-
-DOM像原子包含着亚原子微粒那样，也有很多类型的DOM节点包含着其他类型的节点。接下来我们先看看其中的三种：
-12345&lt;div&gt;    &lt;p title=&quot;title&quot;&gt;        con ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/07/02/JavaScript-debounce-throttle/" title="什么是防抖和节流？有什么区别？如何实现？">什么是防抖和节流？有什么区别？如何实现？</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-07-01T16:00:00.000Z" title="发表于 2024-07-02 00:00:00">2024-07-02</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-02-07T07:51:12.106Z" title="更新于 2025-02-07 15:51:12">2025-02-07</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/JavaScript/">JavaScript</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/JavaScript/">JavaScript</a></span></div><div class="content"> 
-一、是什么本质上是优化高频率执行代码的一种手段
-如：浏览器的 resize、scroll、keypress、mousemove 等事件在触发时，会不断地调用绑定在事件上的回调函数，极大地浪费资源，降低前端性能
-为了优化体验，需要对这类事件进行调用次数的限制，对此我们就可以采用 防抖（debounce） 和 节流（throttle） 的方式来减少调用频率
-定义
-节流: n 秒内只运行一次，若在 n 秒内重复触发，只有一次生效
-防抖: n 秒后在执行该事件，若在 n 秒内被重复触发，则重新计时
-
-一个经典的比喻:
-想象每天上班大厦底下的电梯。把电梯完成一次运送，类比为一次函数的执行和响应
-假设电梯有两种运行策略 debounce 和 throttle，超时设定为15秒，不考虑容量限制
-电梯第一个人进来后，15秒后准时运送一次，这是节流
-电梯第一个人进来后，等待15秒。如果过程中又有人进来，15秒等待重新计时，直到15秒后开始运送，这是防抖
-代码实现节流完成节流可以使用时间戳与定时器的写法
-使用时间戳写法，事件会立即执行，停止触发后没有办法再次执行
-1234567891011functi ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/07/01/vue-show-if/" title="v-show和v-if有什么区别？使用场景分别是什么？">v-show和v-if有什么区别？使用场景分别是什么？</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-07-01T08:00:00.000Z" title="发表于 2024-07-01 16:00:00">2024-07-01</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-02-08T06:49:30.105Z" title="更新于 2025-02-08 14:49:30">2025-02-08</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Vue/">Vue</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E9%9D%A2%E8%AF%95/">面试</a><span class="article-meta-link">•</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/Vue/">Vue</a></span></div><div class="content">
-一、v-show与v-if的共同点我们都知道在 vue 中 v-show  与 v-if 的作用效果是相同的(不含v-else)，都能控制元素在页面是否显示
-在用法上也是相同的
-12&lt;Model v-show=&quot;isShow&quot; /&gt;&lt;Model v-if=&quot;isShow&quot; /&gt;
-
-
-当表达式为true的时候，都会占据页面的位置
-当表达式都为false时，都不会占据页面位置
-
-二、v-show与v-if的区别
-控制手段不同
-编译过程不同
-编译条件不同
-
-控制手段：v-show隐藏则是为该元素添加css--display:none，dom元素依旧还在。v-if显示隐藏是将dom元素整个添加或删除
-编译过程：v-if切换有一个局部编译&#x2F;卸载的过程，切换过程中合适地销毁和重建内部的事件监听和子组件；v-show只是简单的基于css切换
-编译条件：v-if是真正的条件渲染，它会确保在切换过程中条件块内的事件监听器和子组件适当地被销毁和重建。只有渲染条件为假时，并不做操作，直到为真才渲染
-
-v-show 由false变为t ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/06/29/vue-slot/" title="说说你对slot的理解？slot使用场景有哪些？">说说你对slot的理解？slot使用场景有哪些？</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-06-29T08:00:00.000Z" title="发表于 2024-06-29 16:00:00">2024-06-29</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-02-08T06:49:30.105Z" title="更新于 2025-02-08 14:49:30">2025-02-08</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Vue/">Vue</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E9%9D%A2%E8%AF%95/">面试</a><span class="article-meta-link">•</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/Vue/">Vue</a></span></div><div class="content"> 
-一、slot是什么在HTML中 slot 元素 ，作为 Web Components 技术套件的一部分，是Web组件内的一个占位符
-该占位符可以在后期使用自己的标记语言填充
-举个栗子
-123456789&lt;template id=&quot;element-details-template&quot;&gt;  &lt;slot name=&quot;element-name&quot;&gt;Slot template&lt;/slot&gt;&lt;/template&gt;&lt;element-details&gt;  &lt;span slot=&quot;element-name&quot;&gt;1&lt;/span&gt;&lt;/element-details&gt;&lt;element-details&gt;  &lt;span slot=&quot;element-name&quot;&gt;2&lt;/span&gt;&lt;/element-details&gt;
-template不会展示到页面中，需要用先获取它的引用，然后添加到DOM中，
-1234 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/06/28/vue-spa/" title="你对SPA单页面的理解，它的优缺点分别是什么？如何实现SPA应用呢">你对SPA单页面的理解，它的优缺点分别是什么？如何实现SPA应用呢</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-06-28T08:00:00.000Z" title="发表于 2024-06-28 16:00:00">2024-06-28</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-02-08T06:49:30.105Z" title="更新于 2025-02-08 14:49:30">2025-02-08</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Vue/">Vue</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E9%9D%A2%E8%AF%95/">面试</a><span class="article-meta-link">•</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/Vue/">Vue</a></span></div><div class="content">
-一、什么是SPASPA（single-page application），翻译过来就是单页应用SPA是一种网络应用程序或网站的模型，它通过动态重写当前页面来与用户交互，这种方法避免了页面之间切换打断用户体验在单页应用中，所有必要的代码（HTML、JavaScript和CSS）都通过单个页面的加载而检索，或者根据需要（通常是为响应用户操作）动态装载适当的资源并添加到页面页面在任何时间点都不会重新加载，也不会将控制转移到其他页面举个例子来讲就是一个杯子，早上装的牛奶，中午装的是开水，晚上装的是茶，我们发现，变的始终是杯子里的内容，而杯子始终是那个杯子结构如下图
- 
-我们熟知的JS框架如react,vue,angular,ember都属于SPA
-二、SPA和MPA的区别上面大家已经对单页面有所了解了，下面来讲讲多页应用MPA（MultiPage-page application），翻译过来就是多页应用在MPA中，每个页面都是一个主页面，都是独立的当我们在访问另一个页面的时候，都需要重新加载html、css、js文件，公共文件则根据需求按需加载如下图
- 
-单页应用与多页应用的区别
-
-
-
-单页 ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/4/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/#content-inner">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/#content-inner">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/#content-inner">10</a><a class="extend next" rel="next" href="/page/6/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Answer Ran</div><div class="author-info__description">记录学习与思考</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">100</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">31</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">15</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/answer-ran-ts" target="_blank" title="fab fa-github"><i class="Github"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/02/06/ai-ai-development-perspective/" title="如何理性看待AI发展：一把双刃剑">如何理性看待AI发展：一把双刃剑</a><time datetime="2025-02-05T16:00:00.000Z" title="发表于 2025-02-06 00:00:00">2025-02-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/02/03/vue-axiosCode/" title="你了解axios的原理吗？有看过它的源码吗？">你了解axios的原理吗？有看过它的源码吗？</a><time datetime="2025-02-03T08:00:00.000Z" title="发表于 2025-02-03 16:00:00">2025-02-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/02/02/vue-bind/" title="双向数据绑定是什么">双向数据绑定是什么</a><time datetime="2025-02-02T08:00:00.000Z" title="发表于 2025-02-02 16:00:00">2025-02-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/01/31/vue3-goal/" title="Vue3.0的设计目标是什么？做了哪些优化">Vue3.0的设计目标是什么？做了哪些优化</a><time datetime="2025-01-31T08:00:00.000Z" title="发表于 2025-01-31 16:00:00">2025-01-31</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/01/30/vue3-composition/" title="Vue3.0 所采用的 Composition Api 与 Vue2.x 使用的 Options Api 有什么不同？">Vue3.0 所采用的 Composition Api 与 Vue2.x 使用的 Options Api 有什么不同？</a><time datetime="2025-01-30T08:00:00.000Z" title="发表于 2025-01-30 16:00:00">2025-01-30</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+trim自动过滤用户输入的首空格字符，而中间的空格不会过滤
+1&lt;input type=&quot;text&quot; v-model.trim=&quo ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/4/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/#content-inner">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/#content-inner">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/#content-inner">12</a><a class="extend next" rel="next" href="/page/6/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Answer Ran</div><div class="author-info__description">欢迎来到我的博客</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">115</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">32</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">17</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/answer-ran-ts" target="_blank" title="fab fa-github"><i class="Github"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><div class="announcement">
+  欢迎访问本站！
+  <br/>这里是一个分享技术与生活的空间
+  <br/>希望能带给大家有价值的内容
+</div>
+</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/02/09/http-WebSocket/" title="对WebSocket的理解？应用场景">对WebSocket的理解？应用场景</a><time datetime="2025-02-09T12:20:00.000Z" title="发表于 2025-02-09 20:20:00">2025-02-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/02/07/http-1-0-1-1-2-0/" title="HTTP1.0/1.1/2.0 的区别">HTTP1.0/1.1/2.0 的区别</a><time datetime="2025-02-07T14:20:00.000Z" title="发表于 2025-02-07 22:20:00">2025-02-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/02/07/http-CDN/" title="如何理解CDN？说说实现原理？">如何理解CDN？说说实现原理？</a><time datetime="2025-02-07T13:20:00.000Z" title="发表于 2025-02-07 21:20:00">2025-02-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/02/07/http-DNS/" title="DNS协议 是什么？说说DNS 完整的查询过程?">DNS协议 是什么？说说DNS 完整的查询过程?</a><time datetime="2025-02-07T13:20:00.000Z" title="发表于 2025-02-07 21:20:00">2025-02-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/02/07/http-GET-POST/" title="GET 和 POST 的区别？">GET 和 POST 的区别？</a><time datetime="2025-02-07T13:20:00.000Z" title="发表于 2025-02-07 21:20:00">2025-02-07</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
             <i class="fas fa-folder-open"></i>
             <span>分类</span>
             <a class="card-more-btn" href="/categories/" title="查看更多">
@@ -297,5 +328,5 @@ template不会展示到页面中，需要用先获取它的引用，然后添加
             </div>
             <ul class="card-category-list" id="aside-cat-list">
             <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/AI/"><span class="card-category-list-name">AI</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/JavaScript/"><span class="card-category-list-name">JavaScript</span><span class="card-category-list-count">36</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Vue/"><span class="card-category-list-name">Vue</span><span class="card-category-list-count">43</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/webpack/"><span class="card-category-list-name">webpack</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E4%BA%A4%E4%BA%92/"><span class="card-category-list-name">交互</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/"><span class="card-category-list-name">前端</span><span class="card-category-list-count">8</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/%E5%9C%B0%E5%9B%BE%E5%BC%80%E5%8F%91/"><span class="card-category-list-name">地图开发</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/%E5%B7%A5%E7%A8%8B%E5%8C%96/"><span class="card-category-list-name">工程化</span><span class="card-category-list-count">1</span></a></li></ul></li>
-            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 1.33em; color: #99a2af">微信小程序</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E5%8F%91%E5%B1%95/" style="font-size: 1.1em; color: #999">技术发展</a> <a href="/tags/JavaScript/" style="font-size: 1.39em; color: #99a4b4">JavaScript</a> <a href="/tags/Vuex/" style="font-size: 1.1em; color: #999">Vuex</a> <a href="/tags/React/" style="font-size: 1.1em; color: #999">React</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 1.16em; color: #999b9e">大数据</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 1.1em; color: #999">前端</a> <a href="/tags/Vue3/" style="font-size: 1.1em; color: #999">Vue3</a> <a href="/tags/AI%E4%BC%A6%E7%90%86/" style="font-size: 1.1em; color: #999">AI伦理</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E7%89%B9%E6%95%88/" style="font-size: 1.1em; color: #999">前端特效</a> <a href="/tags/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/" style="font-size: 1.1em; color: #999">错误处理</a> <a href="/tags/CSS/" style="font-size: 1.1em; color: #999">CSS</a> <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" style="font-size: 1.1em; color: #999">人工智能</a> <a href="/tags/%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/" style="font-size: 1.16em; color: #999b9e">最佳实践</a> <a href="/tags/%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90/" style="font-size: 1.16em; color: #999b9e">原理解析</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 1.44em; color: #99a7ba">面试</a> <a href="/tags/AI/" style="font-size: 1.1em; color: #999">AI</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E8%B7%AF%E7%94%B1/" style="font-size: 1.1em; color: #999">前端路由</a> <a href="/tags/Excel/" style="font-size: 1.1em; color: #999">Excel</a> <a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" style="font-size: 1.27em; color: #99a0a9">性能优化</a> <a href="/tags/webpack/" style="font-size: 1.21em; color: #999ea4">webpack</a> <a href="/tags/Vue/" style="font-size: 1.5em; color: #99a9bf">Vue</a> <a href="/tags/WebSocket/" style="font-size: 1.1em; color: #999">WebSocket</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E7%9B%91%E6%8E%A7/" style="font-size: 1.16em; color: #999b9e">前端监控</a> <a href="/tags/%E5%9C%B0%E5%9B%BE/" style="font-size: 1.1em; color: #999">地图</a> <a href="/tags/%E5%8D%B3%E6%97%B6%E9%80%9A%E8%AE%AF/" style="font-size: 1.1em; color: #999">即时通讯</a> <a href="/tags/%E6%9C%AA%E6%9D%A5%E5%8F%91%E5%B1%95/" style="font-size: 1.1em; color: #999">未来发展</a> <a href="/tags/%E6%9E%B6%E6%9E%84/" style="font-size: 1.1em; color: #999">架构</a> <a href="/tags/%E5%BE%AE%E5%89%8D%E7%AB%AF/" style="font-size: 1.1em; color: #999">微前端</a> <a href="/tags/%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1/" style="font-size: 1.1em; color: #999">组件通信</a> <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 1.1em; color: #999">工程化</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
-    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/02/"><span class="card-archive-list-date">二月 2025</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/01/"><span class="card-archive-list-date">一月 2025</span><span class="card-archive-list-count">12</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/11/"><span class="card-archive-list-date">十一月 2024</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/10/"><span class="card-archive-list-date">十月 2024</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/09/"><span class="card-archive-list-date">九月 2024</span><span class="card-archive-list-count">5</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/08/"><span class="card-archive-list-date">八月 2024</span><span class="card-archive-list-count">8</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/07/"><span class="card-archive-list-date">七月 2024</span><span class="card-archive-list-count">13</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/06/"><span class="card-archive-list-date">六月 2024</span><span class="card-archive-list-count">11</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">100</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2025-02-08T16:38:30.158Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="footer_custom_text">©2020 - 2025 By Answer Ran</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script src="/js/tilt-effect.js"></script><script src="/js/bubble-effect.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.13.0"></script></div></div></body></html>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90/" style="font-size: 1.15em; color: #999b9e">原理解析</a> <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" style="font-size: 1.1em; color: #999">人工智能</a> <a href="/tags/AI%E4%BC%A6%E7%90%86/" style="font-size: 1.1em; color: #999">AI伦理</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 1.15em; color: #999b9e">大数据</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 1.35em; color: #99a3b1">网络</a> <a href="/tags/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/" style="font-size: 1.1em; color: #999">错误处理</a> <a href="/tags/%E5%9C%B0%E5%9B%BE/" style="font-size: 1.1em; color: #999">地图</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E7%9B%91%E6%8E%A7/" style="font-size: 1.15em; color: #999b9e">前端监控</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E7%89%B9%E6%95%88/" style="font-size: 1.1em; color: #999">前端特效</a> <a href="/tags/Vue/" style="font-size: 1.5em; color: #99a9bf">Vue</a> <a href="/tags/Excel/" style="font-size: 1.1em; color: #999">Excel</a> <a href="/tags/webpack/" style="font-size: 1.2em; color: #999da3">webpack</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 1.1em; color: #999">前端</a> <a href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 1.3em; color: #99a1ac">微信小程序</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E5%8F%91%E5%B1%95/" style="font-size: 1.1em; color: #999">技术发展</a> <a href="/tags/React/" style="font-size: 1.1em; color: #999">React</a> <a href="/tags/%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/" style="font-size: 1.15em; color: #999b9e">最佳实践</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 1.45em; color: #99a7ba">面试</a> <a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" style="font-size: 1.25em; color: #999fa7">性能优化</a> <a href="/tags/JavaScript/" style="font-size: 1.4em; color: #99a5b6">JavaScript</a> <a href="/tags/Vue3/" style="font-size: 1.1em; color: #999">Vue3</a> <a href="/tags/%E5%8D%B3%E6%97%B6%E9%80%9A%E8%AE%AF/" style="font-size: 1.1em; color: #999">即时通讯</a> <a href="/tags/Vuex/" style="font-size: 1.1em; color: #999">Vuex</a> <a href="/tags/%E5%BE%AE%E5%89%8D%E7%AB%AF/" style="font-size: 1.1em; color: #999">微前端</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E8%B7%AF%E7%94%B1/" style="font-size: 1.1em; color: #999">前端路由</a> <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 1.1em; color: #999">工程化</a> <a href="/tags/CSS/" style="font-size: 1.1em; color: #999">CSS</a> <a href="/tags/%E6%9E%B6%E6%9E%84/" style="font-size: 1.1em; color: #999">架构</a> <a href="/tags/WebSocket/" style="font-size: 1.1em; color: #999">WebSocket</a> <a href="/tags/%E6%9C%AA%E6%9D%A5%E5%8F%91%E5%B1%95/" style="font-size: 1.1em; color: #999">未来发展</a> <a href="/tags/AI/" style="font-size: 1.1em; color: #999">AI</a> <a href="/tags/%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1/" style="font-size: 1.1em; color: #999">组件通信</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/02/"><span class="card-archive-list-date">二月 2025</span><span class="card-archive-list-count">17</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/01/"><span class="card-archive-list-date">一月 2025</span><span class="card-archive-list-count">12</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/11/"><span class="card-archive-list-date">十一月 2024</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/10/"><span class="card-archive-list-date">十月 2024</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/09/"><span class="card-archive-list-date">九月 2024</span><span class="card-archive-list-count">5</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/08/"><span class="card-archive-list-date">八月 2024</span><span class="card-archive-list-count">8</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/07/"><span class="card-archive-list-date">七月 2024</span><span class="card-archive-list-count">13</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/06/"><span class="card-archive-list-date">六月 2024</span><span class="card-archive-list-count">11</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">115</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2025-02-10T15:36:30.975Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="footer_custom_text">©2020 - 2025 By Answer Ran</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script src="/js/tilt-effect.js"></script><script src="/js/bubble-effect.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.13.0"></script></div></div></body></html>
