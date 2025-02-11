@@ -1,3 +1,36 @@
+# SEO 设置
+# 在文件开头添加以下配置
+subtitle: '技术分享与学习笔记' # 网站副标题
+description: '分享前端开发、面试经验、技术心得的个人技术博客' # 网站描述
+keywords: '前端开发,面试题,JavaScript,Vue,React,Node.js,技术博客' # 网站关键词
+
+# Open Graph 配置
+open_graph:
+  enable: true
+  option:
+    twitter_card: summary_large_image
+    twitter_id: 
+    twitter_site: 
+    fb_admins: 
+    fb_app_id: 
+
+# 添加站点地图配置
+sitemap:
+  path: sitemap.xml
+  rel: true
+
+# 添加 RSS 订阅
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+
+# 添加百度统计
+baidu_analytics: # 你的百度统计代码
+
+# 添加 Google Analytics
+google_analytics: # 你的 Google Analytics 代码
+
 # Navigation bar settings
 menu:
   首页: / || fas fa-home
@@ -76,20 +109,21 @@ aside:
     enable: true
     description: "欢迎来到我的博客，这里是一个分享技术与生活的空间，希望能带给大家有价值的内容😉"
     button:
-      enable: true
+      enable: false
       icon: fab fa-github
       text: Follow Me
       link: https://github.com/answer-ran-ts
-    button2:
-      enable: true
-      icon: fas fa-code
-      text: Coplit
-      link: https://www.coplit.com/answer-ran
   card_announcement:
     enable: true
     content: |
       <div class="announcement">
         努力更新中......面试ing......
+        <br/><br/>
+        <div style="text-align: center;">
+          <img src="/img/wechat-group.jpg" style="width: 200px; border-radius: 4px;" alt="微信交流群">
+          <br/>
+          <span style="color: #666; font-size: 0.9em;">扫码加入交流群，一起学习进步</span>
+        </div>
       </div>
   card_recent_post:
     enable: true
