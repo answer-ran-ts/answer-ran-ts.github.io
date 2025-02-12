@@ -39,11 +39,11 @@
     <category term="架构" scheme="https://blogmind.cloud/categories/%E5%89%8D%E7%AB%AF/%E6%9E%B6%E6%9E%84/"/>
     
     
+    <category term="部署" scheme="https://blogmind.cloud/tags/%E9%83%A8%E7%BD%B2/"/>
+    
     <category term="微前端" scheme="https://blogmind.cloud/tags/%E5%BE%AE%E5%89%8D%E7%AB%AF/"/>
     
     <category term="架构" scheme="https://blogmind.cloud/tags/%E6%9E%B6%E6%9E%84/"/>
-    
-    <category term="部署" scheme="https://blogmind.cloud/tags/%E9%83%A8%E7%BD%B2/"/>
     
   </entry>
   
@@ -69,11 +69,11 @@
     <category term="架构" scheme="https://blogmind.cloud/categories/%E5%89%8D%E7%AB%AF/%E6%9E%B6%E6%9E%84/"/>
     
     
+    <category term="最佳实践" scheme="https://blogmind.cloud/tags/%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/"/>
+    
     <category term="微前端" scheme="https://blogmind.cloud/tags/%E5%BE%AE%E5%89%8D%E7%AB%AF/"/>
     
     <category term="架构" scheme="https://blogmind.cloud/tags/%E6%9E%B6%E6%9E%84/"/>
-    
-    <category term="最佳实践" scheme="https://blogmind.cloud/tags/%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/"/>
     
   </entry>
   
@@ -99,11 +99,11 @@
     <category term="架构" scheme="https://blogmind.cloud/categories/%E5%89%8D%E7%AB%AF/%E6%9E%B6%E6%9E%84/"/>
     
     
+    <category term="最佳实践" scheme="https://blogmind.cloud/tags/%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/"/>
+    
     <category term="微前端" scheme="https://blogmind.cloud/tags/%E5%BE%AE%E5%89%8D%E7%AB%AF/"/>
     
     <category term="架构" scheme="https://blogmind.cloud/tags/%E6%9E%B6%E6%9E%84/"/>
-    
-    <category term="最佳实践" scheme="https://blogmind.cloud/tags/%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/"/>
     
   </entry>
   
@@ -129,11 +129,11 @@
     <category term="架构" scheme="https://blogmind.cloud/categories/%E5%89%8D%E7%AB%AF/%E6%9E%B6%E6%9E%84/"/>
     
     
-    <category term="最佳实践" scheme="https://blogmind.cloud/tags/%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/"/>
+    <category term="DevOps" scheme="https://blogmind.cloud/tags/DevOps/"/>
     
     <category term="部署" scheme="https://blogmind.cloud/tags/%E9%83%A8%E7%BD%B2/"/>
     
-    <category term="DevOps" scheme="https://blogmind.cloud/tags/DevOps/"/>
+    <category term="最佳实践" scheme="https://blogmind.cloud/tags/%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/"/>
     
   </entry>
   
@@ -159,11 +159,11 @@
     <category term="架构" scheme="https://blogmind.cloud/categories/%E5%89%8D%E7%AB%AF/%E6%9E%B6%E6%9E%84/"/>
     
     
+    <category term="部署" scheme="https://blogmind.cloud/tags/%E9%83%A8%E7%BD%B2/"/>
+    
     <category term="Vue" scheme="https://blogmind.cloud/tags/Vue/"/>
     
     <category term="组件库" scheme="https://blogmind.cloud/tags/%E7%BB%84%E4%BB%B6%E5%BA%93/"/>
-    
-    <category term="部署" scheme="https://blogmind.cloud/tags/%E9%83%A8%E7%BD%B2/"/>
     
   </entry>
   
