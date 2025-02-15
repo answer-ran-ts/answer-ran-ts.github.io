@@ -1,0 +1,217 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Vue 组件之间的通信方式有哪些？ | BlogMind</title><meta name="author" content="Answer Ran"><meta name="copyright" content="Answer Ran"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="一、组件通信的概念组件通信是指组件与组件之间数据传递和交互的方式。在 Vue 中，组件之间的通信是非常重要的概念，因为一个应用往往由多个组件构成，它们之间需要相互配合才能完成特定的功能。 二、通信方式1. props &#x2F; $emit父组件通过 props 向子组件传递数据，子组件通过 $emit 向父组件发送事件 1234567891011121314151617181920212223">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue 组件之间的通信方式有哪些？">
+<meta property="og:url" content="https://blogmind.cloud/Vue/vue-vue-components-communication/">
+<meta property="og:site_name" content="BlogMind">
+<meta property="og:description" content="一、组件通信的概念组件通信是指组件与组件之间数据传递和交互的方式。在 Vue 中，组件之间的通信是非常重要的概念，因为一个应用往往由多个组件构成，它们之间需要相互配合才能完成特定的功能。 二、通信方式1. props &#x2F; $emit父组件通过 props 向子组件传递数据，子组件通过 $emit 向父组件发送事件 1234567891011121314151617181920212223">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-06-12T12:30:00.000Z">
+<meta property="article:modified_time" content="2025-02-08T06:49:30.106Z">
+<meta property="article:author" content="Answer Ran">
+<meta property="article:tag" content="面试">
+<meta property="article:tag" content="Vue">
+<meta property="article:tag" content="组件通信">
+<meta name="twitter:card" content="summary"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://blogmind.cloud/Vue/vue-vue-components-communication/"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//busuanzi.ibruce.info"><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Vue 组件之间的通信方式有哪些？',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-02-08 14:49:30'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js"></script><link rel="stylesheet" href="/css/bubble-effect.css"><link rel="stylesheet" href="/css/mobile.css"><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="BlogMind" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">125</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">40</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">19</div></a></div><hr class="custom-hr"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="BlogMind"><span class="site-name">BlogMind</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Vue 组件之间的通信方式有哪些？</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-06-12T12:30:00.000Z" title="发表于 2024-06-12 20:30:00">2024-06-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-02-08T06:49:30.106Z" title="更新于 2025-02-08 14:49:30">2025-02-08</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Vue/">Vue</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id data-flag-title="Vue 组件之间的通信方式有哪些？"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="一、组件通信的概念"><a href="#一、组件通信的概念" class="headerlink" title="一、组件通信的概念"></a>一、组件通信的概念</h2><p>组件通信是指组件与组件之间数据传递和交互的方式。在 Vue 中，组件之间的通信是非常重要的概念，因为一个应用往往由多个组件构成，它们之间需要相互配合才能完成特定的功能。</p>
+<h2 id="二、通信方式"><a href="#二、通信方式" class="headerlink" title="二、通信方式"></a>二、通信方式</h2><h3 id="1-props-emit"><a href="#1-props-emit" class="headerlink" title="1. props &#x2F; $emit"></a>1. props &#x2F; $emit</h3><p>父组件通过 props 向子组件传递数据，子组件通过 $emit 向父组件发送事件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 父组件 --&gt;</span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;child :msg=&quot;message&quot; @changeMsg=&quot;handleChange&quot;/&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  data() &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      message: &#x27;Hello&#x27;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    handleChange(val) &#123;</span><br><span class="line">      this.message = val</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 子组件 --&gt;</span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;button @click=&quot;handleClick&quot;&gt;修改&lt;/button&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  props: [&#x27;msg&#x27;],</span><br><span class="line">  methods: &#123;</span><br><span class="line">    handleClick() &#123;</span><br><span class="line">      this.$emit(&#x27;changeMsg&#x27;, &#x27;World&#x27;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-refs-parent-children"><a href="#2-refs-parent-children" class="headerlink" title="2. $refs &#x2F; $parent &#x2F; $children"></a>2. $refs &#x2F; $parent &#x2F; $children</h3><p>通过 ref 获取子组件实例，直接调用子组件的方法或访问数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 父组件 --&gt;</span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;child ref=&quot;childComp&quot;/&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  mounted() &#123;</span><br><span class="line">    // 访问子组件的数据和方法</span><br><span class="line">    this.$refs.childComp.someMethod()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-EventBus"><a href="#3-EventBus" class="headerlink" title="3. EventBus"></a>3. EventBus</h3><p>通过一个空的 Vue 实例作为中央事件总线，实现任意组件间的通信</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// eventBus.js</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">Vue</span> <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title class_">EventBus</span> = <span class="keyword">new</span> <span class="title class_">Vue</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 组件 A</span></span><br><span class="line"><span class="title class_">EventBus</span>.$emit(<span class="string">&#x27;custom-event&#x27;</span>, data)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 组件 B</span></span><br><span class="line"><span class="title class_">EventBus</span>.$on(<span class="string">&#x27;custom-event&#x27;</span>, <span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(data)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-Vuex"><a href="#4-Vuex" class="headerlink" title="4. Vuex"></a>4. Vuex</h3><p>状态管理模式，集中式存储管理应用的所有组件的状态</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// store.js</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">Vue</span> <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">Vuex</span> <span class="keyword">from</span> <span class="string">&#x27;vuex&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">Vue</span>.<span class="title function_">use</span>(<span class="title class_">Vuex</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> <span class="title class_">Vuex</span>.<span class="title class_">Store</span>(&#123;</span><br><span class="line">  <span class="attr">state</span>: &#123;</span><br><span class="line">    <span class="attr">count</span>: <span class="number">0</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">mutations</span>: &#123;</span><br><span class="line">    <span class="title function_">increment</span>(<span class="params">state</span>) &#123;</span><br><span class="line">      state.<span class="property">count</span>++</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 组件中使用</span></span><br><span class="line"><span class="variable language_">this</span>.<span class="property">$store</span>.<span class="property">state</span>.<span class="property">count</span></span><br><span class="line"><span class="variable language_">this</span>.<span class="property">$store</span>.<span class="title function_">commit</span>(<span class="string">&#x27;increment&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="三、各种通信方式的使用场景"><a href="#三、各种通信方式的使用场景" class="headerlink" title="三、各种通信方式的使用场景"></a>三、各种通信方式的使用场景</h2><ol>
+<li><p>props &#x2F; $emit</p>
+<ul>
+<li>适用于父子组件通信</li>
+<li>简单且清晰的数据流向</li>
+</ul>
+</li>
+<li><p>$refs &#x2F; $parent &#x2F; $children</p>
+<ul>
+<li>适用于父子组件通信</li>
+<li>需要直接操作子组件时使用</li>
+</ul>
+</li>
+<li><p>EventBus</p>
+<ul>
+<li>适用于任意组件间通信</li>
+<li>项目较小时使用</li>
+<li>数据流混乱时不易维护</li>
+</ul>
+</li>
+<li><p>Vuex</p>
+<ul>
+<li>适用于复杂的数据管理</li>
+<li>大型项目推荐使用</li>
+<li>需要共享的状态较多时</li>
+</ul>
+</li>
+</ol>
+<h2 id="四、注意事项"><a href="#四、注意事项" class="headerlink" title="四、注意事项"></a>四、注意事项</h2><ol>
+<li>避免过度使用全局事件总线</li>
+<li>合理使用 Vuex，不是所有状态都需要放在 Vuex 中</li>
+<li>优先考虑 props &#x2F; $emit 这种最简单的通信方式</li>
+<li>组件通信遵循单向数据流原则</li>
+</ol>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://cn.vuejs.org/v2/guide/components.html">Vue.js 官方文档 - 组件基础</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://vuex.vuejs.org/zh/">Vuex 官方文档</a></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://blogmind.cloud">Answer Ran</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://blogmind.cloud/Vue/vue-vue-components-communication/">https://blogmind.cloud/Vue/vue-vue-components-communication/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="external nofollow noopener noreferrer">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blogmind.cloud" target="_blank">BlogMind</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E9%9D%A2%E8%AF%95/">面试</a><a class="post-meta__tags" href="/tags/Vue/">Vue</a><a class="post-meta__tags" href="/tags/%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1/">组件通信</a></div><div class="post_share"><div class="social-share" data-image="/" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/Vue/vue-vnode/" title="什么是虚拟DOM？如何实现一个虚拟DOM？说说你的思路"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">什么是虚拟DOM？如何实现一个虚拟DOM？说说你的思路</div></div></a></div><div class="next-post pull-right"><a href="/Vue/vue-vue-lifecycle/" title="Vue 生命周期的理解？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Vue 生命周期的理解？</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/Vue/vue-404/" title="vue项目本地开发完成后部署到服务器后报404是什么原因呢？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-19</div><div class="title">vue项目本地开发完成后部署到服务器后报404是什么原因呢？</div></div></a></div><div><a href="/Vue/vue-axios/" title="Vue项目中有封装过axios吗？主要是封装哪方面的？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-16</div><div class="title">Vue项目中有封装过axios吗？主要是封装哪方面的？</div></div></a></div><div><a href="/Vue/vue-communication/" title="Vue组件之间的通信方式都有哪些？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-18</div><div class="title">Vue组件之间的通信方式都有哪些？</div></div></a></div><div><a href="/Vue/vue-cors/" title="Vue项目中你是如何解决跨域的呢？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-11</div><div class="title">Vue项目中你是如何解决跨域的呢？</div></div></a></div><div><a href="/Vue/vue-bind/" title="双向数据绑定是什么"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-02-02</div><div class="title">双向数据绑定是什么</div></div></a></div><div><a href="/Vue/vue-data-object-add-attrs/" title="动态给vue的data添加一个新的属性时会发生什么？怎样解决？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-01</div><div class="title">动态给vue的data添加一个新的属性时会发生什么？怎样解决？</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"></div><div class="author-info__name">Answer Ran</div><div class="author-info__description">欢迎来到我的博客，这里是一个分享技术与生活的空间，希望能带给大家有价值的内容😉</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">125</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">40</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">19</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/answer-ran-ts" target="_blank" title="fab fa-github" rel="external nofollow noopener noreferrer"><i class="Github"></i></a><a class="social-icon" href="https://www.coplit.com/answer-ran" target="_blank" title="fas fa-code" rel="external nofollow noopener noreferrer"><i class="Coplit"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><div class="announcement">
+  努力更新中......面试ing......
+  <br><br>
+  <div style="text-align: center;">
+    <img src="/img/wechat-group.jpg" style="width: 200px; border-radius: 4px;" alt="微信交流群">
+    <br>
+    <span style="color: #666; font-size: 0.9em;">扫码加入交流群，一起学习进步</span>
+  </div>
+</div>
+</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">1.</span> <span class="toc-text">一、组件通信的概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text">二、通信方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-props-emit"><span class="toc-number">2.1.</span> <span class="toc-text">1. props &#x2F; $emit</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-refs-parent-children"><span class="toc-number">2.2.</span> <span class="toc-text">2. $refs &#x2F; $parent &#x2F; $children</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-EventBus"><span class="toc-number">2.3.</span> <span class="toc-text">3. EventBus</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Vuex"><span class="toc-number">2.4.</span> <span class="toc-text">4. Vuex</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%90%84%E7%A7%8D%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">3.</span> <span class="toc-text">三、各种通信方式的使用场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">4.</span> <span class="toc-text">四、注意事项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">5.</span> <span class="toc-text">参考文献</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/engine-pre2/" title="2.15 前端面试复盘（三）">2.15 前端面试复盘（三）</a><time datetime="2025-02-15T04:00:00.000Z" title="发表于 2025-02-15 12:00:00">2025-02-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/engine-websocket/" title="2.15 前端面试复盘（二）">2.15 前端面试复盘（二）</a><time datetime="2025-02-15T04:00:00.000Z" title="发表于 2025-02-15 12:00:00">2025-02-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/%E8%81%8C%E5%9C%BA/life-1/" title="2.15 面对职场矛盾，要不要宣泄怒气">2.15 面对职场矛盾，要不要宣泄怒气</a><time datetime="2025-02-15T04:00:00.000Z" title="发表于 2025-02-15 12:00:00">2025-02-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/engine-pre/" title="2.15 前端面试复盘（一）">2.15 前端面试复盘（一）</a><time datetime="2025-02-15T04:00:00.000Z" title="发表于 2025-02-15 12:00:00">2025-02-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/%E5%89%8D%E7%AB%AF/%E6%9E%B6%E6%9E%84/micro-micro-deploy/" title="微前端子应用如何部署？">微前端子应用如何部署？</a><time datetime="2025-02-14T16:09:00.000Z" title="发表于 2025-02-15 00:09:00">2025-02-15</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="footer_custom_text">©2025 Answer Ran</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script src="/js/tilt-effect.js"></script><script src="/js/bubble-effect.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"></div></div><hr><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.13.0"></script></div></div></body></html>

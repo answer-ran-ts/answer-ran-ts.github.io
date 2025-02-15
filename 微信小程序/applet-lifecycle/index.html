@@ -1,0 +1,348 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>微信小程序的生命周期 | BlogMind</title><meta name="author" content="Answer Ran"><meta name="copyright" content="Answer Ran"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="一、是什么跟vue、react框架一样，微信小程序框架也存在生命周期，实质也是一堆会在特定时期执行的函数 小程序中，生命周期主要分成了三部分：  应用的生命周期 页面的生命周期 组件的生命周期  应用的生命周期小程序的生命周期函数是在app.js里面调用的，通过App(Object)函数用来注册一个小程序，指定其小程序的生命周期回调 页面的生命周期页面生命周期函数就是当你每进入&#x2F;切换">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微信小程序的生命周期">
+<meta property="og:url" content="https://blogmind.cloud/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/applet-lifecycle/">
+<meta property="og:site_name" content="BlogMind">
+<meta property="og:description" content="一、是什么跟vue、react框架一样，微信小程序框架也存在生命周期，实质也是一堆会在特定时期执行的函数 小程序中，生命周期主要分成了三部分：  应用的生命周期 页面的生命周期 组件的生命周期  应用的生命周期小程序的生命周期函数是在app.js里面调用的，通过App(Object)函数用来注册一个小程序，指定其小程序的生命周期回调 页面的生命周期页面生命周期函数就是当你每进入&#x2F;切换">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://static.vue-js.com/1df64890-30e0-11ec-8e64-91fdec0f05a1.png">
+<meta property="article:published_time" content="2024-03-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-02-07T07:57:09.522Z">
+<meta property="article:author" content="Answer Ran">
+<meta property="article:tag" content="微信小程序">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://static.vue-js.com/1df64890-30e0-11ec-8e64-91fdec0f05a1.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://blogmind.cloud/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/applet-lifecycle/"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//busuanzi.ibruce.info"><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '微信小程序的生命周期',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-02-07 15:57:09'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js"></script><link rel="stylesheet" href="/css/bubble-effect.css"><link rel="stylesheet" href="/css/mobile.css"><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="BlogMind" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">125</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">40</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">19</div></a></div><hr class="custom-hr"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="BlogMind"><span class="site-name">BlogMind</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">微信小程序的生命周期</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-03-19T16:00:00.000Z" title="发表于 2024-03-20 00:00:00">2024-03-20</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-02-07T07:57:09.522Z" title="更新于 2025-02-07 15:57:09">2025-02-07</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id data-flag-title="微信小程序的生命周期"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p> <img src="https://static.vue-js.com/1df64890-30e0-11ec-8e64-91fdec0f05a1.png"></p>
+<h2 id="一、是什么"><a href="#一、是什么" class="headerlink" title="一、是什么"></a>一、是什么</h2><p>跟<code>vue</code>、<code>react</code>框架一样，微信小程序框架也存在生命周期，实质也是一堆会在特定时期执行的函数</p>
+<p>小程序中，生命周期主要分成了三部分：</p>
+<ul>
+<li>应用的生命周期</li>
+<li>页面的生命周期</li>
+<li>组件的生命周期</li>
+</ul>
+<h3 id="应用的生命周期"><a href="#应用的生命周期" class="headerlink" title="应用的生命周期"></a>应用的生命周期</h3><p>小程序的生命周期函数是在<code>app.js</code>里面调用的，通过<code>App(Object)</code>函数用来注册一个小程序，指定其小程序的生命周期回调</p>
+<h3 id="页面的生命周期"><a href="#页面的生命周期" class="headerlink" title="页面的生命周期"></a>页面的生命周期</h3><p>页面生命周期函数就是当你每进入&#x2F;切换到一个新的页面的时候，就会调用的生命周期函数，同样通过<code>App(Object)</code>函数用来注册一个页面</p>
+<h3 id="组件的生命周期"><a href="#组件的生命周期" class="headerlink" title="组件的生命周期"></a>组件的生命周期</h3><p>组件的生命周期，指的是组件自身的一些函数，这些函数在特殊的时间点或遇到一些特殊的框架事件时被自动触发，通过<code>Component(Object)</code>进行注册组件</p>
+<h2 id="二、有哪些"><a href="#二、有哪些" class="headerlink" title="二、有哪些"></a>二、有哪些</h2><h3 id="应用的生命周期-1"><a href="#应用的生命周期-1" class="headerlink" title="应用的生命周期"></a>应用的生命周期</h3><table>
+<thead>
+<tr>
+<th>生命周期</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>onLaunch</td>
+<td>小程序初始化完成时触发，全局只触发一次</td>
+</tr>
+<tr>
+<td>onShow</td>
+<td>小程序启动，或从后台进入前台显示时触发</td>
+</tr>
+<tr>
+<td>onHide</td>
+<td>小程序从前台进入后台时触发</td>
+</tr>
+<tr>
+<td>onError</td>
+<td>小程序发生脚本错误或 API 调用报错时触发</td>
+</tr>
+<tr>
+<td>onPageNotFound</td>
+<td>小程序要打开的页面不存在时触发</td>
+</tr>
+<tr>
+<td>onUnhandledRejection()</td>
+<td>小程序有未处理的 Promise 拒绝时触发</td>
+</tr>
+<tr>
+<td>onThemeChange</td>
+<td>系统切换主题时触发</td>
+</tr>
+</tbody></table>
+<h3 id="页面的生命周期-1"><a href="#页面的生命周期-1" class="headerlink" title="页面的生命周期"></a>页面的生命周期</h3><table>
+<thead>
+<tr>
+<th>生命周期</th>
+<th>说明</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>onLoad</td>
+<td>生命周期回调—监听页面加载</td>
+<td>发送请求获取数据</td>
+</tr>
+<tr>
+<td>onShow</td>
+<td>生命周期回调—监听页面显示</td>
+<td>请求数据</td>
+</tr>
+<tr>
+<td>onReady</td>
+<td>生命周期回调—监听页面初次渲染完成</td>
+<td>获取页面元素（少用）</td>
+</tr>
+<tr>
+<td>onHide</td>
+<td>生命周期回调—监听页面隐藏</td>
+<td>终止任务，如定时器或者播放音乐</td>
+</tr>
+<tr>
+<td>onUnload</td>
+<td>生命周期回调—监听页面卸载</td>
+<td>终止任务</td>
+</tr>
+</tbody></table>
+<h3 id="组件的生命周期-1"><a href="#组件的生命周期-1" class="headerlink" title="组件的生命周期"></a>组件的生命周期</h3><table>
+<thead>
+<tr>
+<th>生命周期</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>created</td>
+<td>生命周期回调—监听页面加载</td>
+</tr>
+<tr>
+<td>attached</td>
+<td>生命周期回调—监听页面显示</td>
+</tr>
+<tr>
+<td>ready</td>
+<td>生命周期回调—监听页面初次渲染完成</td>
+</tr>
+<tr>
+<td>moved</td>
+<td>生命周期回调—监听页面隐藏</td>
+</tr>
+<tr>
+<td>detached</td>
+<td>生命周期回调—监听页面卸载</td>
+</tr>
+<tr>
+<td>error</td>
+<td>每当组件方法抛出错误时执行</td>
+</tr>
+</tbody></table>
+<p>注意的是：</p>
+<ul>
+<li>组件实例刚刚被创建好时， created 生命周期被触发，此时，组件数据 this.data 就是在 Component  构造器中定义的数据 data ， 此时不能调用 setData</li>
+<li>在组件完全初始化完毕、进入页面节点树后， attached 生命周期被触发。此时， this.data 已被初始化为组件的当前值。这个生命周期很有用，绝大多数初始化工作可以在这个时机进行</li>
+<li>在组件离开页面节点树后， detached 生命周期被触发。退出一个页面时，如果组件还在页面节点树中，则  detached 会被触发</li>
+</ul>
+<p>还有一些特殊的生命周期，它们并非与组件有很强的关联，但有时组件需要获知，以便组件内部处理，这样的生命周期称为“组件所在页面的生命周期”，在 <code>pageLifetimes</code> 定义段中定义，如下：</p>
+<table>
+<thead>
+<tr>
+<th>生命周期</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>show</td>
+<td>组件所在的页面被展示时执行</td>
+</tr>
+<tr>
+<td>hide</td>
+<td>组件所在的页面被隐藏时执行</td>
+</tr>
+</tbody></table>
+<p>代码如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Component</span>(&#123;</span><br><span class="line">  <span class="attr">pageLifetimes</span>: &#123;</span><br><span class="line">    <span class="attr">show</span>: <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="comment">// 页面被展示</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">hide</span>: <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="comment">// 页面被隐藏</span></span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+<h2 id="三、执行过程"><a href="#三、执行过程" class="headerlink" title="三、执行过程"></a>三、执行过程</h2><h3 id="应⽤的⽣命周期执行过程："><a href="#应⽤的⽣命周期执行过程：" class="headerlink" title="应⽤的⽣命周期执行过程："></a>应⽤的⽣命周期执行过程：</h3><ul>
+<li><p>⽤户⾸次打开⼩程序，触发 onLaunch（全局只触发⼀次）</p>
+</li>
+<li><p>⼩程序初始化完成后，触发onShow⽅法，监听⼩程序显示</p>
+</li>
+<li><p>⼩程序从前台进⼊后台，触发 onHide⽅法</p>
+</li>
+<li><p>⼩程序从后台进⼊前台显示，触发 onShow⽅法</p>
+</li>
+<li><p>⼩程序后台运⾏⼀定时间，或系统资源占⽤过⾼，会被销毁</p>
+</li>
+</ul>
+<h3 id="⻚⾯⽣命周期的执行过程："><a href="#⻚⾯⽣命周期的执行过程：" class="headerlink" title="⻚⾯⽣命周期的执行过程："></a>⻚⾯⽣命周期的执行过程：</h3><ul>
+<li>⼩程序注册完成后，加载⻚⾯，触发onLoad⽅法</li>
+<li>⻚⾯载⼊后触发onShow⽅法，显示⻚⾯</li>
+<li>⾸次显示⻚⾯，会触发onReady⽅法，渲染⻚⾯元素和样式，⼀个⻚⾯只会调⽤⼀次</li>
+<li>当⼩程序后台运⾏或跳转到其他⻚⾯时，触发onHide⽅法</li>
+<li>当⼩程序有后台进⼊到前台运⾏或重新进⼊⻚⾯时，触发onShow⽅法</li>
+<li>当使⽤重定向⽅法 wx.redirectTo() 或关闭当前⻚返回上⼀⻚wx.navigateBack()，触发onUnload</li>
+</ul>
+<p>当存在也应用生命周期和页面周期的时候，相关的执行顺序如下：</p>
+<ul>
+<li><p>打开小程序：(App)onLaunch –&gt; (App)onShow –&gt; (Pages)onLoad –&gt; (Pages)onShow –&gt; (pages)onRead</p>
+</li>
+<li><p>进入下一个页面：(Pages)onHide –&gt; (Next)onLoad –&gt; (Next)onShow –&gt; (Next)onReady</p>
+</li>
+<li><p>返回上一个页面：(curr)onUnload –&gt; (pre)onShow</p>
+</li>
+<li><p>离开小程序：(App)onHide</p>
+</li>
+<li><p>再次进入：小程序未销毁 –&gt; (App)onShow(执行上面的顺序），小程序被销毁，（App)onLaunch重新开始执行.</p>
+</li>
+</ul>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://developers.weixin.qq.com/miniprogram/dev/reference/api/App.html#onLaunch-Object-object">https://developers.weixin.qq.com/miniprogram/dev/reference/api/App.html#onLaunch-Object-object</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://developers.weixin.qq.com/miniprogram/dev/reference/api/Page.html#onLoad-Object-query">https://developers.weixin.qq.com/miniprogram/dev/reference/api/Page.html#onLoad-Object-query</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://developers.weixin.qq.com/miniprogram/dev/reference/api/App.html#onLaunch-Object-object">https://developers.weixin.qq.com/miniprogram/dev/reference/api/App.html#onLaunch-Object-object</a></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://blogmind.cloud">Answer Ran</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://blogmind.cloud/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/applet-lifecycle/">https://blogmind.cloud/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/applet-lifecycle/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="external nofollow noopener noreferrer">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blogmind.cloud" target="_blank">BlogMind</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a></div><div class="post_share"><div class="social-share" data-image="/" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/Vue/vue-vuex-principle/" title="Vuex的实现原理解析"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Vuex的实现原理解析</div></div></a></div><div class="next-post pull-right"><a href="/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/engine-babel-runtime/" title="Babel Runtime 面试题解答指南"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Babel Runtime 面试题解答指南</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/applet-WebView-jscore/" title="微信小程序的实现原理"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-05-19</div><div class="title">微信小程序的实现原理</div></div></a></div><div><a href="/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/applet-applet/" title="微信小程序的理解"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-19</div><div class="title">微信小程序的理解</div></div></a></div><div><a href="/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/applet-navigate/" title="微信小程序中路由跳转的方式有哪些？区别"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-22</div><div class="title">微信小程序中路由跳转的方式有哪些？区别</div></div></a></div><div><a href="/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/applet-login/" title="微信小程序的登录流程"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-21</div><div class="title">微信小程序的登录流程</div></div></a></div><div><a href="/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/applet-optimization/" title="提高微信小程序的应用速度的手段有哪些？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-30</div><div class="title">提高微信小程序的应用速度的手段有哪些？</div></div></a></div><div><a href="/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/applet-publish/" title="微信小程序的发布流程？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-04-10</div><div class="title">微信小程序的发布流程？</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"></div><div class="author-info__name">Answer Ran</div><div class="author-info__description">欢迎来到我的博客，这里是一个分享技术与生活的空间，希望能带给大家有价值的内容😉</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">125</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">40</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">19</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/answer-ran-ts" target="_blank" title="fab fa-github" rel="external nofollow noopener noreferrer"><i class="Github"></i></a><a class="social-icon" href="https://www.coplit.com/answer-ran" target="_blank" title="fas fa-code" rel="external nofollow noopener noreferrer"><i class="Coplit"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><div class="announcement">
+  努力更新中......面试ing......
+  <br><br>
+  <div style="text-align: center;">
+    <img src="/img/wechat-group.jpg" style="width: 200px; border-radius: 4px;" alt="微信交流群">
+    <br>
+    <span style="color: #666; font-size: 0.9em;">扫码加入交流群，一起学习进步</span>
+  </div>
+</div>
+</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">1.</span> <span class="toc-text">一、是什么</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-number">1.1.</span> <span class="toc-text">应用的生命周期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B5%E9%9D%A2%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-number">1.2.</span> <span class="toc-text">页面的生命周期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-number">1.3.</span> <span class="toc-text">组件的生命周期</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="toc-number">2.</span> <span class="toc-text">二、有哪些</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-1"><span class="toc-number">2.1.</span> <span class="toc-text">应用的生命周期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B5%E9%9D%A2%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-1"><span class="toc-number">2.2.</span> <span class="toc-text">页面的生命周期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-1"><span class="toc-number">2.3.</span> <span class="toc-text">组件的生命周期</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B"><span class="toc-number">3.</span> <span class="toc-text">三、执行过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E2%BD%A4%E7%9A%84%E2%BD%A3%E5%91%BD%E5%91%A8%E6%9C%9F%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B%EF%BC%9A"><span class="toc-number">3.1.</span> <span class="toc-text">应⽤的⽣命周期执行过程：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%BB%9A%E2%BE%AF%E2%BD%A3%E5%91%BD%E5%91%A8%E6%9C%9F%E7%9A%84%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B%EF%BC%9A"><span class="toc-number">3.2.</span> <span class="toc-text">⻚⾯⽣命周期的执行过程：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">4.</span> <span class="toc-text">参考文献</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/engine-pre2/" title="2.15 前端面试复盘（三）">2.15 前端面试复盘（三）</a><time datetime="2025-02-15T04:00:00.000Z" title="发表于 2025-02-15 12:00:00">2025-02-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/engine-websocket/" title="2.15 前端面试复盘（二）">2.15 前端面试复盘（二）</a><time datetime="2025-02-15T04:00:00.000Z" title="发表于 2025-02-15 12:00:00">2025-02-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/%E8%81%8C%E5%9C%BA/life-1/" title="2.15 面对职场矛盾，要不要宣泄怒气">2.15 面对职场矛盾，要不要宣泄怒气</a><time datetime="2025-02-15T04:00:00.000Z" title="发表于 2025-02-15 12:00:00">2025-02-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/engine-pre/" title="2.15 前端面试复盘（一）">2.15 前端面试复盘（一）</a><time datetime="2025-02-15T04:00:00.000Z" title="发表于 2025-02-15 12:00:00">2025-02-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/%E5%89%8D%E7%AB%AF/%E6%9E%B6%E6%9E%84/micro-micro-deploy/" title="微前端子应用如何部署？">微前端子应用如何部署？</a><time datetime="2025-02-14T16:09:00.000Z" title="发表于 2025-02-15 00:09:00">2025-02-15</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="footer_custom_text">©2025 Answer Ran</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script src="/js/tilt-effect.js"></script><script src="/js/bubble-effect.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"></div></div><hr><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.13.0"></script></div></div></body></html>

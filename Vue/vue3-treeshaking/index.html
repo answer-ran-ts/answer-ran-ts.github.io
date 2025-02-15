@@ -1,0 +1,224 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>说说Vue 3.0中Treeshaking特性？举例说明一下？ | BlogMind</title><meta name="author" content="Answer Ran"><meta name="copyright" content="Answer Ran"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="一、是什么Tree shaking 是一种通过清除多余代码方式来优化项目打包体积的技术，专业术语叫 Dead code elimination 简单来讲，就是在保持代码运行结果不变的前提下，去除无用的代码 如果把代码打包比作制作蛋糕，传统的方式是把鸡蛋（带壳）全部丢进去搅拌，然后放入烤箱，最后把（没有用的）蛋壳全部挑选并剔除出去 而treeshaking则是一开始就把有用的蛋白蛋黄（impor">
+<meta property="og:type" content="article">
+<meta property="og:title" content="说说Vue 3.0中Treeshaking特性？举例说明一下？">
+<meta property="og:url" content="https://blogmind.cloud/Vue/vue3-treeshaking/">
+<meta property="og:site_name" content="BlogMind">
+<meta property="og:description" content="一、是什么Tree shaking 是一种通过清除多余代码方式来优化项目打包体积的技术，专业术语叫 Dead code elimination 简单来讲，就是在保持代码运行结果不变的前提下，去除无用的代码 如果把代码打包比作制作蛋糕，传统的方式是把鸡蛋（带壳）全部丢进去搅拌，然后放入烤箱，最后把（没有用的）蛋壳全部挑选并剔除出去 而treeshaking则是一开始就把有用的蛋白蛋黄（impor">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://static.vue-js.com/5e8bf1d0-6097-11eb-ab90-d9ae814b240d.png">
+<meta property="og:image" content="https://static.vue-js.com/6bd2aff0-6097-11eb-85f6-6fac77c0c9b3.png">
+<meta property="og:image" content="https://static.vue-js.com/7c29e260-6097-11eb-ab90-d9ae814b240d.png">
+<meta property="og:image" content="https://static.vue-js.com/95df0000-6097-11eb-85f6-6fac77c0c9b3.png">
+<meta property="og:image" content="https://static.vue-js.com/b36a7a00-6097-11eb-85f6-6fac77c0c9b3.png">
+<meta property="article:published_time" content="2025-01-12T08:00:00.000Z">
+<meta property="article:modified_time" content="2025-02-08T06:49:30.109Z">
+<meta property="article:author" content="Answer Ran">
+<meta property="article:tag" content="面试">
+<meta property="article:tag" content="Vue">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://static.vue-js.com/5e8bf1d0-6097-11eb-ab90-d9ae814b240d.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://blogmind.cloud/Vue/vue3-treeshaking/"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//busuanzi.ibruce.info"><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '说说Vue 3.0中Treeshaking特性？举例说明一下？',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-02-08 14:49:30'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js"></script><link rel="stylesheet" href="/css/bubble-effect.css"><link rel="stylesheet" href="/css/mobile.css"><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="BlogMind" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">125</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">40</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">19</div></a></div><hr class="custom-hr"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="BlogMind"><span class="site-name">BlogMind</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">说说Vue 3.0中Treeshaking特性？举例说明一下？</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-01-12T08:00:00.000Z" title="发表于 2025-01-12 16:00:00">2025-01-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-02-08T06:49:30.109Z" title="更新于 2025-02-08 14:49:30">2025-02-08</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Vue/">Vue</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id data-flag-title="说说Vue 3.0中Treeshaking特性？举例说明一下？"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p> <img src="https://static.vue-js.com/5e8bf1d0-6097-11eb-ab90-d9ae814b240d.png"></p>
+<h2 id="一、是什么"><a href="#一、是什么" class="headerlink" title="一、是什么"></a>一、是什么</h2><p><code>Tree shaking</code> 是一种通过清除多余代码方式来优化项目打包体积的技术，专业术语叫 <code>Dead code elimination</code></p>
+<p>简单来讲，就是在保持代码运行结果不变的前提下，去除无用的代码</p>
+<p>如果把代码打包比作制作蛋糕，传统的方式是把鸡蛋（带壳）全部丢进去搅拌，然后放入烤箱，最后把（没有用的）蛋壳全部挑选并剔除出去</p>
+<p>而<code>treeshaking</code>则是一开始就把有用的蛋白蛋黄（import）放入搅拌，最后直接作出蛋糕</p>
+<p>也就是说 ，<code>tree shaking</code> 其实是找出使用的代码</p>
+<p>在<code>Vue2</code>中，无论我们使用什么功能，它们最终都会出现在生产代码中。主要原因是<code>Vue</code>实例在项目中是单例的，捆绑程序无法检测到该对象的哪些属性在代码中被使用到</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">Vue</span> <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"> </span><br><span class="line"><span class="title class_">Vue</span>.<span class="title function_">nextTick</span>(<span class="function">() =&gt;</span> &#123;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>而<code>Vue3</code>源码引入<code>tree shaking</code>特性，将全局 API 进行分块。如果您不使用其某些功能，它们将不会包含在您的基础包中</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; nextTick, observable &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"> </span><br><span class="line"><span class="title function_">nextTick</span>(<span class="function">() =&gt;</span> &#123;&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="二、如何做"><a href="#二、如何做" class="headerlink" title="二、如何做"></a>二、如何做</h2><p><code>Tree shaking</code>是基于<code>ES6</code>模板语法（<code>import</code>与<code>exports</code>），主要是借助<code>ES6</code>模块的静态编译思想，在编译时就能确定模块的依赖关系，以及输入和输出的变量</p>
+<p><code>Tree shaking</code>无非就是做了两件事：</p>
+<ul>
+<li>编译阶段利用<code>ES6 Module</code>判断哪些模块已经加载</li>
+<li>判断那些模块和变量未被使用或者引用，进而删除对应代码</li>
+</ul>
+<p>下面就来举个例子：</p>
+<p>通过脚手架<code>vue-cli</code>安装<code>Vue2</code>与<code>Vue3</code>项目</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue create vue-demo</span><br></pre></td></tr></table></figure>
+
+<h3 id="Vue2-项目"><a href="#Vue2-项目" class="headerlink" title="Vue2 项目"></a>Vue2 项目</h3><p>组件中使用<code>data</code>属性</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    export default &#123;</span><br><span class="line">        data: () =&gt; (&#123;</span><br><span class="line">            count: 1,</span><br><span class="line">        &#125;),</span><br><span class="line">    &#125;;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>对项目进行打包，体积如下图</p>
+<p><img src="https://static.vue-js.com/6bd2aff0-6097-11eb-85f6-6fac77c0c9b3.png"></p>
+<p>为组件设置其他属性（<code>compted</code>、<code>watch</code>）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    <span class="attr">data</span>: <span class="function">() =&gt;</span> (&#123;</span><br><span class="line">        <span class="attr">question</span>:<span class="string">&quot;&quot;</span>, </span><br><span class="line">        <span class="attr">count</span>: <span class="number">1</span>,</span><br><span class="line">    &#125;),</span><br><span class="line">    <span class="attr">computed</span>: &#123;</span><br><span class="line">        <span class="attr">double</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">count</span> * <span class="number">2</span>;</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">watch</span>: &#123;</span><br><span class="line">        <span class="attr">question</span>: <span class="keyword">function</span> (<span class="params">newQuestion, oldQuestion</span>) &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">answer</span> = <span class="string">&#x27;xxxx&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>再一次打包，发现打包出来的体积并没有变化</p>
+<p><img src="https://static.vue-js.com/7c29e260-6097-11eb-ab90-d9ae814b240d.png"></p>
+<h3 id="Vue3-项目"><a href="#Vue3-项目" class="headerlink" title="Vue3 项目"></a>Vue3 项目</h3><p>组件中简单使用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; reactive, defineComponent &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">defineComponent</span>(&#123;</span><br><span class="line">  <span class="title function_">setup</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> state = <span class="title function_">reactive</span>(&#123;</span><br><span class="line">      <span class="attr">count</span>: <span class="number">1</span>,</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      state,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>将项目进行打包</p>
+<p><img src="https://static.vue-js.com/95df0000-6097-11eb-85f6-6fac77c0c9b3.png"></p>
+<p>在组件中引入<code>computed</code>和<code>watch</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; reactive, defineComponent, computed, watch &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">defineComponent</span>(&#123;</span><br><span class="line">  <span class="title function_">setup</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> state = <span class="title function_">reactive</span>(&#123;</span><br><span class="line">      <span class="attr">count</span>: <span class="number">1</span>,</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">const</span> double = <span class="title function_">computed</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> state.<span class="property">count</span> * <span class="number">2</span>;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="title function_">watch</span>(</span><br><span class="line">      <span class="function">() =&gt;</span> state.<span class="property">count</span>,</span><br><span class="line">      <span class="function">(<span class="params">count, preCount</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(count);</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(preCount);</span><br><span class="line">      &#125;</span><br><span class="line">    );</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      state,</span><br><span class="line">      double,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>再次对项目进行打包，可以看到在引入<code>computer</code>和<code>watch</code>之后，项目整体体积变大了</p>
+<p> <img src="https://static.vue-js.com/b36a7a00-6097-11eb-85f6-6fac77c0c9b3.png"></p>
+<h2 id="三、作用"><a href="#三、作用" class="headerlink" title="三、作用"></a>三、作用</h2><p>通过<code>Tree shaking</code>，<code>Vue3</code>给我们带来的好处是：</p>
+<ul>
+<li>减少程序体积（更小）</li>
+<li>减少程序执行时间（更快）</li>
+<li>便于将来对程序架构进行优化（更友好）</li>
+</ul>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://segmentfault.com/a/1190000038962700">https://segmentfault.com/a/1190000038962700</a></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://blogmind.cloud">Answer Ran</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://blogmind.cloud/Vue/vue3-treeshaking/">https://blogmind.cloud/Vue/vue3-treeshaking/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="external nofollow noopener noreferrer">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blogmind.cloud" target="_blank">BlogMind</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E9%9D%A2%E8%AF%95/">面试</a><a class="post-meta__tags" href="/tags/Vue/">Vue</a></div><div class="post_share"><div class="social-share" data-image="/" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/Vue/vue3-performance/" title="Vue3.0性能提升主要是通过哪几方面体现的？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Vue3.0性能提升主要是通过哪几方面体现的？</div></div></a></div><div class="next-post pull-right"><a href="/Vue/vue3-vue3-vue2/" title="面试官：vue3有了解过吗？能说说跟vue2的区别吗？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">面试官：vue3有了解过吗？能说说跟vue2的区别吗？</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/Vue/vue-404/" title="vue项目本地开发完成后部署到服务器后报404是什么原因呢？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-19</div><div class="title">vue项目本地开发完成后部署到服务器后报404是什么原因呢？</div></div></a></div><div><a href="/Vue/vue-axios/" title="Vue项目中有封装过axios吗？主要是封装哪方面的？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-16</div><div class="title">Vue项目中有封装过axios吗？主要是封装哪方面的？</div></div></a></div><div><a href="/Vue/vue-communication/" title="Vue组件之间的通信方式都有哪些？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-18</div><div class="title">Vue组件之间的通信方式都有哪些？</div></div></a></div><div><a href="/Vue/vue-cors/" title="Vue项目中你是如何解决跨域的呢？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-11</div><div class="title">Vue项目中你是如何解决跨域的呢？</div></div></a></div><div><a href="/Vue/vue-bind/" title="双向数据绑定是什么"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-02-02</div><div class="title">双向数据绑定是什么</div></div></a></div><div><a href="/Vue/vue-data-object-add-attrs/" title="动态给vue的data添加一个新的属性时会发生什么？怎样解决？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-01</div><div class="title">动态给vue的data添加一个新的属性时会发生什么？怎样解决？</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"></div><div class="author-info__name">Answer Ran</div><div class="author-info__description">欢迎来到我的博客，这里是一个分享技术与生活的空间，希望能带给大家有价值的内容😉</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">125</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">40</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">19</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/answer-ran-ts" target="_blank" title="fab fa-github" rel="external nofollow noopener noreferrer"><i class="Github"></i></a><a class="social-icon" href="https://www.coplit.com/answer-ran" target="_blank" title="fas fa-code" rel="external nofollow noopener noreferrer"><i class="Coplit"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><div class="announcement">
+  努力更新中......面试ing......
+  <br><br>
+  <div style="text-align: center;">
+    <img src="/img/wechat-group.jpg" style="width: 200px; border-radius: 4px;" alt="微信交流群">
+    <br>
+    <span style="color: #666; font-size: 0.9em;">扫码加入交流群，一起学习进步</span>
+  </div>
+</div>
+</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">1.</span> <span class="toc-text">一、是什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%A6%82%E4%BD%95%E5%81%9A"><span class="toc-number">2.</span> <span class="toc-text">二、如何做</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Vue2-%E9%A1%B9%E7%9B%AE"><span class="toc-number">2.1.</span> <span class="toc-text">Vue2 项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Vue3-%E9%A1%B9%E7%9B%AE"><span class="toc-number">2.2.</span> <span class="toc-text">Vue3 项目</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E4%BD%9C%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">三、作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">4.</span> <span class="toc-text">参考文献</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/engine-pre2/" title="2.15 前端面试复盘（三）">2.15 前端面试复盘（三）</a><time datetime="2025-02-15T04:00:00.000Z" title="发表于 2025-02-15 12:00:00">2025-02-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/engine-websocket/" title="2.15 前端面试复盘（二）">2.15 前端面试复盘（二）</a><time datetime="2025-02-15T04:00:00.000Z" title="发表于 2025-02-15 12:00:00">2025-02-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/%E8%81%8C%E5%9C%BA/life-1/" title="2.15 面对职场矛盾，要不要宣泄怒气">2.15 面对职场矛盾，要不要宣泄怒气</a><time datetime="2025-02-15T04:00:00.000Z" title="发表于 2025-02-15 12:00:00">2025-02-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/engine-pre/" title="2.15 前端面试复盘（一）">2.15 前端面试复盘（一）</a><time datetime="2025-02-15T04:00:00.000Z" title="发表于 2025-02-15 12:00:00">2025-02-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/%E5%89%8D%E7%AB%AF/%E6%9E%B6%E6%9E%84/micro-micro-deploy/" title="微前端子应用如何部署？">微前端子应用如何部署？</a><time datetime="2025-02-14T16:09:00.000Z" title="发表于 2025-02-15 00:09:00">2025-02-15</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="footer_custom_text">©2025 Answer Ran</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script src="/js/tilt-effect.js"></script><script src="/js/bubble-effect.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"></div></div><hr><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.13.0"></script></div></div></body></html>

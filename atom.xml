@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>BlogMind</title>
   
-  <subtitle>思维的栖息地</subtitle>
+  <subtitle>前端驿站</subtitle>
   <link href="https://blogmind.cloud/atom.xml" rel="self"/>
   
   <link href="https://blogmind.cloud/"/>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>2.15 前端面试复盘（三）</title>
-    <link href="https://blogmind.cloud/2025/02/15/engine-pre2/"/>
-    <id>https://blogmind.cloud/2025/02/15/engine-pre2/</id>
+    <link href="https://blogmind.cloud/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/engine-pre2/"/>
+    <id>https://blogmind.cloud/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/engine-pre2/</id>
     <published>2025-02-15T04:00:00.000Z</published>
     <updated>2025-02-15T07:40:46.485Z</updated>
     
@@ -44,8 +44,8 @@
   
   <entry>
     <title>2.15 前端面试复盘（二）</title>
-    <link href="https://blogmind.cloud/2025/02/15/engine-websocket/"/>
-    <id>https://blogmind.cloud/2025/02/15/engine-websocket/</id>
+    <link href="https://blogmind.cloud/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/engine-websocket/"/>
+    <id>https://blogmind.cloud/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/engine-websocket/</id>
     <published>2025-02-15T04:00:00.000Z</published>
     <updated>2025-02-15T07:33:04.665Z</updated>
     
@@ -72,8 +72,8 @@
   
   <entry>
     <title>2.15 面对职场矛盾，要不要宣泄怒气</title>
-    <link href="https://blogmind.cloud/2025/02/15/life-1/"/>
-    <id>https://blogmind.cloud/2025/02/15/life-1/</id>
+    <link href="https://blogmind.cloud/%E8%81%8C%E5%9C%BA/life-1/"/>
+    <id>https://blogmind.cloud/%E8%81%8C%E5%9C%BA/life-1/</id>
     <published>2025-02-15T04:00:00.000Z</published>
     <updated>2025-02-15T08:28:33.518Z</updated>
     
@@ -96,8 +96,8 @@
   
   <entry>
     <title>2.15 前端面试复盘（一）</title>
-    <link href="https://blogmind.cloud/2025/02/15/engine-pre/"/>
-    <id>https://blogmind.cloud/2025/02/15/engine-pre/</id>
+    <link href="https://blogmind.cloud/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/engine-pre/"/>
+    <id>https://blogmind.cloud/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/engine-pre/</id>
     <published>2025-02-15T04:00:00.000Z</published>
     <updated>2025-02-15T08:26:12.985Z</updated>
     
@@ -122,8 +122,8 @@
   
   <entry>
     <title>微前端子应用如何部署？</title>
-    <link href="https://blogmind.cloud/2025/02/15/micro-micro-deploy/"/>
-    <id>https://blogmind.cloud/2025/02/15/micro-micro-deploy/</id>
+    <link href="https://blogmind.cloud/%E5%89%8D%E7%AB%AF/%E6%9E%B6%E6%9E%84/micro-micro-deploy/"/>
+    <id>https://blogmind.cloud/%E5%89%8D%E7%AB%AF/%E6%9E%B6%E6%9E%84/micro-micro-deploy/</id>
     <published>2025-02-14T16:09:00.000Z</published>
     <updated>2025-02-12T16:43:14.488Z</updated>
     
@@ -153,8 +153,8 @@
   
   <entry>
     <title>qiankun如何实现css隔离？</title>
-    <link href="https://blogmind.cloud/2025/02/14/micro-css-isolation/"/>
-    <id>https://blogmind.cloud/2025/02/14/micro-css-isolation/</id>
+    <link href="https://blogmind.cloud/%E5%89%8D%E7%AB%AF/%E6%9E%B6%E6%9E%84/micro-css-isolation/"/>
+    <id>https://blogmind.cloud/%E5%89%8D%E7%AB%AF/%E6%9E%B6%E6%9E%84/micro-css-isolation/</id>
     <published>2025-02-13T16:09:00.000Z</published>
     <updated>2025-02-12T16:16:25.015Z</updated>
     
@@ -183,8 +183,8 @@
   
   <entry>
     <title>qiankun如何实现js隔离？</title>
-    <link href="https://blogmind.cloud/2025/02/13/micro-snapshotSandbox/"/>
-    <id>https://blogmind.cloud/2025/02/13/micro-snapshotSandbox/</id>
+    <link href="https://blogmind.cloud/%E5%89%8D%E7%AB%AF/%E6%9E%B6%E6%9E%84/micro-snapshotSandbox/"/>
+    <id>https://blogmind.cloud/%E5%89%8D%E7%AB%AF/%E6%9E%B6%E6%9E%84/micro-snapshotSandbox/</id>
     <published>2025-02-12T16:09:00.000Z</published>
     <updated>2025-02-12T16:43:20.569Z</updated>
     
@@ -213,8 +213,8 @@
   
   <entry>
     <title>什么是CI/CD？</title>
-    <link href="https://blogmind.cloud/2025/02/12/micro-ci-cd/"/>
-    <id>https://blogmind.cloud/2025/02/12/micro-ci-cd/</id>
+    <link href="https://blogmind.cloud/%E5%89%8D%E7%AB%AF/%E6%9E%B6%E6%9E%84/micro-ci-cd/"/>
+    <id>https://blogmind.cloud/%E5%89%8D%E7%AB%AF/%E6%9E%B6%E6%9E%84/micro-ci-cd/</id>
     <published>2025-02-11T16:09:00.000Z</published>
     <updated>2025-02-12T16:42:50.175Z</updated>
     
@@ -243,8 +243,8 @@
   
   <entry>
     <title>如何部署和使用公司组件库？</title>
-    <link href="https://blogmind.cloud/2025/02/11/micro-component-deploy/"/>
-    <id>https://blogmind.cloud/2025/02/11/micro-component-deploy/</id>
+    <link href="https://blogmind.cloud/%E5%89%8D%E7%AB%AF/%E6%9E%B6%E6%9E%84/micro-component-deploy/"/>
+    <id>https://blogmind.cloud/%E5%89%8D%E7%AB%AF/%E6%9E%B6%E6%9E%84/micro-component-deploy/</id>
     <published>2025-02-10T16:09:00.000Z</published>
     <updated>2025-02-12T16:43:03.117Z</updated>
     
@@ -273,8 +273,8 @@
   
   <entry>
     <title>如何开发公司基建组件库？</title>
-    <link href="https://blogmind.cloud/2025/02/10/micro-component-library/"/>
-    <id>https://blogmind.cloud/2025/02/10/micro-component-library/</id>
+    <link href="https://blogmind.cloud/%E5%89%8D%E7%AB%AF/%E6%9E%B6%E6%9E%84/micro-component-library/"/>
+    <id>https://blogmind.cloud/%E5%89%8D%E7%AB%AF/%E6%9E%B6%E6%9E%84/micro-component-library/</id>
     <published>2025-02-09T16:09:00.000Z</published>
     <updated>2025-02-12T16:42:57.837Z</updated>
     
@@ -303,8 +303,8 @@
   
   <entry>
     <title>如何理性看待AI发展：一把双刃剑</title>
-    <link href="https://blogmind.cloud/2025/02/06/ai-ai-development-perspective/"/>
-    <id>https://blogmind.cloud/2025/02/06/ai-ai-development-perspective/</id>
+    <link href="https://blogmind.cloud/AI/ai-ai-development-perspective/"/>
+    <id>https://blogmind.cloud/AI/ai-ai-development-perspective/</id>
     <published>2025-02-05T16:00:00.000Z</published>
     <updated>2025-02-07T08:24:37.855Z</updated>
     
@@ -335,8 +335,8 @@
   
   <entry>
     <title>你了解axios的原理吗？有看过它的源码吗？</title>
-    <link href="https://blogmind.cloud/2025/02/03/vue-axiosCode/"/>
-    <id>https://blogmind.cloud/2025/02/03/vue-axiosCode/</id>
+    <link href="https://blogmind.cloud/Vue/vue-axiosCode/"/>
+    <id>https://blogmind.cloud/Vue/vue-axiosCode/</id>
     <published>2025-02-03T08:00:00.000Z</published>
     <updated>2025-02-08T06:49:30.105Z</updated>
     
@@ -362,8 +362,8 @@
   
   <entry>
     <title>双向数据绑定是什么</title>
-    <link href="https://blogmind.cloud/2025/02/02/vue-bind/"/>
-    <id>https://blogmind.cloud/2025/02/02/vue-bind/</id>
+    <link href="https://blogmind.cloud/Vue/vue-bind/"/>
+    <id>https://blogmind.cloud/Vue/vue-bind/</id>
     <published>2025-02-02T08:00:00.000Z</published>
     <updated>2025-02-08T06:49:30.088Z</updated>
     
@@ -389,8 +389,8 @@
   
   <entry>
     <title>Vue3.0的设计目标是什么？做了哪些优化</title>
-    <link href="https://blogmind.cloud/2025/01/31/vue3-goal/"/>
-    <id>https://blogmind.cloud/2025/01/31/vue3-goal/</id>
+    <link href="https://blogmind.cloud/Vue/vue3-goal/"/>
+    <id>https://blogmind.cloud/Vue/vue3-goal/</id>
     <published>2025-01-31T08:00:00.000Z</published>
     <updated>2025-02-08T06:49:30.106Z</updated>
     
@@ -416,8 +416,8 @@
   
   <entry>
     <title>Vue3.0 所采用的 Composition Api 与 Vue2.x 使用的 Options Api 有什么不同？</title>
-    <link href="https://blogmind.cloud/2025/01/30/vue3-composition/"/>
-    <id>https://blogmind.cloud/2025/01/30/vue3-composition/</id>
+    <link href="https://blogmind.cloud/Vue/vue3-composition/"/>
+    <id>https://blogmind.cloud/Vue/vue3-composition/</id>
     <published>2025-01-30T08:00:00.000Z</published>
     <updated>2025-02-08T06:49:30.106Z</updated>
     
@@ -443,8 +443,8 @@
   
   <entry>
     <title>用Vue3.0 写过组件吗？如果想实现一个 Modal你会怎么设计？</title>
-    <link href="https://blogmind.cloud/2025/01/22/vue3-modal-component/"/>
-    <id>https://blogmind.cloud/2025/01/22/vue3-modal-component/</id>
+    <link href="https://blogmind.cloud/Vue/vue3-modal-component/"/>
+    <id>https://blogmind.cloud/Vue/vue3-modal-component/</id>
     <published>2025-01-22T08:00:00.000Z</published>
     <updated>2025-02-08T06:49:30.106Z</updated>
     
@@ -470,8 +470,8 @@
   
   <entry>
     <title>Vue中组件和插件有什么区别？</title>
-    <link href="https://blogmind.cloud/2025/01/21/vue-components-plugin/"/>
-    <id>https://blogmind.cloud/2025/01/21/vue-components-plugin/</id>
+    <link href="https://blogmind.cloud/Vue/vue-components-plugin/"/>
+    <id>https://blogmind.cloud/Vue/vue-components-plugin/</id>
     <published>2025-01-21T08:00:00.000Z</published>
     <updated>2025-02-08T06:49:30.090Z</updated>
     
@@ -497,8 +497,8 @@
   
   <entry>
     <title>Vue组件之间的通信方式都有哪些？</title>
-    <link href="https://blogmind.cloud/2025/01/18/vue-communication/"/>
-    <id>https://blogmind.cloud/2025/01/18/vue-communication/</id>
+    <link href="https://blogmind.cloud/Vue/vue-communication/"/>
+    <id>https://blogmind.cloud/Vue/vue-communication/</id>
     <published>2025-01-18T08:00:00.000Z</published>
     <updated>2025-02-08T06:49:33.443Z</updated>
     
@@ -524,8 +524,8 @@
   
   <entry>
     <title>Vue项目中有封装过axios吗？主要是封装哪方面的？</title>
-    <link href="https://blogmind.cloud/2025/01/16/vue-axios/"/>
-    <id>https://blogmind.cloud/2025/01/16/vue-axios/</id>
+    <link href="https://blogmind.cloud/Vue/vue-axios/"/>
+    <id>https://blogmind.cloud/Vue/vue-axios/</id>
     <published>2025-01-16T08:00:00.000Z</published>
     <updated>2025-02-08T06:49:30.105Z</updated>
     
@@ -551,8 +551,8 @@
   
   <entry>
     <title>Vue3.0里为什么要用 Proxy API 替代 defineProperty API ？</title>
-    <link href="https://blogmind.cloud/2025/01/14/vue3-proxy/"/>
-    <id>https://blogmind.cloud/2025/01/14/vue3-proxy/</id>
+    <link href="https://blogmind.cloud/Vue/vue3-proxy/"/>
+    <id>https://blogmind.cloud/Vue/vue3-proxy/</id>
     <published>2025-01-14T08:00:00.000Z</published>
     <updated>2025-02-08T06:49:30.106Z</updated>
     

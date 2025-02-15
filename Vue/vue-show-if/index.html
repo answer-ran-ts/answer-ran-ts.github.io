@@ -1,0 +1,216 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>v-show和v-if有什么区别？使用场景分别是什么？ | BlogMind</title><meta name="author" content="Answer Ran"><meta name="copyright" content="Answer Ran"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="一、v-show与v-if的共同点我们都知道在 vue 中 v-show  与 v-if 的作用效果是相同的(不含v-else)，都能控制元素在页面是否显示 在用法上也是相同的 12&lt;Model v-show&#x3D;&quot;isShow&quot; &#x2F;&gt;&lt;Model v-if&#x3D;&quot;isShow&quot; &#x2F;&gt;   当表达式为true的时候，都会占据页面的位置 当表">
+<meta property="og:type" content="article">
+<meta property="og:title" content="v-show和v-if有什么区别？使用场景分别是什么？">
+<meta property="og:url" content="https://blogmind.cloud/Vue/vue-show-if/">
+<meta property="og:site_name" content="BlogMind">
+<meta property="og:description" content="一、v-show与v-if的共同点我们都知道在 vue 中 v-show  与 v-if 的作用效果是相同的(不含v-else)，都能控制元素在页面是否显示 在用法上也是相同的 12&lt;Model v-show&#x3D;&quot;isShow&quot; &#x2F;&gt;&lt;Model v-if&#x3D;&quot;isShow&quot; &#x2F;&gt;   当表达式为true的时候，都会占据页面的位置 当表">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://static.vue-js.com/d21c3c50-3acb-11eb-85f6-6fac77c0c9b3.png">
+<meta property="article:published_time" content="2024-07-01T08:00:00.000Z">
+<meta property="article:modified_time" content="2025-02-08T06:49:30.105Z">
+<meta property="article:author" content="Answer Ran">
+<meta property="article:tag" content="面试">
+<meta property="article:tag" content="Vue">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://static.vue-js.com/d21c3c50-3acb-11eb-85f6-6fac77c0c9b3.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://blogmind.cloud/Vue/vue-show-if/"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//busuanzi.ibruce.info"><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'v-show和v-if有什么区别？使用场景分别是什么？',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-02-08 14:49:30'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js"></script><link rel="stylesheet" href="/css/bubble-effect.css"><link rel="stylesheet" href="/css/mobile.css"><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="BlogMind" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">125</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">40</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">19</div></a></div><hr class="custom-hr"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="BlogMind"><span class="site-name">BlogMind</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">v-show和v-if有什么区别？使用场景分别是什么？</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-07-01T08:00:00.000Z" title="发表于 2024-07-01 16:00:00">2024-07-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-02-08T06:49:30.105Z" title="更新于 2025-02-08 14:49:30">2025-02-08</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Vue/">Vue</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id data-flag-title="v-show和v-if有什么区别？使用场景分别是什么？"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><img src="https://static.vue-js.com/d21c3c50-3acb-11eb-85f6-6fac77c0c9b3.png"></p>
+<h2 id="一、v-show与v-if的共同点"><a href="#一、v-show与v-if的共同点" class="headerlink" title="一、v-show与v-if的共同点"></a>一、v-show与v-if的共同点</h2><p>我们都知道在 <code>vue</code> 中 <code>v-show </code> 与 <code>v-if</code> 的作用效果是相同的(不含v-else)，都能控制元素在页面是否显示</p>
+<p>在用法上也是相同的</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="title class_">Model</span> v-show=<span class="string">&quot;isShow&quot;</span> /&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">Model</span> <span class="attr">v-if</span>=<span class="string">&quot;isShow&quot;</span> /&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>当表达式为<code>true</code>的时候，都会占据页面的位置</li>
+<li>当表达式都为<code>false</code>时，都不会占据页面位置</li>
+</ul>
+<h2 id="二、v-show与v-if的区别"><a href="#二、v-show与v-if的区别" class="headerlink" title="二、v-show与v-if的区别"></a>二、v-show与v-if的区别</h2><ul>
+<li>控制手段不同</li>
+<li>编译过程不同</li>
+<li>编译条件不同</li>
+</ul>
+<p>控制手段：<code>v-show</code>隐藏则是为该元素添加<code>css--display:none</code>，<code>dom</code>元素依旧还在。<code>v-if</code>显示隐藏是将<code>dom</code>元素整个添加或删除</p>
+<p>编译过程：<code>v-if</code>切换有一个局部编译&#x2F;卸载的过程，切换过程中合适地销毁和重建内部的事件监听和子组件；<code>v-show</code>只是简单的基于css切换</p>
+<p>编译条件：<code>v-if</code>是真正的条件渲染，它会确保在切换过程中条件块内的事件监听器和子组件适当地被销毁和重建。只有渲染条件为假时，并不做操作，直到为真才渲染</p>
+<ul>
+<li><p><code>v-show</code> 由<code>false</code>变为<code>true</code>的时候不会触发组件的生命周期</p>
+</li>
+<li><p><code>v-if</code>由<code>false</code>变为<code>true</code>的时候，触发组件的<code>beforeCreate</code>、<code>create</code>、<code>beforeMount</code>、<code>mounted</code>钩子，由<code>true</code>变为<code>false</code>的时候触发组件的<code>beforeDestory</code>、<code>destoryed</code>方法</p>
+</li>
+</ul>
+<p>性能消耗：<code>v-if</code>有更高的切换消耗；<code>v-show</code>有更高的初始渲染消耗；</p>
+<h2 id="三、v-show与v-if原理分析"><a href="#三、v-show与v-if原理分析" class="headerlink" title="三、v-show与v-if原理分析"></a>三、v-show与v-if原理分析</h2><p>具体解析流程这里不展开讲，大致流程如下</p>
+<ul>
+<li>将模板<code>template</code>转为<code>ast</code>结构的<code>JS</code>对象</li>
+<li>用<code>ast</code>得到的<code>JS</code>对象拼装<code>render</code>和<code>staticRenderFns</code>函数</li>
+<li><code>render</code>和<code>staticRenderFns</code>函数被调用后生成虚拟<code>VNODE</code>节点，该节点包含创建<code>DOM</code>节点所需信息</li>
+<li><code>vm.patch</code>函数通过虚拟<code>DOM</code>算法利用<code>VNODE</code>节点创建真实<code>DOM</code>节点</li>
+</ul>
+<h3 id="v-show原理"><a href="#v-show原理" class="headerlink" title="v-show原理"></a>v-show原理</h3><p>不管初始条件是什么，元素总是会被渲染</p>
+<p>我们看一下在<code>vue</code>中是如何实现的</p>
+<p>代码很好理解，有<code>transition</code>就执行<code>transition</code>，没有就直接设置<code>display</code>属性</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// https://github.com/vuejs/vue-next/blob/3cd30c5245da0733f9eb6f29d220f39c46518162/packages/runtime-dom/src/directives/vShow.ts</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="attr">vShow</span>: <span class="title class_">ObjectDirective</span>&lt;<span class="title class_">VShowElement</span>&gt; = &#123;</span><br><span class="line">  <span class="title function_">beforeMount</span>(<span class="params">el, &#123; value &#125;, &#123; transition &#125;</span>) &#123;</span><br><span class="line">    el.<span class="property">_vod</span> = el.<span class="property">style</span>.<span class="property">display</span> === <span class="string">&#x27;none&#x27;</span> ? <span class="string">&#x27;&#x27;</span> : el.<span class="property">style</span>.<span class="property">display</span></span><br><span class="line">    <span class="keyword">if</span> (transition &amp;&amp; value) &#123;</span><br><span class="line">      transition.<span class="title function_">beforeEnter</span>(el)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="title function_">setDisplay</span>(el, value)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">mounted</span>(<span class="params">el, &#123; value &#125;, &#123; transition &#125;</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (transition &amp;&amp; value) &#123;</span><br><span class="line">      transition.<span class="title function_">enter</span>(el)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">updated</span>(<span class="params">el, &#123; value, oldValue &#125;, &#123; transition &#125;</span>) &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">beforeUnmount</span>(<span class="params">el, &#123; value &#125;</span>) &#123;</span><br><span class="line">    <span class="title function_">setDisplay</span>(el, value)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="v-if原理"><a href="#v-if原理" class="headerlink" title="v-if原理"></a>v-if原理</h3><p><code>v-if</code>在实现上比<code>v-show</code>要复杂的多，因为还有<code>else</code> <code>else-if</code> 等条件需要处理，这里我们也只摘抄源码中处理 <code>v-if</code> 的一小部分</p>
+<p>返回一个<code>node</code>节点，<code>render</code>函数通过表达式的值来决定是否生成<code>DOM</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// https://github.com/vuejs/vue-next/blob/cdc9f336fd/packages/compiler-core/src/transforms/vIf.ts</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> transformIf = <span class="title function_">createStructuralDirectiveTransform</span>(</span><br><span class="line">  <span class="regexp">/^(if|else|else-if)$/</span>,</span><br><span class="line">  <span class="function">(<span class="params">node, dir, context</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">processIf</span>(node, dir, context, <span class="function">(<span class="params">ifNode, branch, isRoot</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// ...</span></span><br><span class="line">      <span class="keyword">return</span> <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (isRoot) &#123;</span><br><span class="line">          ifNode.<span class="property">codegenNode</span> = <span class="title function_">createCodegenNodeForBranch</span>(</span><br><span class="line">            branch,</span><br><span class="line">            key,</span><br><span class="line">            context</span><br><span class="line">          ) <span class="keyword">as</span> <span class="title class_">IfConditionalExpression</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="comment">// attach this branch&#x27;s codegen node to the v-if root.</span></span><br><span class="line">          <span class="keyword">const</span> parentCondition = <span class="title function_">getParentCondition</span>(ifNode.<span class="property">codegenNode</span>!)</span><br><span class="line">          parentCondition.<span class="property">alternate</span> = <span class="title function_">createCodegenNodeForBranch</span>(</span><br><span class="line">            branch,</span><br><span class="line">            key + ifNode.<span class="property">branches</span>.<span class="property">length</span> - <span class="number">1</span>,</span><br><span class="line">            context</span><br><span class="line">          )</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h2 id="四、v-show与v-if的使用场景"><a href="#四、v-show与v-if的使用场景" class="headerlink" title="四、v-show与v-if的使用场景"></a>四、v-show与v-if的使用场景</h2><p><code>v-if</code> 与 <code>v-show</code> 都能控制<code>dom</code>元素在页面的显示</p>
+<p><code>v-if</code> 相比 <code>v-show</code> 开销更大的（直接操作<code>dom</code>节点增加与删除） </p>
+<p>如果需要非常频繁地切换，则使用 v-show 较好</p>
+<p>如果在运行时条件很少改变，则使用 v-if 较好</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.jianshu.com/p/7af8554d8f08">https://www.jianshu.com/p/7af8554d8f08</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://juejin.cn/post/6897948855904501768">https://juejin.cn/post/6897948855904501768</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://vue3js/docs/zh">https://vue3js/docs/zh</a></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://blogmind.cloud">Answer Ran</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://blogmind.cloud/Vue/vue-show-if/">https://blogmind.cloud/Vue/vue-show-if/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="external nofollow noopener noreferrer">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blogmind.cloud" target="_blank">BlogMind</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E9%9D%A2%E8%AF%95/">面试</a><a class="post-meta__tags" href="/tags/Vue/">Vue</a></div><div class="post_share"><div class="social-share" data-image="/" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/JavaScript/JavaScript-debounce-throttle/" title="什么是防抖和节流？有什么区别？如何实现？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">什么是防抖和节流？有什么区别？如何实现？</div></div></a></div><div class="next-post pull-right"><a href="/Vue/vue-slot/" title="说说你对slot的理解？slot使用场景有哪些？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">说说你对slot的理解？slot使用场景有哪些？</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/Vue/vue-404/" title="vue项目本地开发完成后部署到服务器后报404是什么原因呢？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-19</div><div class="title">vue项目本地开发完成后部署到服务器后报404是什么原因呢？</div></div></a></div><div><a href="/Vue/vue-axios/" title="Vue项目中有封装过axios吗？主要是封装哪方面的？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-16</div><div class="title">Vue项目中有封装过axios吗？主要是封装哪方面的？</div></div></a></div><div><a href="/Vue/vue-communication/" title="Vue组件之间的通信方式都有哪些？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-18</div><div class="title">Vue组件之间的通信方式都有哪些？</div></div></a></div><div><a href="/Vue/vue-cors/" title="Vue项目中你是如何解决跨域的呢？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-11</div><div class="title">Vue项目中你是如何解决跨域的呢？</div></div></a></div><div><a href="/Vue/vue-bind/" title="双向数据绑定是什么"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-02-02</div><div class="title">双向数据绑定是什么</div></div></a></div><div><a href="/Vue/vue-data-object-add-attrs/" title="动态给vue的data添加一个新的属性时会发生什么？怎样解决？"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-01</div><div class="title">动态给vue的data添加一个新的属性时会发生什么？怎样解决？</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"></div><div class="author-info__name">Answer Ran</div><div class="author-info__description">欢迎来到我的博客，这里是一个分享技术与生活的空间，希望能带给大家有价值的内容😉</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">125</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">40</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">19</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/answer-ran-ts" target="_blank" title="fab fa-github" rel="external nofollow noopener noreferrer"><i class="Github"></i></a><a class="social-icon" href="https://www.coplit.com/answer-ran" target="_blank" title="fas fa-code" rel="external nofollow noopener noreferrer"><i class="Coplit"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><div class="announcement">
+  努力更新中......面试ing......
+  <br><br>
+  <div style="text-align: center;">
+    <img src="/img/wechat-group.jpg" style="width: 200px; border-radius: 4px;" alt="微信交流群">
+    <br>
+    <span style="color: #666; font-size: 0.9em;">扫码加入交流群，一起学习进步</span>
+  </div>
+</div>
+</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81v-show%E4%B8%8Ev-if%E7%9A%84%E5%85%B1%E5%90%8C%E7%82%B9"><span class="toc-number">1.</span> <span class="toc-text">一、v-show与v-if的共同点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81v-show%E4%B8%8Ev-if%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">2.</span> <span class="toc-text">二、v-show与v-if的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81v-show%E4%B8%8Ev-if%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90"><span class="toc-number">3.</span> <span class="toc-text">三、v-show与v-if原理分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#v-show%E5%8E%9F%E7%90%86"><span class="toc-number">3.1.</span> <span class="toc-text">v-show原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#v-if%E5%8E%9F%E7%90%86"><span class="toc-number">3.2.</span> <span class="toc-text">v-if原理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81v-show%E4%B8%8Ev-if%E7%9A%84%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">4.</span> <span class="toc-text">四、v-show与v-if的使用场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">5.</span> <span class="toc-text">参考文献</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/engine-pre2/" title="2.15 前端面试复盘（三）">2.15 前端面试复盘（三）</a><time datetime="2025-02-15T04:00:00.000Z" title="发表于 2025-02-15 12:00:00">2025-02-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/engine-websocket/" title="2.15 前端面试复盘（二）">2.15 前端面试复盘（二）</a><time datetime="2025-02-15T04:00:00.000Z" title="发表于 2025-02-15 12:00:00">2025-02-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/%E8%81%8C%E5%9C%BA/life-1/" title="2.15 面对职场矛盾，要不要宣泄怒气">2.15 面对职场矛盾，要不要宣泄怒气</a><time datetime="2025-02-15T04:00:00.000Z" title="发表于 2025-02-15 12:00:00">2025-02-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/engine-pre/" title="2.15 前端面试复盘（一）">2.15 前端面试复盘（一）</a><time datetime="2025-02-15T04:00:00.000Z" title="发表于 2025-02-15 12:00:00">2025-02-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/%E5%89%8D%E7%AB%AF/%E6%9E%B6%E6%9E%84/micro-micro-deploy/" title="微前端子应用如何部署？">微前端子应用如何部署？</a><time datetime="2025-02-14T16:09:00.000Z" title="发表于 2025-02-15 00:09:00">2025-02-15</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="footer_custom_text">©2025 Answer Ran</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script src="/js/tilt-effect.js"></script><script src="/js/bubble-effect.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"></div></div><hr><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.13.0"></script></div></div></body></html>
